@@ -5,10 +5,10 @@ using UnityEngine;
 /// </summary>
 public class Building : MonoBehaviour
 {
-    [Tooltip("Objenin zýrhý")]
-    public Matter armor;
+    [Tooltip("Yapýnýn zýrhý")]
+    [SerializeField] internal BuildingMatter armor;
     [Tooltip("Bu objenin parçalanabilir örneði")]
-    public GameObject smashableObjectPrefab;
+    [SerializeField] internal GameObject smashableObjectPrefab;
     /// <summary>
     /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
     /// </summary>
@@ -85,8 +85,21 @@ public class Building : MonoBehaviour
     /// <param name="collision"></param>
     private void DoDamage(Collision collision)
     {
-        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        durability -= collisionForce;
+        if(collision.transform.CompareTag("Ammo"))
+        {
+            var ammoArmor = collision.gameObject.GetComponent<Ammo>().armor;
+            if (armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+            {
+                Debug.Log("Damage!");
+                var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+                durability -= collisionForce;
+            }
+        }
+        else
+        {
+            var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+            durability -= collisionForce;
+        }
     }
 
     /// <summary>
@@ -123,16 +136,12 @@ public class Building : MonoBehaviour
 /// <summary>
 /// Madde
 /// </summary>
-public enum Matter
+public enum BuildingMatter
 {
     Wood = 1,
     Stone,
     Iron,
-    Steel,
-    Fire,
-    Ice,
-    Explosion,
-    Electric
+    Steel
 }
 
 

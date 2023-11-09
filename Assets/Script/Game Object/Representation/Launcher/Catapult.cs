@@ -1,10 +1,10 @@
 using UnityEngine.InputSystem;
-//using Zenject;
+using Zenject;
 
 
 public class Catapult : Launcher
 {
-    //[Inject] FiringBar firingBar;
+    [Inject] FiringBar firingBar;
     private void Start()
     {
         PlayerController.action.InLevel.Attack.canceled += LaunchAnimTrigger;
@@ -14,7 +14,7 @@ public class Catapult : Launcher
     {
         _ammoRigidBody.isKinematic = false;
         _ammoRigidBody.useGravity = true;
-        _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * _launchPower * (1/*+(firingBar.currentFillAmount*100f)*/));
+        _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * _launchPower * (1+(firingBar.currentFillAmount*100f)));
         _ammoRigidBody.transform.parent = null;
         
     }
@@ -25,7 +25,7 @@ public class Catapult : Launcher
         if(CheckChangeAnimState())
         {
             _animator.SetTrigger("launch");
-            _animator.speed = /*(firingBar.currentFillAmount * 6f)*/ + 1;
+            _animator.speed = (firingBar.currentFillAmount * 6f) + 1;
         }
         
     }
