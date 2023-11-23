@@ -5,7 +5,10 @@ using UnityEngine;
 /// </summary>
 public class Explosive : MonoBehaviour
 {
-    [SerializeField] private GameObject _particles, _smashableObject;
+    [Tooltip("Patlamanýn particle effectid")]
+    [SerializeField] private GameObject _explosionParticle;
+    [Tooltip("Objenin parçalanabilir hali")]
+    [SerializeField] private GameObject _smashableObject;
     [Tooltip("Patlamanýn yarýçapý")]
     [SerializeField] private float _explosionRadius = 5;
     [Tooltip("Patlamanýn gücü")]
@@ -18,22 +21,30 @@ public class Explosive : MonoBehaviour
     {
         Damage(collision);
         if (CheckSmash())
-            Explode();        
+            Explode(collision);        
     }
 
     /// <summary>
     /// Patlat
     /// </summary>
-    void Explode()
+    void Explode(Collision collision)
     {
-        Instantiate(_smashableObject, transform.position, Quaternion.identity);
+        if(_smashableObject!=null)
+        {
+            Instantiate(_smashableObject, transform.position, Quaternion.identity);
+        }        
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var obj in surroundingObjects)
         {
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
-            rb.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
-            //Instantiate(_particles, transform.position, Quaternion.identity);
+            rb.AddExplosionForce(_explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
+            Instantiate(_explosionParticle, transform.position, Quaternion.identity);
+            if(rb.TryGetComponent<IDamageable>(out IDamageable iDamageable))
+            {
+                var differentPosition = rb.transform.position - transform.position;
+                iDamageable.Durability -= (_explosionForce * collision.relativeVelocity.magnitude*300) / differentPosition.magnitude;
+            }
         }
         Destroy(gameObject);
     }

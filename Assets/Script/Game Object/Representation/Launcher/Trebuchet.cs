@@ -17,6 +17,10 @@ public class Trebuchet : Launcher
         Launch();
     }
 
+    /// <summary>
+    /// Fýrlatma iþlemini baþlatýr
+    /// </summary>
+    /// <param name="context"></param>
     protected void Launch(InputAction.CallbackContext context)
     {
         if (CheckChangeAnimState()) { LaunchAnimTrigger(); }

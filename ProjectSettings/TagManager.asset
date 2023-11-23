@@ -8,6 +8,9 @@ TagManager:
   - ship
   - Ammo
   - Building
+  - Flame
+  - Fire
+  - Node
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemie
+  - Wall
+  - Node
   - 
   - 
   - 

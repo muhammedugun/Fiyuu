@@ -3,29 +3,29 @@ using UnityEngine;
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
 /// </summary>
-public class Building : MonoBehaviour
+public class Building : MonoBehaviour, IDamageable
 {
+    public float Durability { get { return _durability; } set { _durability = value; } }
+
     [Tooltip("Yapýnýn zýrhý")]
     [SerializeField] internal BuildingMatter armor;
     [Tooltip("Bu objenin parçalanabilir örneði")]
     [SerializeField] internal GameObject smashableObjectPrefab;
+
+    private float _durability;
     /// <summary>
     /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
     /// </summary>
     private float _volumeSize;
-    /// <summary>
-    /// Objenin dayanýklýlýðý
-    /// </summary>
-    internal float durability;
 
     /// <summary>
-    /// Zýrh dayanýklýklarý
+    /// Zýrh dayanýklýklarý. Zýrhýn neye dayanýklý olup neye dayanýklý olmadýðý. Satýrlar: Bina maddesi(zýrhý), Sütunlar: mühimmat maddesi
     /// </summary>
     private int[,] armorStrengths = new int[4, 8]
     {
-        // Mühimmat zýrh türleri (sütunlar).
+        // Mühimmat maddesi türleri (sütunlar).
         // Ahþap=1, taþ=2, demir=3, çelik=4, ateþ=5, buz=6, patlama=7, elektrik=8
-        // Bina zýrh türleri (satýrlar)
+        // Bina maddesi türleri (satýrlar)
         { 0,0,0,0,0,0,0,1 }, // Ahþap
         { 1,0,0,0,1,0,0,1 }, // Taþ
         { 1,1,0,0,1,0,0,0 }, // Demir
@@ -59,7 +59,7 @@ public class Building : MonoBehaviour
     /// </summary>
     private void AssignMass(Rigidbody rb, float volumeSize)
     {
-        if(volumeSize<=0)
+        if (volumeSize <= 0)
         {
             Debug.LogError("Yapýnýn hacmi atanmamýþ ya da hacmi sýfýr");
         }
@@ -67,7 +67,7 @@ public class Building : MonoBehaviour
         {
             rb.mass = (int)armor * (volumeSize / 20);
         }
-        
+
     }
 
     /// <summary>
@@ -75,30 +75,24 @@ public class Building : MonoBehaviour
     /// </summary>
     private void AssignDurability()
     {
-        durability = (int)armor *200; // deðeri þimdilik temsili koyulmuþtur
+        _durability = (int)armor * 700; // deðeri þimdilik temsili koyulmuþtur
     }
 
-
-    /// <summary>
-    /// Objenin dayanýklýk deðerini azaltýr
-    /// </summary>
-    /// <param name="collision"></param>
-    private void DoDamage(Collision collision)
+    public void DoDamage(Collision collision)
     {
-        if(collision.transform.CompareTag("Ammo"))
+        if (collision.transform.CompareTag("Ammo"))
         {
-            var ammoArmor = collision.gameObject.GetComponent<Ammo>().armor;
+            var ammoArmor = collision.gameObject.GetComponent<Ammo>().matter;
             if (armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
             {
-                Debug.Log("Damage!");
                 var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-                durability -= collisionForce;
+                _durability -= collisionForce;
             }
         }
         else
         {
             var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-            durability -= collisionForce;
+            _durability -= collisionForce;
         }
     }
 
@@ -109,10 +103,10 @@ public class Building : MonoBehaviour
     private void Smash(GameObject smashableObject)
     {
         var initializedSmashableObject = Instantiate(smashableObject, gameObject.transform.position, smashableObject.transform.rotation);
-        for(int i=0; i < initializedSmashableObject.transform.childCount; i++)
+        for (int i = 0; i < initializedSmashableObject.transform.childCount; i++)
         {
             var child = initializedSmashableObject.transform.GetChild(i);
-            float volumeSize=0;
+            float volumeSize = 0;
             AssignVolume(child.GetComponent<Renderer>(), ref volumeSize);
             var rb = child.GetComponent<Rigidbody>();
             AssignMass(rb, volumeSize);
@@ -126,15 +120,16 @@ public class Building : MonoBehaviour
     /// <param name="collision"></param>
     private bool CheckSmash()
     {
-        if (durability <= 0) return true;
+        if (_durability <= 0) return true;
         else return false;
-
     }
 
 }
 
+
+
 /// <summary>
-/// Madde
+/// Yapýnýn maddesi(zýrhý) 
 /// </summary>
 public enum BuildingMatter
 {

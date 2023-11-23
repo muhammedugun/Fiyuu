@@ -1,16 +1,16 @@
 using UnityEngine;
 
+/// <summary>
+/// Mühimmat ile ilgili
+/// </summary>
 public class Ammo : MonoBehaviour
 {
-    [Tooltip("Mühimmatýn zýrhý")]
-    [SerializeField] internal AmmoMatter armor;
-
-    
-
+    [Tooltip("Mühimmatýn maddesi")]
+    [SerializeField] internal AmmoMatter matter;
 }
 
 /// <summary>
-/// Madde
+/// Mühimmatýn maddesi
 /// </summary>
 public enum AmmoMatter
 {
