@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3148657699685198376}
   - component: {fileID: 2025947943118824845}
   - component: {fileID: 4321603662864912711}
-  - component: {fileID: 3186576027744538996}
   - component: {fileID: 3186576027744538998}
+  - component: {fileID: 3186576027744538996}
+  - component: {fileID: -7043620285633651543}
   - component: {fileID: 3186576027744538997}
   m_Layer: 0
   m_Name: Ammo
@@ -86,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &3186576027744538998
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376097207816859794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0024999995
+  m_Center: {x: -8.1490725e-10, y: 8.149071e-10, z: 0}
 --- !u!54 &3186576027744538996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,19 +116,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3186576027744538998
-SphereCollider:
+--- !u!114 &-7043620285633651543
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2376097207816859794}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0024999995
-  m_Center: {x: -8.1490725e-10, y: 8.149071e-10, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matter: 2
 --- !u!114 &3186576027744538997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,9 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4bf1864db309442ac2c70432f777b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particles: {fileID: 0}
-  _smashableObject: {fileID: 1861610780220072714, guid: 1cad851017257c44a81ac361235b97dc,
+  _isParticleEffect: 1
+  _explosionParticle: {fileID: 4549895982509988320, guid: 6d8419e3bcdf7f943b910ea56acdea99,
     type: 3}
-  _explosionRadius: 2
-  _explosionForce: 1
-  _durability: 100
+  _smashableObject: {fileID: 5702043830548744128, guid: 2cb60a1687ad2a34e881148cc2bad2a2,
+    type: 3}
+  _explosionRadius: 3
+  _explosionForce: 0.1
+  _durability: 200

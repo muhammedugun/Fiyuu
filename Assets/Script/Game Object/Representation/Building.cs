@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
 /// </summary>
-public class Building : MonoBehaviour, IDamageable
+public class Building : MonoBehaviour, ISmashable
 {
     public float Durability { get { return _durability; } set { _durability = value; } }
 
@@ -32,6 +32,13 @@ public class Building : MonoBehaviour, IDamageable
         { 1,1,1,1,1,1,1,0 }  // Çelik
     };
 
+
+    internal float[] _matterDurabilitiy = new float[4] { 2000f, 4000f, 6000f, 8000f};
+
+    /// <summary>
+    /// Parçalanma gerçekleþti mi?
+    /// </summary>
+    private bool _isSmash;
     private void Start()
     {
         AssignDurability();
@@ -41,8 +48,11 @@ public class Building : MonoBehaviour, IDamageable
 
     private void OnCollisionEnter(Collision collision)
     {
-        DoDamage(collision);
-        if (CheckSmash()) Smash(smashableObjectPrefab);
+        if (!_isSmash)
+        {
+            DoDamage(collision);
+            if (CheckSmash()) Smash(smashableObjectPrefab);
+        }
     }
 
     /// <summary>
@@ -65,7 +75,7 @@ public class Building : MonoBehaviour, IDamageable
         }
         else
         {
-            rb.mass = (int)armor * (volumeSize / 20);
+            rb.mass = (int)armor * (volumeSize);
         }
 
     }
@@ -75,21 +85,25 @@ public class Building : MonoBehaviour, IDamageable
     /// </summary>
     private void AssignDurability()
     {
-        _durability = (int)armor * 700; // deðeri þimdilik temsili koyulmuþtur
+        _durability = _matterDurabilitiy[(int)armor - 1];
     }
 
     public void DoDamage(Collision collision)
     {
+
         if (collision.transform.CompareTag("Ammo"))
         {
-            var ammoArmor = collision.gameObject.GetComponent<Ammo>().matter;
+            var ammo = collision.gameObject.GetComponent<Ammo>();
+            var ammoArmor = ammo.matter;
             if (armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
             {
                 var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-                _durability -= collisionForce;
+                Debug.Log("collisionForce: " + collisionForce);
+                _durability -= collisionForce * ammo.power[(int)ammoArmor - 1];
+                Debug.Log("damage: " + collisionForce * ammo.power[(int)ammoArmor - 1]);
             }
         }
-        else
+        else if(collision.gameObject.layer!=LayerMask.NameToLayer("Node"))
         {
             var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
             _durability -= collisionForce;
@@ -100,9 +114,10 @@ public class Building : MonoBehaviour, IDamageable
     /// Parçalamayý gerçekleþtirir
     /// </summary>
     /// <param name="smashableObject">Objenin parçalanabilir halinin örneði</param>
-    private void Smash(GameObject smashableObject)
+    public void Smash(GameObject smashableObject)
     {
-        var initializedSmashableObject = Instantiate(smashableObject, gameObject.transform.position, smashableObject.transform.rotation);
+        _isSmash = true;
+        var initializedSmashableObject = Instantiate(smashableObject, gameObject.transform.position, gameObject.transform.localRotation);
         for (int i = 0; i < initializedSmashableObject.transform.childCount; i++)
         {
             var child = initializedSmashableObject.transform.GetChild(i);
@@ -112,13 +127,14 @@ public class Building : MonoBehaviour, IDamageable
             AssignMass(rb, volumeSize);
         }
         gameObject.SetActive(false);
+
     }
 
     /// <summary>
     /// Parçalamanýn gerçekleþebilirliðini kontrol eder
     /// </summary>
     /// <param name="collision"></param>
-    private bool CheckSmash()
+    public bool CheckSmash()
     {
         if (_durability <= 0) return true;
         else return false;

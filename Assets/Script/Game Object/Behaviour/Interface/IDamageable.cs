@@ -1,8 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Hasar alabilir objeler
+/// </summary>
 public interface IDamageable
 {
-
     /// <summary>
     /// Objenin dayanýklýlýðý
     /// </summary>

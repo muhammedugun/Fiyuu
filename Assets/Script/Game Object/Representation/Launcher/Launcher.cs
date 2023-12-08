@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public abstract class Launcher : MonoBehaviour
 {
     [Tooltip("Mühimmatýn rigidbody bileþeni")]
-    [SerializeField] protected Rigidbody _ammoRigidBody;
+    protected Rigidbody _ammoRigidBody;
     [Tooltip("Fýrlatma gücü")]
     [SerializeField] protected float _launchPower;
     [SerializeField ]protected Animator _animator;

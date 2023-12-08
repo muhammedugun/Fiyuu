@@ -3,8 +3,10 @@ using UnityEngine;
 /// <summary>
 /// Patlayýcý ile ilgili görevlerden sorumlu
 /// </summary>
-public class Explosive : MonoBehaviour
+public class Explosive : MonoBehaviour, ISmashable
 {
+    [Tooltip("Particle effect olsun mu?")]
+    [SerializeField] private bool _isParticleEffect;
     [Tooltip("Patlamanýn particle effectid")]
     [SerializeField] private GameObject _explosionParticle;
     [Tooltip("Objenin parçalanabilir hali")]
@@ -15,13 +17,14 @@ public class Explosive : MonoBehaviour
     [SerializeField] private float _explosionForce = 500;
     [Tooltip("Patlayýcý objenin dayanýklýlýðý")]
     [SerializeField] private float _durability;
-    
+
+    public float Durability { get { return _durability; } set { _durability = value; } }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Damage(collision);
+        DoDamage(collision);
         if (CheckSmash())
-            Explode(collision);        
+            Explode(collision);
     }
 
     /// <summary>
@@ -29,21 +32,19 @@ public class Explosive : MonoBehaviour
     /// </summary>
     void Explode(Collision collision)
     {
-        if(_smashableObject!=null)
-        {
-            Instantiate(_smashableObject, transform.position, Quaternion.identity);
-        }        
+        Smash(_smashableObject);
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var obj in surroundingObjects)
         {
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
             rb.AddExplosionForce(_explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
-            Instantiate(_explosionParticle, transform.position, Quaternion.identity);
-            if(rb.TryGetComponent<IDamageable>(out IDamageable iDamageable))
+            if(_isParticleEffect)
+                Instantiate(_explosionParticle, transform.position, Quaternion.identity);
+            if (rb.TryGetComponent<IDamageable>(out IDamageable iDamageable))
             {
                 var differentPosition = rb.transform.position - transform.position;
-                iDamageable.Durability -= (_explosionForce * collision.relativeVelocity.magnitude*300) / differentPosition.magnitude;
+                iDamageable.Durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
             }
         }
         Destroy(gameObject);
@@ -53,7 +54,7 @@ public class Explosive : MonoBehaviour
     /// Objenin dayanýklýk deðerini azaltýr
     /// </summary>
     /// <param name="collision"></param>
-    private void Damage(Collision collision)
+    public void DoDamage(Collision collision)
     {
         var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
         _durability -= collisionForce;
@@ -63,10 +64,18 @@ public class Explosive : MonoBehaviour
     /// Parçalamannýn gerçekleþebilirliðini kontrol eder
     /// </summary>
     /// <param name="collision"></param>
-    private bool CheckSmash()
+    public bool CheckSmash()
     {
         if (_durability <= 0) return true;
         else return false;
 
+    }
+
+    public void Smash(GameObject smashableObject)
+    {
+        if (_smashableObject != null)
+        {
+            Instantiate(_smashableObject, transform.position, Quaternion.identity);
+        }
     }
 }
