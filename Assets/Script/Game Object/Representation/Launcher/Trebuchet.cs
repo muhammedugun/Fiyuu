@@ -1,27 +1,38 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
+using Zenject;
+
 public class Trebuchet : Launcher
 {
+    [Inject] InputRangeTest inputRangeTest;
     private void Awake()
     {
-        PlayerController.action.InLevel.Attack.started += Launch;
+        //PlayerController.action.InLevel.Attack.started += Launch;
+        inputRangeTest.started += Launch;
     }
 
     private void Start()
     {
+        AssignAmmoType();
+        Initialize();
         _ammoStartY = _ammoRigidBody.transform.position.y;
+        Invoke("SetLaunchPower", 0.1f);
+        
     }
 
-    protected override void Launch()
+
+    /// <summary>
+    /// Fýrlatma animasyonunu tetikle
+    /// </summary>
+    private void LaunchAnimTrigger()
     {
-        Launch();
+        _animator.SetTrigger("launch");
     }
 
     /// <summary>
     /// Fýrlatma iþlemini baþlatýr
     /// </summary>
     /// <param name="context"></param>
-    protected void Launch(InputAction.CallbackContext context)
+    protected override void Launch()
     {
         if (CheckChangeAnimState()) { LaunchAnimTrigger(); }
         else if (_ammoRigidBody.isKinematic)
@@ -36,9 +47,10 @@ public class Trebuchet : Launcher
                 height++;
             }
             
-            _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * _launchPower * height);
+            _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * _currentLaunchPower * height);
             _ammoRigidBody.transform.parent = null;
         }
+        OnLaunchedInvoke();
     }
     
 }

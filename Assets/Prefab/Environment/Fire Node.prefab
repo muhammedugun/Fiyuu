@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fa44fb503aef442aa1305d0faf8689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fire: {fileID: 1000010184371054, guid: 3411500506135f147b2c1aa274f42b3e, type: 3}
-  m_links: []
-  m_HP: 10
-  m_fuel: 15
-  m_combustionRateValue: 1
-  m_fireJustStarted: 0
-  m_isAlight: 0
+  fire: {fileID: 1000010184371054, guid: 3411500506135f147b2c1aa274f42b3e, type: 3}
+  links: []
+  hp: 10
+  fuel: 15
+  combustionRate: 1
+  fireJustStarted: 0
+  isAlight: 0
 --- !u!65 &7491663678706034883
 BoxCollider:
   m_ObjectHideFlags: 0

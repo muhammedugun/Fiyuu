@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     {
         action = new PlayerControllerAction();
        
-        action.InLevel.Attack.started += SetAttackStartedTime;
-        action.InLevel.Attack.canceled += SetAttackEndedTime;
+        //action.InLevel.Attack.started += SetAttackStartedTime;
+        //action.InLevel.Attack.canceled += SetAttackEndedTime;
     }
 
     private void OnDisable()

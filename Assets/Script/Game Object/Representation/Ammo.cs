@@ -7,7 +7,7 @@ public class Ammo : MonoBehaviour
 {
     [Tooltip("Mühimmatýn maddesi")]
     [SerializeField] internal AmmoMatter matter;
-    internal float[] power = new float[8]{ 10f, 15f, 20f, 25f, 1f, 1f, 1f, 1f};
+    internal float[] power = new float[8]{ 10f, 15f, 20f, 25f, 1f, 10f, 10f, 10f};
     float _volumeSize;
 
     private void Start()

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8098945746530595282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.61, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0.28}
+  m_LocalScale: {x: 0.0125, y: 0.025, z: 0.0035}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4146597970855246390}
@@ -100,11 +100,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire Node (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}
@@ -181,11 +176,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Node (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}
       propertyPath: m_RootOrder
@@ -260,11 +250,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire Node (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}
@@ -341,11 +326,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Node
       objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}
       propertyPath: m_RootOrder
@@ -421,11 +401,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Node (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}
       propertyPath: m_RootOrder
@@ -500,11 +475,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire Node (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3696083951936562078, guid: 2002f4237913ec549b722d5dcca34af2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6484184701809210228, guid: 2002f4237913ec549b722d5dcca34af2,
         type: 3}

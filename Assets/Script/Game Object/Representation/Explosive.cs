@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -32,7 +33,7 @@ public class Explosive : MonoBehaviour, ISmashable
     /// </summary>
     void Explode(Collision collision)
     {
-        Smash(_smashableObject);
+        StartCoroutine(Smash(_smashableObject));
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var obj in surroundingObjects)
         {
@@ -71,11 +72,12 @@ public class Explosive : MonoBehaviour, ISmashable
 
     }
 
-    public void Smash(GameObject smashableObject)
+    public IEnumerator Smash(GameObject smashableObject)
     {
         if (_smashableObject != null)
         {
             Instantiate(_smashableObject, transform.position, Quaternion.identity);
         }
+        yield return null;
     }
 }

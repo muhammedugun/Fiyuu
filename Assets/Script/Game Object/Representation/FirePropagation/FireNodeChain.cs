@@ -2,79 +2,54 @@
 using System.Collections.Generic;
 
 public class FireNodeChain : MonoBehaviour {
-    [Tooltip("Değer ne kadar yüksek olursa, yangın yakıtı da o kadar çabuk tutuşturur")]
-    public float m_firePropagationSpeed = 20.0f;
-    [SerializeField] private GameObject[] _fireFace;
+    [Tooltip("Yangın yayılım hızı")]
+    public float firePropagationSpeed = 20.0f;
+    [SerializeField] private GameObject[] _fireFaces;
     [Tooltip("Bu zincirdeki düğümleri temsil etmektedir. Not: yangınların doğru şekilde başlaması için tüm düğümlere sahip olmalıdır")]
-    public FireNode[] m_fireNodes = null;
-    [Tooltip("Tüm düğümler ateşe verildikten sonra GameObject'in yok edilmesi gerekiyorsa etkinleştirin, ağaçlar için etkinleştirmeyin!!")]
-    public bool m_destroyAfterFire = false;
-    [Tooltip("Tüm düğümler ateşlendikten sonra GameObject'in başka bir ağ ile değiştirilmesi gerekiyorsa etkinleştirin")]
-    public bool m_replaceAfterFire = false;
+    public FireNode[] fireNodes = null;
+    [Tooltip("Tüm düğümler ateşe verildikten sonra GameObject'in yok edilmesi gerekiyorsa etkinleştirin")]
+    public bool destroyAfterFire = false;
+    [Tooltip("Tüm düğümler ateşlendikten sonra GameObject'in başka bir mesh ile değiştirilmesi gerekiyorsa etkinleştirin")]
+    public bool replaceAfterFire = false;
     [Tooltip("Bu nesnenin değiştirilmesi gereken GameObject")]
-    public GameObject m_replacementMesh;
+    public GameObject replacementMesh;
     /// <summary>
-    /// Yanma hızı değeri
+    /// zaten destroy edildi mi?
     /// </summary>
-    private float m_combustionRateValue = 1.0f;
-    private bool m_destroyedAlready = false;
-    private bool m_replacedAlready = false;
+    private bool destroyedAlready = false;
     /// <summary>
-    /// m_fireNodes'in üzerindeki tüm değerler atanmışsa true döndürür
+    /// zaten mesh replace edildi mi?
     /// </summary>
-    private bool m_validChain = true;
+    private bool replacedAlready = false;
+    /// <summary>
+    /// fireNodes'in üzerindeki tüm değerler atanmışsa true döndürür
+    /// </summary>
+    private bool validChain = true;
+    /// <summary>
+    /// Zincirdeki tüm FireNode'lar yandı mı?
+    /// </summary>
+    private bool _chainBurned = false;
 
-    public float propagationSpeed
-    {
-        get { return m_firePropagationSpeed; }
-        set { m_firePropagationSpeed = value; }
-    }
 
-    // Use this for initialization
     void Start () {
-        List<FireNode> tempList = new List<FireNode>();
-        foreach(var fireFace in _fireFace)
-        {
-            for(int i=0; i< fireFace.transform.childCount; i++)
-            {
-                tempList.Add(fireFace.transform.GetChild(i).GetComponent<FireNode>());
-            }
-        }
-        foreach(var fireNode in m_fireNodes)
-        {
-            tempList.Add(fireNode);
-        }
-        
-        m_fireNodes = tempList.ToArray();
 
-
-        // fireNodes'teki tüm düğümlerin atandığını kontrol edilir
-        for (int i = 0; i < m_fireNodes.Length; i++)
-        {
-            if (m_fireNodes[i] == null)
-            {
-                Debug.LogError(gameObject.GetComponentInParent<Transform>().name + " isimli objede FireNodeChain bileşeni üzerinde " +
-                    "bazı FireNode'lar atanmamış");
-                m_validChain = false;
-                break;
-            }
-            else
-            {
-                m_validChain = true;
-            }
-        }
+        AssignFireNodes();
+        CheckFireNodes();
     }
 
     void Update () {
-        if (m_validChain)
+        if (validChain)
         {
             PropagateFire();
+            if(destroyAfterFire || replaceAfterFire)
+            {
+                CheckChainBurn();
 
-            if (m_destroyAfterFire && !m_destroyedAlready)
-                DestroyAfterFire();
-
-            if (m_replaceAfterFire && !m_replacedAlready)
-                ReplaceAfterFire();
+                if (!replacedAlready)
+                    ReplaceAfterFire();
+                if (!destroyedAlready)
+                    DestroyAfterFire();
+            }
         }
     }
 
@@ -86,21 +61,60 @@ public class FireNodeChain : MonoBehaviour {
             Vector3 differentPos = Vector3.up * 100;
             int index = 100;
             
-            for (int i = 0; i < m_fireNodes.Length; i++)
+            for (int i = 0; i < fireNodes.Length; i++)
             {
-                if (!m_fireNodes[i].isAlight)
+                if (!fireNodes[i].isAlight)
                 {
-                    var tempDifPos = collision.transform.position - m_fireNodes[i].transform.position;
+                    var tempDifPos = collision.transform.position - fireNodes[i].transform.position;
                     if(tempDifPos.magnitude<differentPos.magnitude)
                     {
                         differentPos = tempDifPos;
                         index = i;
                     }
-
                 }
-
             }
-            m_fireNodes[index].fireJustStarted=true;
+            fireNodes[index].fireJustStarted=true;
+        }
+    }
+
+    /// <summary>
+    /// _fireFaces altındaki düğümlerin fireNode'larını fireNodes'e ekler
+    /// </summary>
+    void AssignFireNodes()
+    {
+        List<FireNode> tempList = new List<FireNode>();
+        foreach (var fireFace in _fireFaces)
+        {
+            for (int i = 0; i < fireFace.transform.childCount; i++)
+            {
+                tempList.Add(fireFace.transform.GetChild(i).GetComponent<FireNode>());
+            }
+        }
+        foreach (var fireNode in fireNodes)
+        {
+            tempList.Add(fireNode);
+        }
+
+        fireNodes = tempList.ToArray();
+    }
+    /// <summary>
+    /// fireNodes'teki tüm düğümlerin atandığını kontrol edilir
+    /// </summary>
+    void CheckFireNodes()
+    {
+        for (int i = 0; i < fireNodes.Length; i++)
+        {
+            if (fireNodes[i] == null)
+            {
+                Debug.LogError(gameObject.GetComponentInParent<Transform>().name + " isimli objede FireNodeChain bileşeni üzerinde " +
+                    "bazı FireNode'lar atanmamış");
+                validChain = false;
+                break;
+            }
+            else
+            {
+                validChain = true;
+            }
         }
     }
 
@@ -110,113 +124,71 @@ public class FireNodeChain : MonoBehaviour {
     void PropagateFire()
     {
         // Hangi düğümlerin şuanda yandığını, yanmadığını ve daha önce yanmış olup olmadıklarını temel alarak, düğümler üzerinde yangını yay
-        for (int i = 0; i < m_fireNodes.Length; i++)
+        for (int i = 0; i < fireNodes.Length; i++)
         {
-            if (m_fireNodes[i].isAlight)
+            if (fireNodes[i].isAlight)
             {
-                for (int child = 0; child < m_fireNodes[i].links.Count; child++)
+                for (int child = 0; child < fireNodes[i].links.Count; child++)
                 {
-                    if (m_fireNodes[i].links[child] != null && m_fireNodes[i].links[child].GetComponent<FireNode>().hp > 0.0f)
+                    if (fireNodes[i].links[child] != null && fireNodes[i].links[child].GetComponent<FireNode>().hp > 0.0f)
                     {
-                        m_fireNodes[i].links[child].GetComponent<FireNode>().hp -= m_firePropagationSpeed * Time.deltaTime;
+                        fireNodes[i].links[child].GetComponent<FireNode>().hp -= firePropagationSpeed * Time.deltaTime;
                     }
                 }
             }
 
-            m_fireNodes[i].ForceUpdate();
+            fireNodes[i].ForceUpdate();
         }
     }
 
-    // brief Find the closest node to the fire as set it alight
-    // param Vector3 fire position
-    public void StartFire(Vector3 firePoisition)
+    /// <summary>
+    /// Tüm FireNode'ların yanıp yanmadığını kontrol eder
+    /// </summary>
+    /// <returns>Tüm FireNode'lar yandıysa true döndürür</returns>
+    bool CheckChainBurn()
     {
-        float shortestDistance = float.MaxValue;
-        int shortestIndex = 0;
-        for (int i = 0; i < m_fireNodes.Length; i++)
+        for (int i = 0; i < fireNodes.Length; i++)
         {
-            float distance = Vector3.Distance(m_fireNodes[i].GetComponent<Transform>().position, firePoisition);
-
-            if (distance < shortestDistance)
+            if (fireNodes[i].fuel > 0.0f)
             {
-                shortestDistance = distance;
-                shortestIndex = i;
+                _chainBurned = false;
+                return false;
             }
         }
-
-        m_fireNodes[shortestIndex].hp -= m_combustionRateValue * Time.deltaTime;
+        _chainBurned = true;
+        return true;
     }
 
-    // brief Destroys the object once all FireNode's have run out of fuel
+    /// <summary>
+    /// Tüm FireNode'ların yakıtı bittiğinde nesneyi yok eder
+    /// </summary>
     void DestroyAfterFire()
     {
-        bool allBurnt = false;
-
-        // Check all nodes have had they fuel used up
-        for (int i = 0; i < m_fireNodes.Length; i++)
-        {
-            if (m_fireNodes[i].fuel <= 0.0f)
-            {
-                // Got to the end, all have ran out of fuel
-                if (i == m_fireNodes.Length - 1)
-                    allBurnt = true;
-
-                // Need to check next node
-                continue;
-            }
-            else // Still have fuel
-            {
-                break;
-            }
-        }
-
-        // If so, delete the gameoject
-        if (allBurnt)
+        if (_chainBurned)
         {
             Destroy(gameObject);
-            m_destroyedAlready = true;
+            destroyedAlready = true;
         }
     }
 
-    // brief Replaces the object with another once all FireNode's have run out of fuel
+    /// <summary>
+    /// Tüm FireNode'ların yakıtı bittiğinde nesneyi bir başkasıyla değiştirir
+    /// </summary>
     void ReplaceAfterFire()
     {
-        bool allBurnt = false;
-
-        // Check all nodes have had they fuel used up
-        for (int i = 0; i < m_fireNodes.Length; i++)
+        if (_chainBurned && replacementMesh != null)
         {
-            if (m_fireNodes[i].NodeConsumed() == true)
-            {
-                // Got to the end, all have ran out of fuel
-                if (i == m_fireNodes.Length - 1)
-                    allBurnt = true;
-
-                // Need to check next node
-                continue;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        // If so, delete the gameoject and replace it
-        if (allBurnt && m_replacementMesh != null)
-        {
-            if (m_replacementMesh != null)
+            if (replacementMesh != null)
             {
                 Transform trans = gameObject.transform;
                 Destroy(gameObject);
-                Instantiate(m_replacementMesh, trans.position, trans.rotation);
+                Instantiate(replacementMesh, trans.position, trans.rotation);
             }
             else
             {
-                Debug.Log("Failed to replace the gameobject");
+                Debug.LogWarning("Yanmış objenin meshi değiştirilemedi");
             }
-
-
-            m_replacedAlready = true;
+            replacedAlready = true;
         }
     }
 }

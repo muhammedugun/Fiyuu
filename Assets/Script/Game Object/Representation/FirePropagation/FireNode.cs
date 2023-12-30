@@ -35,7 +35,6 @@ public class FireNode : MonoBehaviour
     /// Yangın sönmüş
     /// </summary>
     private bool extingushed = false;
-    private bool clean = false;
     private FireVisualManager visualMgr = null;
 
     void Start()
@@ -86,15 +85,6 @@ public class FireNode : MonoBehaviour
         Combustion();
     }
 
-    // brief Has this node ran out of fire fuel
-    // return bool true if it has
-    public bool NodeConsumed()
-    {
-        if (clean == true)
-            return true;
-        else
-            return false;
-    }
 
     /// <summary>
     /// Update fonkisyonunu 1 kez çalıştırmaya zorlar
@@ -161,7 +151,6 @@ public class FireNode : MonoBehaviour
                 extingushed = true;
 
                 KillFlames();
-                clean = true;
             }
         }
     }
