@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 /// <summary>
 /// Parçalanabilir objeler
@@ -9,7 +8,7 @@ public interface ISmashable : IDamageable
     /// Parçalamayý gerçekleþtirir
     /// </summary>
     /// <param name="smashableObject">Objenin parçalanabilir halinin örneði</param>
-    IEnumerator Smash(GameObject smashableObject);
+    void Smash(Collision collision);
 
     /// <summary>
     /// Parçalamanýn gerçekleþebilirliðini kontrol eder

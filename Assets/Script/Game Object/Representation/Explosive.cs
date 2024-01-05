@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Fracture))]
 /// <summary>
 /// Patlayýcý ile ilgili görevlerden sorumlu
 /// </summary>
@@ -19,6 +20,8 @@ public class Explosive : MonoBehaviour, ISmashable
     [Tooltip("Patlayýcý objenin dayanýklýlýðý")]
     [SerializeField] private float _durability;
 
+    private Fracture fracture;
+
     public float Durability { get { return _durability; } set { _durability = value; } }
 
     private void OnCollisionEnter(Collision collision)
@@ -33,7 +36,7 @@ public class Explosive : MonoBehaviour, ISmashable
     /// </summary>
     void Explode(Collision collision)
     {
-        StartCoroutine(Smash(_smashableObject));
+        Smash(collision);
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var obj in surroundingObjects)
         {
@@ -72,12 +75,14 @@ public class Explosive : MonoBehaviour, ISmashable
 
     }
 
-    public IEnumerator Smash(GameObject smashableObject)
+    public void Smash(Collision collision)
     {
-        if (_smashableObject != null)
+        if (collision.contactCount > 0)
         {
-            Instantiate(_smashableObject, transform.position, Quaternion.identity);
+            // Collision force must exceed the minimum force (F = I / T)
+            var contact = collision.contacts[0];
+            fracture.callbackOptions.CallOnFracture(contact.otherCollider, gameObject, contact.point);
+            fracture.ComputeFracture();
         }
-        yield return null;
     }
 }
