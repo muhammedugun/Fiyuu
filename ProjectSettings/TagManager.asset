@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - asteroid
-  - ship
   - Ammo
   - Building
   - Flame
   - Fire
   - Node
+  - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

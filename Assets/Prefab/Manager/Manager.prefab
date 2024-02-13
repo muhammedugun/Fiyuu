@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7b9e69a064c35468d6652881f0a637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponCountText: {fileID: 0}
-  ammoLimit: 3
   _scoreText: {fileID: 0}
 --- !u!1 &8830759572299914555
 GameObject:
@@ -242,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 2943716769212600598, guid: 14d4983b701b8a34f96236800e507572,
         type: 3}
       propertyPath: m_Name
-      value: Zenject Scene Context
+      value: ZenjectSceneContext
       objectReference: {fileID: 0}
     - target: {fileID: 2943716769212600598, guid: 14d4983b701b8a34f96236800e507572,
         type: 3}
