@@ -11,6 +11,7 @@ TagManager:
   - Node
   - Projectile
   - Enemy
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
+
 /// <summary>
 /// Fýrlatýcý silahlarý(mancýnýklarý) temsil eder.
 /// </summary>

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2376097207816859794
+--- !u!1 &4479274969241186548
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3148657699685198376}
-  - component: {fileID: 2025947943118824845}
-  - component: {fileID: 4321603662864912711}
-  - component: {fileID: 3186576027744538998}
-  - component: {fileID: 3186576027744538996}
-  - component: {fileID: -7043620285633651543}
-  - component: {fileID: 3186576027744538997}
+  - component: {fileID: 3846712308182755918}
+  - component: {fileID: 201993359572870635}
+  - component: {fileID: 2677786532907372833}
   m_Layer: 0
-  m_Name: Ammo
-  m_TagString: Ammo
+  m_Name: Visual
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3148657699685198376
+--- !u!4 &3846712308182755918
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
-  m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
-  m_LocalPosition: {x: 3.245, y: 0.238, z: 0.051}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_GameObject: {fileID: 4479274969241186548}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 6723652361306235737}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
---- !u!33 &2025947943118824845
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &201993359572870635
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
-  m_Mesh: {fileID: 4711208715938537054, guid: 563e548934541f04ba529c26f2468d2d, type: 3}
---- !u!23 &4321603662864912711
+  m_GameObject: {fileID: 4479274969241186548}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2677786532907372833
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
+  m_GameObject: {fileID: 4479274969241186548}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,26 +83,76 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3186576027744538998
+--- !u!1 &7243087556200954350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6723652361306235737}
+  - component: {fileID: 4392420955353594479}
+  - component: {fileID: 2238119145034582034}
+  - component: {fileID: 591327998941107333}
+  - component: {fileID: 9144498835152586731}
+  - component: {fileID: 11621990892040735}
+  m_Layer: 0
+  m_Name: Ammo
+  m_TagString: Ammo
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6723652361306235737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243087556200954350}
+  m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3846712308182755918}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
+--- !u!114 &4392420955353594479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243087556200954350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matter: 1
+--- !u!135 &2238119145034582034
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
+  m_GameObject: {fileID: 7243087556200954350}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0024999995
-  m_Center: {x: -8.1490725e-10, y: 8.149071e-10, z: 0}
---- !u!54 &3186576027744538996
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &591327998941107333
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
+  m_GameObject: {fileID: 7243087556200954350}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -116,36 +162,61 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7043620285633651543
+--- !u!114 &9144498835152586731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
+  m_GameObject: {fileID: 7243087556200954350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 91fc9178a0b0c3d4bb8b6d91b16d9893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matter: 1
---- !u!114 &3186576027744538997
+  triggerOptions:
+    triggerType: 1
+    minimumCollisionForce: 0
+    filterCollisionsByTag: 0
+    triggerAllowedTags: []
+    triggerKey: 0
+  fractureOptions:
+    fragmentCount: 10
+    xAxis: 1
+    yAxis: 1
+    zAxis: 1
+    detectFloatingFragments: 0
+    asynchronous: 0
+    insideMaterial: {fileID: 0}
+    textureScale: {x: 1, y: 1}
+    textureOffset: {x: 0, y: 0}
+  refractureOptions:
+    enableRefracturing: 0
+    maxRefractureCount: 1
+    invokeCallbacks: 0
+  callbackOptions:
+    onFracture:
+      m_PersistentCalls:
+        m_Calls: []
+    onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+  visual: {fileID: 4479274969241186548}
+  currentRefractureCount: 0
+--- !u!114 &11621990892040735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376097207816859794}
+  m_GameObject: {fileID: 7243087556200954350}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b4bf1864db309442ac2c70432f777b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isParticleEffect: 1
-  _explosionParticle: {fileID: 4549895982509988320, guid: 6d8419e3bcdf7f943b910ea56acdea99,
-    type: 3}
-  _smashableObject: {fileID: 5702043830548744128, guid: 2cb60a1687ad2a34e881148cc2bad2a2,
-    type: 3}
+  _isParticleEffect: 0
+  _explosionParticle: {fileID: 0}
   _explosionRadius: 3
-  _explosionForce: 0.1
-  _durability: 200
+  _explosionForce: 0.2
+  _durability: 300

@@ -771,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 2244396649944824745}
   m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.7071079}
   m_LocalPosition: {x: -7.58, y: 2.22, z: 0.16440758}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3040489179748961474}
@@ -823,7 +823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1960526229296636560}
-  dieFeedBack: {fileID: 1433511430981222670}
+  dieFeedback: {fileID: 0}
+  damageFeedback: {fileID: 0}
   _durability: 200
 --- !u!95 &1433511432378764684
 Animator:

@@ -7,14 +7,13 @@ using UnityEngine;
 /// </summary>
 public class Building : MonoBehaviour, ISmashable
 {
-    [SerializeField] private GameObject body;
     [SerializeField] private MMF_Player damageFeedbacks, beginningFeedbacks;
     public static event Action<float, BuildingMatter> OnBuildSmashed; // float yapýnýn hacmi, BuildingMatter yapýnýn zýrhý
     public float Durability { get { return _durability; } set { _durability = value; } }
 
     [Tooltip("Yapýnýn zýrhý")]
     [SerializeField] internal BuildingMatter armor;
-    [SerializeField] private Fracture fracture;
+    private Fracture fracture;
 
     private float _durability;
     /// <summary>
@@ -37,7 +36,7 @@ public class Building : MonoBehaviour, ISmashable
     };
 
 
-    internal float[] _matterDurabilitiy = new float[4] { 2000f, 4000f, 6000f, 8000f};
+    internal float[] _matterDurabilitiy = new float[4] { 2000f, 40000f, 60000f, 80000f};
 
     /// <summary>
     /// Parçalanma gerçekleþti mi?
@@ -45,10 +44,11 @@ public class Building : MonoBehaviour, ISmashable
     private bool _isSmash;
     private void Start()
     {
+        fracture = GetComponent<Fracture>();
         AssignDurability();
-        AssignVolume(body.GetComponent<Renderer>(), ref _volumeSize);
+        AssignVolume(GetComponentInChildren<Renderer>(), ref _volumeSize);
         AssignMass(gameObject.GetComponent<Rigidbody>(), _volumeSize);
-        beginningFeedbacks.PlayFeedbacks();
+        beginningFeedbacks?.PlayFeedbacks();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -115,6 +115,7 @@ public class Building : MonoBehaviour, ISmashable
         }
         else if(collision.gameObject.layer!=LayerMask.NameToLayer("Node"))
         {
+            Debug.Log(collision.impulse.magnitude);
             var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
             _durability -= collisionForce;
         }
@@ -143,8 +144,14 @@ public class Building : MonoBehaviour, ISmashable
     /// <param name="collision"></param>
     public bool CheckSmash()
     {
-        if (_durability <= 0) return true;
-        else return false;
+        if (_durability <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

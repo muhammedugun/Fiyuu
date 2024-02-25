@@ -1,17 +1,17 @@
 using UnityEngine;
-using Zenject;
 
 
 public class Catapult : Launcher
 {
     public AmmoMatter ammoType;
     public GameObject[] ammoTypePrefabs;
-
+    
     private void Start()
     {
         Initialize();
     }
 
+    
     private void Update()
     {
         var inputValue = PlayerController.action.InLevel.Move.ReadValue<Vector3>();

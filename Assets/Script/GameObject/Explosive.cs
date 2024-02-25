@@ -11,8 +11,6 @@ public class Explosive : MonoBehaviour, ISmashable
     [SerializeField] private bool _isParticleEffect;
     [Tooltip("Patlamanýn particle effectid")]
     [SerializeField] private GameObject _explosionParticle;
-    [Tooltip("Objenin parçalanabilir hali")]
-    [SerializeField] private GameObject _smashableObject;
     [Tooltip("Patlamanýn yarýçapý")]
     [SerializeField] private float _explosionRadius = 5;
     [Tooltip("Patlamanýn gücü")]
@@ -23,7 +21,10 @@ public class Explosive : MonoBehaviour, ISmashable
     private Fracture fracture;
 
     public float Durability { get { return _durability; } set { _durability = value; } }
-
+    private void Start()
+    {
+        fracture = GetComponent<Fracture>();
+    }
     private void OnCollisionEnter(Collision collision)
     {
         DoDamage(collision);
@@ -36,7 +37,7 @@ public class Explosive : MonoBehaviour, ISmashable
     /// </summary>
     void Explode(Collision collision)
     {
-        //Smash(collision);
+        Smash(collision);
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var obj in surroundingObjects)
         {

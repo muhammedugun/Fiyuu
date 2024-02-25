@@ -12,8 +12,8 @@ public class Ammo : MonoBehaviour
 
     private void Start()
     {
-        AssignVolume(gameObject.GetComponent<Renderer>(), ref _volumeSize);
-        AssignMass(gameObject.GetComponent<Rigidbody>(), _volumeSize);
+        AssignVolume(GetComponentInChildren<Renderer>(), ref _volumeSize);
+        AssignMass(GetComponentInChildren<Rigidbody>(), _volumeSize);
     }
 
     private void OnCollisionEnter(Collision collision)
