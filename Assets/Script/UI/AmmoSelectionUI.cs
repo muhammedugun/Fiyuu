@@ -12,10 +12,11 @@ public class AmmoSelectionUI : MonoBehaviour
 
     [SerializeField] private List<Image> _ammoSelections;
 
-    [Inject] private Catapult _catapult; 
+    //[Inject] private Catapult _catapult; 
     public void SetAmmoType(AmmoMatter ammoMatter)
     {
-        _catapult.SetAmmoType(ammoMatter);
+        
+        //_catapult.SetAmmoType(ammoMatter);
         SetAmmoSelectionColor(ammoMatter);
     }
     

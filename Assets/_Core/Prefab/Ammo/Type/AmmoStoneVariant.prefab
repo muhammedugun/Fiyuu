@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2238119145034582034, guid: b54eb14662c805e419642ba892163856,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2677786532907372833, guid: b54eb14662c805e419642ba892163856,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -71,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 7243087556200954350, guid: b54eb14662c805e419642ba892163856,
         type: 3}
       propertyPath: m_Name
-      value: AmmoStone
+      value: AmmoStoneVariant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b54eb14662c805e419642ba892163856, type: 3}
