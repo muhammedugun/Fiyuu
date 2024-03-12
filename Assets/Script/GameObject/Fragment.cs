@@ -9,7 +9,7 @@ public class Fragment : MonoBehaviour
     /// <summary>
     /// Obje oluþtuktan kaç saniye sonra yok olsun?
     /// </summary>
-    [SerializeField] private float deactivedDuration = 1f;
+    [SerializeField] private float deactivedDuration = 5f;
 
     /// <summary>
     /// Obje yok olurken üretilecek olan partikul efekti

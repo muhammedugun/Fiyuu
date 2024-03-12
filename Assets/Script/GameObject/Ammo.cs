@@ -40,7 +40,7 @@ public class Ammo : ExplosiveBase
         {
             _trailRenderer.material = visibleMaterial;
             ShowLaunchPowerText();
-
+            Smash(collision);
             Explode(collision);
             isExplode = true;
             if (isDestroyable)
@@ -55,10 +55,10 @@ public class Ammo : ExplosiveBase
     /// </summary>
     private void ShowLaunchPowerText()
     {
-        // Dünya pozisyonunu ekran pozisyonuna �evir.
+        // Dünya pozisyonunu ekran pozisyonuna çevir.
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, launchPos);
         // Ekran pozisyonunu RectTransform'ın yerel pozisyonuna çevir.
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(launchPowerText.rectTransform, screenPoint, null, out Vector2 localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(launchPowerText.rectTransform.parent.GetComponent<RectTransform>(), screenPoint, null, out Vector2 localPoint);
         // Yeni pozisyonu ayarla.
         launchPowerText.rectTransform.anchoredPosition = localPoint;
     }

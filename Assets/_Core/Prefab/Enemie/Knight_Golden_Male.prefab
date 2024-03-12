@@ -1105,7 +1105,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!136 &2271568560563539198
 CapsuleCollider:
@@ -1137,6 +1137,7 @@ MonoBehaviour:
   visual: {fileID: 4635544107729093644}
   dieFeedback: {fileID: 611345398969430098}
   damageFeedback: {fileID: 8760625767756383743}
+  durabilityMultiplier: 50
 --- !u!95 &1389169461746580189
 Animator:
   serializedVersion: 5

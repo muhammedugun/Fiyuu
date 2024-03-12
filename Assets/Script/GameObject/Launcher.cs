@@ -165,7 +165,7 @@ public class Launcher : MonoBehaviour
             {
                 lastAmmo.GetComponent<Ammo>().isDestroyable=true;
                 if(lastAmmo.GetComponent<ExplosiveBase>().isExplode)
-                Destroy(lastAmmo.gameObject);
+                    Destroy(lastAmmo.gameObject);
             }
                 
             lastAmmo = _ammo;
@@ -175,7 +175,7 @@ public class Launcher : MonoBehaviour
             ammoRigidBody.useGravity = true;
             ammoRigidBody.GetComponent<Collider>().enabled = true;
             float height = ammoRigidBody.transform.position.y - _ammoStartY;
-            Debug.Log(height);
+
             if(height<2)
             {
                 height++;

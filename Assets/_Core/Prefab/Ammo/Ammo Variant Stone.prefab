@@ -7,10 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
+        type: 3}
+      propertyPath: matter
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7579927785406351002, guid: b54eb14662c805e419642ba892163856,
         type: 3}
       propertyPath: m_Name
-      value: Ammo
+      value: Ammo Variant Stone
       objectReference: {fileID: 0}
     - target: {fileID: 7579927785406351005, guid: b54eb14662c805e419642ba892163856,
         type: 3}

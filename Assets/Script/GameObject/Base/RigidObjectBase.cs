@@ -13,7 +13,7 @@ public abstract class RigidObjectBase : MonoBehaviour
     /// <summary>
     /// Aðýrlýk atamasý yapýlýrken eklenecek çarpan.
     /// </summary>
-    protected float _massMultiplier;
+    protected float _massMultiplier=1f;
     /// <summary>
     /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
     /// </summary>

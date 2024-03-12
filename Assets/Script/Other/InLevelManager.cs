@@ -74,11 +74,11 @@ public class InLevelManager : MonoBehaviour
     [SerializeField] private ScoreBar scoreBar;
     void CalculateScore(float volumeSize, BuildingMatter buildingArmor)
     {
-        if(_isGameEnd && (ammoCount.limitCount / ammoCount.firedCount) >1)
+        if(_isGameEnd && ammoCount.firedCount!=0 && (ammoCount.limitCount / ammoCount.firedCount) > 1)
         {
             score += 100 * ammoCount.limitCount / ammoCount.firedCount;
         }
-        Debug.Log("volume size: " + volumeSize);
+
         score += (int)(volumeSize*10) * (int)buildingArmor;
         scoreText.text = "Score: " + score;
         scoreBar.UpdateScoreIcons();

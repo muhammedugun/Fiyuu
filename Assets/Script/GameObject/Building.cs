@@ -22,7 +22,7 @@ public class Building : SmashableObjectBase
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
-    internal float[] armorDurabilitiy = new float[4] { 10000f, 40000f, 60000f, 80000f };
+    internal float[] armorDurabilitiy = new float[4] { 150f, 400f, 600f, 800f };
 
 
     /// <summary>
@@ -43,53 +43,47 @@ public class Building : SmashableObjectBase
 
     private void Awake()
     {
-        _massMultiplier= (int)armor;
+        _massMultiplier = (int)armor;
+        _durabilityMultiplier = armorDurabilitiy[(int)armor - 1];
     }
 
     protected override void Start()
     {
         base.Start();
-        AssignDurability();
         beginningFeedbacks?.PlayFeedbacks();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_isSmash)
+
+        DoDamage(collision);
+        if (CheckSmash())
         {
-            DoDamage(collision);
-            if (CheckSmash())
-            {
-                _isSmash = true;
-                Smash(collision);
-            }
+            Smash(collision);
         }
+  
     }
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        if (collision.transform.CompareTag("Ammo"))
+        if(durability>0)
         {
-            damageFeedbacks?.PlayFeedbacks();
-            var ammo = collision.gameObject.GetComponent<Ammo>();
-            var ammoArmor = ammo.matter;
-            
-            if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+            if (collision.transform.CompareTag("Ammo"))
             {
-                base.DoDamage(collision, ammo.power[(int)ammoArmor - 1]);
+                damageFeedbacks?.PlayFeedbacks();
+                var ammo = collision.gameObject.GetComponent<Ammo>();
+                var ammoArmor = ammo.matter;
+
+                if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+                {
+                    base.DoDamage(collision, ammo.power[(int)ammoArmor - 1]);
+                }
+            }
+            else if (collision.gameObject.layer != LayerMask.NameToLayer("Node"))
+            {
+                base.DoDamage(collision);
             }
         }
-        else if(collision.gameObject.layer!=LayerMask.NameToLayer("Node"))
-        {
-            base.DoDamage(collision);
-        }
-    }
-
-
-
-    protected override void AssignDurability(float durabilityMultiplier=1f)
-    {
-        base.AssignDurability(armorDurabilitiy[(int)armor - 1]);
     }
 
     public override void Smash(Collision collision)

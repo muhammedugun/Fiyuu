@@ -23,6 +23,7 @@ public abstract class SmashableObjectBase : DamagableObjectBase
     {
         if (collision.contactCount > 0)
         {
+            _isSmash = true;
             var contact = collision.contacts[0];
             _fracture.callbackOptions.CallOnFracture(contact.otherCollider, gameObject, contact.point);
             _fracture.ComputeFracture();
@@ -35,7 +36,7 @@ public abstract class SmashableObjectBase : DamagableObjectBase
     /// <param name="collision"></param>
     public bool CheckSmash()
     {
-        if (durability <= 0)
+        if (!_isSmash && durability <= 0)
             return true;
         else
             return false;

@@ -6,6 +6,14 @@ public abstract class DamagableObjectBase : RigidObjectBase
 {
     public float durability { get; set; }
 
+    protected float _durabilityMultiplier=1f;
+
+    protected override void Start()
+    {
+        base.Start();
+        AssignDurability(_durabilityMultiplier);
+    }
+
     /// <summary>
     /// Objenin dayanýklýlýðýný atar
     /// </summary>
@@ -20,7 +28,14 @@ public abstract class DamagableObjectBase : RigidObjectBase
     /// <param name="collision"></param>
     public virtual void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        durability -= collisionForce * damageMultiplier;
+        if(durability>0)
+        {
+            var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+            durability -= collisionForce * damageMultiplier;
+            if (durability < 0)
+            {
+                durability = 0;
+            }
+        }
     }
 }

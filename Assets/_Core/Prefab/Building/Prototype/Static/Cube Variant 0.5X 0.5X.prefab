@@ -12,6 +12,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube Variant 0.5X 0.5X
       objectReference: {fileID: 0}
+    - target: {fileID: 1912945802873347877, guid: a207779963e9d0c4e9b9704e71f1026d,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912945802873347877, guid: a207779963e9d0c4e9b9704e71f1026d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912945802873347877, guid: a207779963e9d0c4e9b9704e71f1026d,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4546691729006097320, guid: a207779963e9d0c4e9b9704e71f1026d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -87,5 +102,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 79309130583044593, guid: a207779963e9d0c4e9b9704e71f1026d, type: 3}
+    - {fileID: 2531542227972262575, guid: a207779963e9d0c4e9b9704e71f1026d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a207779963e9d0c4e9b9704e71f1026d, type: 3}

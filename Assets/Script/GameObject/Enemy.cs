@@ -13,6 +13,7 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private GameObject visual;
     [SerializeField] private MMF_Player dieFeedback;
     [SerializeField] private MMF_Player damageFeedback;
+    [SerializeField] private float durabilityMultiplier=50f;
 
     internal Animator animator;
 
@@ -21,6 +22,7 @@ public class Enemy : DamagableObjectBase
     private void Awake()
     {
         _massMultiplier = 1f;
+        _durabilityMultiplier = durabilityMultiplier;
     }
 
     protected override void Start()
