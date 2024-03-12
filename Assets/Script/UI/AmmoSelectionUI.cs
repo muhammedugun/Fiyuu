@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
+
 
 /// <summary>
 /// Arayüzdeki mühimmat seçim objesiyle ilgili

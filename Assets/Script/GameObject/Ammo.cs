@@ -1,64 +1,86 @@
+﻿// Refactor 12.03.24
+using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// M�himmat ile ilgili
+/// Mühimmat ile ilgili
 /// </summary>
-public class Ammo : MonoBehaviour
+public class Ammo : ExplosiveBase
 {
-    [Tooltip("M�himmat�n maddesi")]
+    [Header("Ammo")]
+    [Tooltip("Mühimmatın maddesi")]
     [SerializeField] internal AmmoMatter matter;
-    internal float[] power = new float[8]{ 10f, 15f, 20f, 25f, 1f, 10f, 10f, 10f};
-    float _volumeSize;
+    [Tooltip("Mühimmat düştükten sonra ne kadar yakınındaki düşmanları korkutsun?")]
+    [SerializeField] private float scareRadius;
+    [SerializeField] private TextMeshProUGUI launchPowerText;
+    [Tooltip("Trail Renderer'in görülmesini sağlayacak materyal")]
+    [SerializeField] private Material visibleMaterial;
 
-    private void Start()
+    internal Vector3 launchPos;
+    internal float[] power = new float[8]{ 1f, 2f, 2f, 2f, 1f, 1f, 1f, 1f};
+    internal bool isDestroyable;
+
+    private TrailRenderer _trailRenderer;
+    private void Awake()
     {
-        AssignVolume(GetComponentInChildren<Renderer>(), ref _volumeSize);
-        AssignMass(GetComponentInChildren<Rigidbody>(), _volumeSize);
+        _massMultiplier = power[(int)matter - 1];
+    }
+    protected override void Start()
+    {
+        base.Start();
+        _trailRenderer = GetComponent<TrailRenderer>();
+        launchPowerText = GameObject.Find("/UI/Canvas/LaunchPowerText").GetComponent<TextMeshProUGUI>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
-        foreach (var hitCollider in hitColliders)
+        ScareEnemies(scareRadius);
+        DoDamage(collision);
+        if (CheckSmash())
         {
-            Enemy enemy = hitCollider.GetComponent<Enemy>();
-            if (enemy != null)
+            _trailRenderer.material = visibleMaterial;
+            ShowLaunchPowerText();
+
+            Explode(collision);
+            isExplode = true;
+            if (isDestroyable)
             {
-                Debug.Log("Enemy detected!");
-                enemy.animator.SetTrigger("terrified");
+                Destroy(gameObject);
             }
         }
     }
 
     /// <summary>
-    /// Objenin hacmini atar
+    /// Fırlatma gücünü fırlatılan noktada text olarak gösterir
     /// </summary>
-    private void AssignVolume(Renderer renderer, ref float volumeSize)
+    private void ShowLaunchPowerText()
     {
-        Bounds bounds = renderer.bounds;
-        volumeSize = bounds.size.x * bounds.size.y * bounds.size.z;
+        // Dünya pozisyonunu ekran pozisyonuna �evir.
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, launchPos);
+        // Ekran pozisyonunu RectTransform'ın yerel pozisyonuna çevir.
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(launchPowerText.rectTransform, screenPoint, null, out Vector2 localPoint);
+        // Yeni pozisyonu ayarla.
+        launchPowerText.rectTransform.anchoredPosition = localPoint;
     }
 
     /// <summary>
-    /// Objenin a��rl���n� atar
+    /// Düşmanları korkut. Mühimmatın bulunduğu konumun çevresindeki düşmanların korkma animasyonlarını çalıştırır.
     /// </summary>
-    private void AssignMass(Rigidbody rb, float volumeSize)
+    private void ScareEnemies(float radius)
     {
-        if (volumeSize <= 0)
+        var hitColliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (var hitCollider in hitColliders)
         {
-            Debug.LogError("M�himmat�n hacmi atanmam�� ya da hacmi s�f�r");
+            hitCollider.TryGetComponent<Enemy>(out var enemy);
+            if (enemy != null)
+                enemy.animator.SetTrigger("terrified");
         }
-        else
-        {
-            rb.mass = power[(int)matter-1] * (volumeSize);
-        }
-
     }
 
 }
 
 /// <summary>
-/// M�himmat�n maddesi
+/// Mühimmatın maddesi
 /// </summary>
 public enum AmmoMatter
 {

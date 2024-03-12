@@ -9,7 +9,7 @@ public class SceneLoadManager : MonoBehaviour
 {
     private void Awake()
     {
-        PlayerController.action.InLevel.RestartScene.started += RestartCurrentScene;
+        ControllerManager.action.InLevel.RestartScene.started += RestartCurrentScene;
     }
 
     public void RestartCurrentScene(InputAction.CallbackContext context)

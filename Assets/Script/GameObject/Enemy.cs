@@ -1,47 +1,42 @@
+// Refactor 12.03.24
+
 using System;
 using UnityEngine;
-using DG.Tweening;
-using System.Collections.Generic;
-using UnityEngine.Events;
 using MoreMountains.Feedbacks;
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : DamagableObjectBase
 {
-    
-    [SerializeField] private GameObject body;
-    [Header("Feedbacks")]
+    /// <summary>
+    /// Öldü eventi
+    /// </summary>
+    public static event Action OnDied;
+
+    [SerializeField] private GameObject visual;
     [SerializeField] private MMF_Player dieFeedback;
     [SerializeField] private MMF_Player damageFeedback;
-    public static event Action OnDied;
-    public float Durability { get { return _durability; } set { _durability = value; } }
-    [SerializeField] private float _durability;
+
     internal Animator animator;
+
     private bool _isDead;
 
     private void Awake()
     {
-        Durability = _durability;
+        _massMultiplier = 1f;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         gameObject.tag = "Enemy";
-
         animator = GetComponent<Animator>();
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         DoDamage(collision);
-        if (!_isDead && CheckDie()) Die();
-    }
-
-    public void DoDamage(Collision collision)
-    {
-        if(collision.gameObject.TryGetComponent<Ammo>(out Ammo ammo))
+        if (collision.gameObject.TryGetComponent<Ammo>(out Ammo ammo))
             damageFeedback.PlayFeedbacks();
-        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        _durability -= collisionForce;
+        if (CheckDie()) 
+            Die();
     }
 
     /// <summary>
@@ -58,17 +53,15 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
 
-
     public void SetActiveFalse()
     {
-        body.SetActive(false);
+        visual.SetActive(false);
         GetComponent<CapsuleCollider>().enabled = false;
         var rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
 
         this.enabled = false;
-        //gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -77,7 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable
     /// <param name="collision"></param>
     private bool CheckDie()
     {
-        if (_durability <= 0) return true;
+        if (!_isDead && durability <= 0) return true;
         else return false;
     }
 

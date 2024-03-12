@@ -1,17 +1,23 @@
+// Refactor 12.03.24
 using UnityEngine;
 
+/// <summary>
+/// Smash (OpenFracture) sistemindeki bir parça
+/// </summary>
 public class Fragment : MonoBehaviour
 {
-    public GameObject particleEffect;
     /// <summary>
-    /// Kaç saniye sonra yok olacaðý
+    /// Obje oluþtuktan kaç saniye sonra yok olsun?
     /// </summary>
     [SerializeField] private float deactivedDuration = 1f;
 
+    /// <summary>
+    /// Obje yok olurken üretilecek olan partikul efekti
+    /// </summary>
+    internal GameObject particleEffect;
     internal bool isUsingParticle = false;
     void Start()
     {
-        
         Invoke(nameof(SetDeactive), deactivedDuration);
     }
 
@@ -20,23 +26,12 @@ public class Fragment : MonoBehaviour
         
         if (isUsingParticle)
         {
-            float volumeSize = 1f;
-            AssignVolume(GetComponent<MeshRenderer>(), ref volumeSize);
             var particle = Instantiate(particleEffect);
             particle.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            float ortalama = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
-            particle.transform.localScale = Vector3.one * ortalama;
+            float middle = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
+            particle.transform.localScale = Vector3.one * middle;
         }
         gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Objenin hacmini atar
-    /// </summary>
-    private void AssignVolume(Renderer renderer, ref float volumeSize)
-    {
-        Bounds bounds = renderer.bounds;
-        volumeSize = bounds.size.x * bounds.size.y * bounds.size.z;
     }
 
 }

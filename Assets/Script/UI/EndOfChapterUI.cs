@@ -1,12 +1,11 @@
 using UnityEngine;
-using Zenject;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 
 public class EndOfChapterUI : MonoBehaviour
 {
-    [Inject] private InLevelManager _inLevelManager;
+    private InLevelManager _inLevelManager;
     [SerializeField] private GameObject[] stars;
     [Tooltip("Bölüm sonundaki çýkan yýldýzlar için gerekli skorlar")]
     [SerializeField] private int[] starScore;
@@ -29,6 +28,7 @@ public class EndOfChapterUI : MonoBehaviour
 
     private void Start()
     {
+        _inLevelManager = FindObjectOfType<InLevelManager>();
         Subscribe();
     }
 
