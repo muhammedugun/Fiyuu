@@ -9,8 +9,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
         type: 3}
+      propertyPath: scareRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
+        type: 3}
       propertyPath: _explosionForce
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
         type: 3}

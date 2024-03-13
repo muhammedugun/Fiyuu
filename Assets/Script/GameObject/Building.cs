@@ -22,7 +22,7 @@ public class Building : SmashableObjectBase
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
-    internal float[] armorDurabilitiy = new float[4] { 150f, 400f, 600f, 800f };
+    internal float[] armorDurabilitiy = new float[4] { 100f, 200f, 600f, 800f };
 
 
     /// <summary>
@@ -66,7 +66,8 @@ public class Building : SmashableObjectBase
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        if(durability>0)
+        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+        if (durability > 0 && collisionForce / _rigidbody.mass > 100f)
         {
             if (collision.transform.CompareTag("Ammo"))
             {
@@ -76,7 +77,7 @@ public class Building : SmashableObjectBase
 
                 if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
                 {
-                    base.DoDamage(collision, ammo.power[(int)ammoArmor - 1]);
+                    base.DoDamage(collision);
                 }
             }
             else if (collision.gameObject.layer != LayerMask.NameToLayer("Node"))

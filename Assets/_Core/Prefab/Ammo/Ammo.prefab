@@ -44,7 +44,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7579927785406351002}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9e2839d6fc9ec1b4e94daa69ae440501, type: 2}
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
@@ -71,6 +71,8 @@ MonoBehaviour:
   scareRadius: 1
   launchPowerText: {fileID: 0}
   visibleMaterial: {fileID: 2100000, guid: 695873166113ab64997efed81c2426c7, type: 2}
+  durabilityMultiplier: 500
+  massMultiplier: 40
 --- !u!54 &7579927785406350983
 Rigidbody:
   m_ObjectHideFlags: 0

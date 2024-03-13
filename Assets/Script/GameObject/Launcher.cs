@@ -38,10 +38,7 @@ public class Launcher : MonoBehaviour
     private void Start()
     {
         AssignAmmoType();
-        Initialize();
-        _ammoStartY = ammoRigidBody.transform.position.y;
-        Invoke("SetLaunchPower", 0.1f);
-
+        _ammoStartY = _ammoSpawnPosition.position.y;
     }
 
     private void OnEnable()
@@ -86,7 +83,6 @@ public class Launcher : MonoBehaviour
     /// </summary>
     public void LaunchExit()
     {
-        Initialize();
         ammoRigidBody.isKinematic = true;
         ammoRigidBody.useGravity = false;
     }
@@ -125,6 +121,7 @@ public class Launcher : MonoBehaviour
         _ammo.transform.position = _ammoSpawnPosition.position;
         _ammo.transform.rotation = _ammoSpawnPosition.rotation;
         ammoRigidBody = _ammo.GetComponent<Rigidbody>();
+        Invoke("SetLaunchPower", 0.1f);
     }
 
     /// <summary>
@@ -148,16 +145,22 @@ public class Launcher : MonoBehaviour
     /// </summary>
     private void LaunchAnimTrigger()
     {
+        _animator.SetBool("leave", false);
         _animator.SetTrigger("launch");
     }
+
+    float height;
 
     /// <summary>
     /// Fırlatma işlemini başlatır
     /// </summary>
     private void Launch()
     {
-        if (CheckChangeAnimState()) { LaunchAnimTrigger(); }
-        else if (ammoRigidBody.isKinematic)
+        if (CheckChangeAnimState())
+        {
+            LaunchAnimTrigger();
+        }
+        else if (ammoRigidBody.isKinematic && !_animator.GetBool("leave"))
         {
             _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
             _ammo.GetComponent<Ammo>().launchPos = _ammo.transform.position;
@@ -170,21 +173,16 @@ public class Launcher : MonoBehaviour
                 
             lastAmmo = _ammo;
 
-            _animator.SetTrigger("leave");
+            _animator.SetBool("leave", true);
             ammoRigidBody.isKinematic = false;
             ammoRigidBody.useGravity = true;
             ammoRigidBody.GetComponent<Collider>().enabled = true;
-            float height = ammoRigidBody.transform.position.y - _ammoStartY;
-
-            if(height<2)
-            {
-                height++;
-            }
+            height = ammoRigidBody.transform.position.y - _ammoStartY;
             
             ammoRigidBody.AddForce(ammoRigidBody.transform.up * _currentLaunchPower * height);
+
             ammoRigidBody.transform.parent = null;
         }
         OnLaunchedInvoke();
-        Invoke(nameof(Initialize), 0.1f);
     }
 }

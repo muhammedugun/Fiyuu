@@ -28,9 +28,9 @@ public abstract class DamagableObjectBase : RigidObjectBase
     /// <param name="collision"></param>
     public virtual void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        if(durability>0)
+        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+        if (durability>0 && collisionForce/_rigidbody.mass>100f)
         {
-            var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
             durability -= collisionForce * damageMultiplier;
             if (durability < 0)
             {

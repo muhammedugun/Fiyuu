@@ -15,15 +15,18 @@ public class Ammo : ExplosiveBase
     [SerializeField] private TextMeshProUGUI launchPowerText;
     [Tooltip("Trail Renderer'in görülmesini sağlayacak materyal")]
     [SerializeField] private Material visibleMaterial;
+    [SerializeField] private float durabilityMultiplier = 100f;
+    [SerializeField] private float massMultiplier = 10f;
 
     internal Vector3 launchPos;
-    internal float[] power = new float[8]{ 1f, 2f, 2f, 2f, 1f, 1f, 1f, 1f};
+
     internal bool isDestroyable;
 
     private TrailRenderer _trailRenderer;
     private void Awake()
     {
-        _massMultiplier = power[(int)matter - 1];
+        _massMultiplier = massMultiplier;
+        _durabilityMultiplier = durabilityMultiplier;
     }
     protected override void Start()
     {
