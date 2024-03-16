@@ -1,4 +1,5 @@
 using Blobcreate.ProjectileToolkit;
+using MoreMountains.Feedbacks;
 using System;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Launcher : MonoBehaviour
     /// <summary>
     /// Fırlatma gerçekleşti eventi
     /// </summary>
-    public static event Action OnLaunched;
+    public static event Action OnThrowed;
     [Tooltip("Projectile için son transform noktası")]
     public Transform endTransform;
 
@@ -19,12 +20,14 @@ public class Launcher : MonoBehaviour
     [Header("Project Tile")]
     [SerializeField] TrajectoryPredictor trajectoryPredictor;
 
-    [Header("Other")]
+    [Header("Launcher")]
     [SerializeField] private Animator animator;
     [Tooltip("Fırlatma gücü")]
-    [SerializeField] private float launchPower;
+    [SerializeField] private float throwPower;
+    [SerializeField] private MMF_Player loadFeedback;
+    [SerializeField] private MMF_Player throwFeedback;
 
-    private Vector3 _launchVelocity;
+    private Vector3 _throwVelocity;
     private GameObject _ammo;
     private GameObject _lastAmmo;
     private InputRange _inputRange;
@@ -62,8 +65,8 @@ public class Launcher : MonoBehaviour
           {
                 if(animator.GetCurrentAnimatorStateInfo(0).IsName("Firing") || animator.GetCurrentAnimatorStateInfo(0).IsName("Mirror Firing"))
                     trajectoryPredictor.enabled = true;
-                _launchVelocity = _ammo.transform.up * launchPower * _height;
-                trajectoryPredictor.Render(_ammo.transform.position, _launchVelocity, endTransform.position, 25);
+                _throwVelocity = _ammo.transform.up * throwPower * _height;
+                trajectoryPredictor.Render(_ammo.transform.position, _throwVelocity, endTransform.position, 25);
           }
         }
     }
@@ -71,12 +74,12 @@ public class Launcher : MonoBehaviour
     private void Subscribe()
     {
         _inputRange = FindObjectOfType<InputRange>();
-        _inputRange.started += Launch;
+        _inputRange.started += Throw;
     }
 
     private void UnSubscribe()
     {
-        _inputRange.started -= Launch;
+        _inputRange.started -= Throw;
     }
 
     /// <summary>
@@ -138,28 +141,31 @@ public class Launcher : MonoBehaviour
     }
 
     /// <summary>
-    /// Fırlatma animasyonunu tetikle
+    /// Yükleme animasyonunu tetikle
     /// </summary>
-    private void LaunchAnimTrigger()
+    private void TriggerLoadAnim()
     {
         animator.SetBool("leave", false);
-        animator.SetTrigger("launch");
+        animator.SetTrigger("load");
     }
 
     /// <summary>
     /// Fırlatma işlemini başlatır
     /// </summary>
-    private void Launch()
+    private void Throw()
     {
         if (CheckAnimStateEmpty())
         {
-            LaunchAnimTrigger();
+            TriggerLoadAnim();
+            loadFeedback.PlayFeedbacks();
         }
         else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave"))
         {
+            loadFeedback.StopFeedbacks();
+            throwFeedback.PlayFeedbacks();
             trajectoryPredictor.enabled = false;
             _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
-            _ammo.GetComponent<Ammo>().launchPos = _ammo.transform.position;
+            _ammo.GetComponent<Ammo>().throwPos = _ammo.transform.position;
             if (_lastAmmo!=null && _lastAmmo != _ammo)
             {
                 _lastAmmo.GetComponent<Ammo>().isDestroyable=true;
@@ -176,13 +182,13 @@ public class Launcher : MonoBehaviour
             _height = _ammoRigidBody.transform.position.y - _ammoStartY;
 
             _ammoRigidBody.transform.parent = null;
-            _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * launchPower * _height, ForceMode.VelocityChange);
+            _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * throwPower * _height, ForceMode.VelocityChange);
             
         }
-        OnLaunchedInvoke();
+        OnThrowedInvoke();
     }
-    private void OnLaunchedInvoke()
+    private void OnThrowedInvoke()
     {
-        OnLaunched?.Invoke();
+        OnThrowed?.Invoke();
     }
 }

@@ -32,8 +32,7 @@ public class Enemy : DamagableObjectBase
     private void OnCollisionEnter(Collision collision)
     {
         DoDamage(collision);
-        if (collision.gameObject.TryGetComponent<Ammo>(out Ammo ammo))
-            damageFeedback.PlayFeedbacks();
+        damageFeedback.PlayFeedbacks();
         if (CheckDie()) 
             Die();
     }
@@ -45,7 +44,7 @@ public class Enemy : DamagableObjectBase
     private void Die()
     {
         _isDead = true;
-        dieFeedback?.PlayFeedbacks();
+        dieFeedback?.PlayFeedbacks(this.transform.position, 200);
         OnDied?.Invoke();
     }
 

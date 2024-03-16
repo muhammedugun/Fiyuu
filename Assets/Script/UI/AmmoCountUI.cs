@@ -41,16 +41,16 @@ public class AmmoCountUI : MonoBehaviour
 
     private void Subscribe()
     {
-        Launcher.OnLaunched += IncreaseFiredAmmo;
-        Launcher.OnLaunched += UpdateText;
-        Launcher.OnLaunched += CheckOutOfAmmo;
+        Launcher.OnThrowed += IncreaseFiredAmmo;
+        Launcher.OnThrowed += UpdateText;
+        Launcher.OnThrowed += CheckOutOfAmmo;
     }
 
     private void UnSubscribe()
     {
-        Launcher.OnLaunched -= IncreaseFiredAmmo;
-        Launcher.OnLaunched -= UpdateText;
-        Launcher.OnLaunched -= CheckOutOfAmmo;
+        Launcher.OnThrowed -= IncreaseFiredAmmo;
+        Launcher.OnThrowed -= UpdateText;
+        Launcher.OnThrowed -= CheckOutOfAmmo;
     }
 
     /// <summary>

@@ -18,7 +18,8 @@ public class Fragment : MonoBehaviour
     internal bool isUsingParticle = false;
     void Start()
     {
-        Invoke(nameof(SetDeactive), deactivedDuration);
+        float duration = Random.Range(deactivedDuration - 3f, deactivedDuration);
+        Invoke(nameof(SetDeactive), duration);
     }
 
     private void SetDeactive()

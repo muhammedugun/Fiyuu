@@ -16,8 +16,8 @@ public class Building : SmashableObjectBase
     [Tooltip("Yapýnýn zýrhý")]
     public BuildingMatter armor;
 
-    [SerializeField] private MMF_Player damageFeedbacks, beginningFeedbacks;
-
+    [SerializeField] private MMF_Player damageFeedbacks;
+    [SerializeField] private MMF_Player destroyFeedbacks;
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
@@ -50,7 +50,6 @@ public class Building : SmashableObjectBase
     protected override void Start()
     {
         base.Start();
-        beginningFeedbacks?.PlayFeedbacks();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,6 +59,8 @@ public class Building : SmashableObjectBase
         if (CheckSmash())
         {
             Smash(collision);
+            int score = InLevelManager.CalculateScore(_volumeSize, armor, 1f);
+            destroyFeedbacks.PlayFeedbacks(this.transform.position, score);
         }
   
     }
@@ -71,14 +72,18 @@ public class Building : SmashableObjectBase
         {
             if (collision.transform.CompareTag("Ammo"))
             {
-                damageFeedbacks?.PlayFeedbacks();
                 var ammo = collision.gameObject.GetComponent<Ammo>();
-                var ammoArmor = ammo.matter;
-
-                if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+                if(ammo!=null)
                 {
-                    base.DoDamage(collision);
+                    damageFeedbacks?.PlayFeedbacks();
+                    var ammoArmor = ammo.matter;
+
+                    if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+                    {
+                        base.DoDamage(collision);
+                    }
                 }
+                
             }
             else if (collision.gameObject.layer != LayerMask.NameToLayer("Node"))
             {

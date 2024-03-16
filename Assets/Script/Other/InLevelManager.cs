@@ -30,6 +30,7 @@ public class InLevelManager : MonoBehaviour
     {
         Enemy.OnDied += UpdateEnemyCount;
         Building.OnBuildSmashed += CalculateScore;
+        Enemy.OnDied += CalculateScore;
         AmmoCountUI.OnOutOfAmmo += GameOver;
     }
 
@@ -37,6 +38,8 @@ public class InLevelManager : MonoBehaviour
     void UnSubscribe()
     {
         Enemy.OnDied -= UpdateEnemyCount;
+        Building.OnBuildSmashed -= CalculateScore;
+        Enemy.OnDied -= CalculateScore;
         AmmoCountUI.OnOutOfAmmo -= GameOver;
     }
 
@@ -79,11 +82,33 @@ public class InLevelManager : MonoBehaviour
             score += 100 * ammoCount.limitCount / ammoCount.firedCount;
         }
 
-        score += (int)(volumeSize*10) * (int)buildingArmor;
+        score += (int)(volumeSize*50) * (int)buildingArmor;
         scoreText.text = "Score: " + score;
         scoreBar.UpdateScoreIcons();
     }
-    
-    
+
+    /// <summary>
+    /// Enemy objesi için hesaplar
+    /// </summary>
+    void CalculateScore()
+    {
+        if (_isGameEnd && ammoCount.firedCount != 0 && (ammoCount.limitCount / ammoCount.firedCount) > 1)
+        {
+            score += 100 * ammoCount.limitCount / ammoCount.firedCount;
+        }
+
+        score += 200;
+        scoreText.text = "Score: " + score;
+        scoreBar.UpdateScoreIcons();
+    }
+
+    public static int CalculateScore(float volumeSize, BuildingMatter buildingArmor, float param=1f)
+    {
+        int score = (int)(volumeSize*50) * (int)buildingArmor;
+        return score;
+    }
+
+
+
 
 }
