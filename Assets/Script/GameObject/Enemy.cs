@@ -15,8 +15,6 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private MMF_Player damageFeedback;
     [SerializeField] private float durabilityMultiplier=50f;
 
-    internal Animator animator;
-
     private bool _isDead;
 
     private void Awake()
@@ -29,7 +27,6 @@ public class Enemy : DamagableObjectBase
     {
         base.Start();
         gameObject.tag = "Enemy";
-        animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,22 +45,8 @@ public class Enemy : DamagableObjectBase
     private void Die()
     {
         _isDead = true;
-        OnDied?.Invoke();
         dieFeedback?.PlayFeedbacks();
-        if(animator!=null)
-            animator.SetTrigger("death");
-    }
-
-
-    public void SetActiveFalse()
-    {
-        visual.SetActive(false);
-        GetComponent<CapsuleCollider>().enabled = false;
-        var rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
-        rb.useGravity = false;
-
-        this.enabled = false;
+        OnDied?.Invoke();
     }
 
     /// <summary>

@@ -590,15 +590,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ae4facaa34dd34f99a4f9aed0d8b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoRigidBody: {fileID: 0}
+  endTransform: {fileID: 0}
   ammoTypePrefabs:
   - {fileID: 588325080514301662, guid: 66a224cc32c72b14cb99854e92368929, type: 3}
   - {fileID: 6966192133560169459, guid: 3daaaada47587db4cadfb5eabc810618, type: 3}
-  _animator: {fileID: 7998918369045621905}
-  _ammoSpawnPosition: {fileID: 4963568302464276050}
-  _ammoParent: {fileID: 4963568302464276050}
+  ammoSpawnPosition: {fileID: 4963568302464276050}
   ammoType: 1
-  _launchPower: 140
+  trajectoryPredictor: {fileID: 0}
+  animator: {fileID: 7998918369045621905}
+  launchPower: 4
 --- !u!95 &7998918369045621905
 Animator:
   serializedVersion: 5

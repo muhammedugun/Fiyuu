@@ -1,4 +1,4 @@
-
+using Blobcreate.ProjectileToolkit;
 using System;
 using UnityEngine;
 
@@ -8,38 +8,33 @@ public class Launcher : MonoBehaviour
     /// Fırlatma gerçekleşti eventi
     /// </summary>
     public static event Action OnLaunched;
+    [Tooltip("Projectile için son transform noktası")]
+    public Transform endTransform;
 
-    [Tooltip("Mühimmatın rigidbody bileşeni")]
-    [SerializeField] private Rigidbody ammoRigidBody;
+    [Header("Ammo")]
     [SerializeField] private GameObject[] ammoTypePrefabs;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private Transform _ammoSpawnPosition;
-    [SerializeField] private Transform _ammoParent;
+    [SerializeField] private Transform ammoSpawnPosition;
     [SerializeField] private AmmoMatter ammoType;
-    [Tooltip("Fırlatma gücü")]
-    [SerializeField] private float _launchPower;
 
+    [Header("Project Tile")]
+    [SerializeField] TrajectoryPredictor trajectoryPredictor;
+
+    [Header("Other")]
+    [SerializeField] private Animator animator;
+    [Tooltip("Fırlatma gücü")]
+    [SerializeField] private float launchPower;
+
+    private Vector3 _launchVelocity;
     private GameObject _ammo;
-    private GameObject lastAmmo;
-    private InputRange inputRange;
+    private GameObject _lastAmmo;
+    private InputRange _inputRange;
+    private Rigidbody _ammoRigidBody;
     /// <summary>
     /// Mühimmatın başlangıçtaki y pozisyonu
     /// </summary>
     private float _ammoStartY;
-    private float _currentLaunchPower;
     private int _ammoTypeIndex;
-
-
-    private void Awake()
-    {
-        _currentLaunchPower = _launchPower;
-    }
-
-    private void Start()
-    {
-        AssignAmmoType();
-        _ammoStartY = _ammoSpawnPosition.position.y;
-    }
+    private float _height;
 
     private void OnEnable()
     {
@@ -51,44 +46,41 @@ public class Launcher : MonoBehaviour
         UnSubscribe();
     }
 
+    private void Start()
+    {
+        AssignAmmoType();
+        _ammoStartY = ammoSpawnPosition.position.y;
+        CreateAmmo();
+    }
+
+    private void LateUpdate()
+    {
+        if(_ammo!=null)
+        {
+          _height = _ammo.transform.position.y - _ammoStartY;
+          if(_height>.02f)
+          {
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Firing") || animator.GetCurrentAnimatorStateInfo(0).IsName("Mirror Firing"))
+                    trajectoryPredictor.enabled = true;
+                _launchVelocity = _ammo.transform.up * launchPower * _height;
+                trajectoryPredictor.Render(_ammo.transform.position, _launchVelocity, endTransform.position, 25);
+          }
+        }
+    }
+
     private void Subscribe()
     {
-        inputRange = FindObjectOfType<InputRange>();
-        inputRange.started += Launch;
+        _inputRange = FindObjectOfType<InputRange>();
+        _inputRange.started += Launch;
     }
 
     private void UnSubscribe()
     {
-        inputRange.started -= Launch;
+        _inputRange.started -= Launch;
     }
 
     /// <summary>
-    /// başlangıçta ağırlığı atamak için
-    /// </summary>
-    private void SetLaunchPower()
-    {
-        _currentLaunchPower = _launchPower * ammoRigidBody.mass;
-    }
-
-    public void SetAmmoType(int ammoTypeIndex)
-    {
-        ammoType = (AmmoMatter)ammoTypeIndex;
-        AssignAmmoType();
-        Initialize();
-        Invoke("SetLaunchPower", 0.1f);
-    }
-
-    /// <summary>
-    /// Fırlatma modundan çıktığında yapılacaklar
-    /// </summary>
-    public void LaunchExit()
-    {
-        ammoRigidBody.isKinematic = true;
-        ammoRigidBody.useGravity = false;
-    }
-
-    /// <summary>
-    /// Ammo tipini ata
+    /// Mühimmat tipini ata
     /// </summary>
     private void AssignAmmoType()
     {
@@ -107,37 +99,42 @@ public class Launcher : MonoBehaviour
     }
 
     /// <summary>
-    /// Başlangıçta yapılacaklar
+    /// Mühimmat tipini değiştir
     /// </summary>
-    private void Initialize()
+    /// <param name="ammoTypeIndex"></param>
+    public void SetAmmoType(int ammoTypeIndex)
     {
-        if (_ammo != null && _ammo.transform.position == _ammoSpawnPosition.position)
-        {
-            Destroy(_ammo);
-        }
-        _ammo = Instantiate(ammoTypePrefabs[_ammoTypeIndex], _ammoParent);
-        if (lastAmmo == null)
-            lastAmmo = _ammo;
-        _ammo.transform.position = _ammoSpawnPosition.position;
-        _ammo.transform.rotation = _ammoSpawnPosition.rotation;
-        ammoRigidBody = _ammo.GetComponent<Rigidbody>();
-        Invoke("SetLaunchPower", 0.1f);
+        ammoType = (AmmoMatter)ammoTypeIndex;
+        AssignAmmoType();
+        CreateAmmo();
     }
 
     /// <summary>
-    /// Animasyon state değişimi için kontrol gerçekleştir. 
+    /// Mühimmat oluşturur
     /// </summary>
-    /// <returns>State değişebilecek durumdaysa true, değilse false döndürür</returns>
-    private bool CheckChangeAnimState()
+    private void CreateAmmo()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
-            return true;
-        else return false;
+        // mevcut bir mühimmat varsa ve fırlatılmamışsa onu yok et
+        if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == ammoSpawnPosition.transform.position)
+            Destroy(_ammo.gameObject);
+
+        _ammo = Instantiate(ammoTypePrefabs[_ammoTypeIndex], ammoSpawnPosition);
+        if (_lastAmmo == null)
+            _lastAmmo = _ammo;
+        _ammo.transform.position = ammoSpawnPosition.position;
+        _ammo.transform.rotation = ammoSpawnPosition.rotation;
+        _ammoRigidBody = _ammo.GetComponent<Rigidbody>();
     }
 
-    private void OnLaunchedInvoke()
+    /// <summary>
+    /// Empty animasyonunda mıyım diye kontrol eder
+    /// </summary>
+    /// <returns>Empty animasyonundaysa true, değilse false döndürür</returns>
+    private bool CheckAnimStateEmpty()
     {
-        OnLaunched?.Invoke();
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
+            return true;
+        else return false;
     }
 
     /// <summary>
@@ -145,44 +142,47 @@ public class Launcher : MonoBehaviour
     /// </summary>
     private void LaunchAnimTrigger()
     {
-        _animator.SetBool("leave", false);
-        _animator.SetTrigger("launch");
+        animator.SetBool("leave", false);
+        animator.SetTrigger("launch");
     }
-
-    float height;
 
     /// <summary>
     /// Fırlatma işlemini başlatır
     /// </summary>
     private void Launch()
     {
-        if (CheckChangeAnimState())
+        if (CheckAnimStateEmpty())
         {
             LaunchAnimTrigger();
         }
-        else if (ammoRigidBody.isKinematic && !_animator.GetBool("leave"))
+        else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave"))
         {
+            trajectoryPredictor.enabled = false;
             _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
             _ammo.GetComponent<Ammo>().launchPos = _ammo.transform.position;
-            if (lastAmmo!=null && lastAmmo != _ammo)
+            if (_lastAmmo!=null && _lastAmmo != _ammo)
             {
-                lastAmmo.GetComponent<Ammo>().isDestroyable=true;
-                if(lastAmmo.GetComponent<ExplosiveBase>().isExplode)
-                    Destroy(lastAmmo.gameObject);
+                _lastAmmo.GetComponent<Ammo>().isDestroyable=true;
+                if(_lastAmmo.GetComponent<ExplosiveBase>().isExplode)
+                    Destroy(_lastAmmo.gameObject);
             }
                 
-            lastAmmo = _ammo;
+            _lastAmmo = _ammo;
 
-            _animator.SetBool("leave", true);
-            ammoRigidBody.isKinematic = false;
-            ammoRigidBody.useGravity = true;
-            ammoRigidBody.GetComponent<Collider>().enabled = true;
-            height = ammoRigidBody.transform.position.y - _ammoStartY;
+            animator.SetBool("leave", true);
+            _ammoRigidBody.isKinematic = false;
+            _ammoRigidBody.useGravity = true;
+            _ammoRigidBody.GetComponent<Collider>().enabled = true;
+            _height = _ammoRigidBody.transform.position.y - _ammoStartY;
+
+            _ammoRigidBody.transform.parent = null;
+            _ammoRigidBody.AddForce(_ammoRigidBody.transform.up * launchPower * _height, ForceMode.VelocityChange);
             
-            ammoRigidBody.AddForce(ammoRigidBody.transform.up * _currentLaunchPower * height);
-
-            ammoRigidBody.transform.parent = null;
         }
         OnLaunchedInvoke();
+    }
+    private void OnLaunchedInvoke()
+    {
+        OnLaunched?.Invoke();
     }
 }

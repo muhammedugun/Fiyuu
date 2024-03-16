@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 
+
 /// <summary>
 /// Mühimmat ile ilgili
 /// </summary>
@@ -22,7 +23,13 @@ public class Ammo : ExplosiveBase
 
     internal bool isDestroyable;
 
+    /// <summary>
+    /// Mühimmatın ilk çaprıştığı noktayı gösterecek olan X şeklindeki UI elemanı
+    /// </summary>
+    private TextMeshProUGUI _collisionIconText;
     private TrailRenderer _trailRenderer;
+    private bool isCollisionShowed;
+    
     private void Awake()
     {
         _massMultiplier = massMultiplier;
@@ -33,17 +40,21 @@ public class Ammo : ExplosiveBase
         base.Start();
         _trailRenderer = GetComponent<TrailRenderer>();
         launchPowerText = GameObject.Find("/UI/Canvas/LaunchPowerText").GetComponent<TextMeshProUGUI>();
+        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        ShowCollisionIcon();
         ScareEnemies(scareRadius);
         DoDamage(collision);
         if (CheckSmash())
         {
-            _trailRenderer.material = visibleMaterial;
-            ShowLaunchPowerText();
             Smash(collision);
+            GetComponent<Rigidbody>().isKinematic = true;
+            _trailRenderer.material = visibleMaterial;
+            // Fırlatma gücünü fırlatılan noktada text olarak gösteriyoruz
+            MoveUIToWorldPos(launchPowerText.rectTransform, launchPos);
             Explode(collision);
             isExplode = true;
             if (isDestroyable)
@@ -54,17 +65,32 @@ public class Ammo : ExplosiveBase
     }
 
     /// <summary>
-    /// Fırlatma gücünü fırlatılan noktada text olarak gösterir
+    /// Çarpışılan noktada "X" işareti gösterir. Bu sayede oyuncu attığı mühimmatın nerede ilk çarpışma yaşadığını anlar
     /// </summary>
-    private void ShowLaunchPowerText()
+    private void ShowCollisionIcon()
+    {
+        if(!isCollisionShowed)
+        {
+            isCollisionShowed = true;
+            MoveUIToWorldPos(_collisionIconText.rectTransform, transform.position);
+        }
+    }
+
+    /// <summary>
+    /// UI elemanını verilen dünya pozisyonuna denk gelecek şekilde ayarlar
+    /// </summary>
+    /// <param name="UIElement"></param>
+    /// <param name="worldPos"></param>
+    private void MoveUIToWorldPos(RectTransform UIElement, Vector3 worldPos)
     {
         // Dünya pozisyonunu ekran pozisyonuna çevir.
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, launchPos);
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
         // Ekran pozisyonunu RectTransform'ın yerel pozisyonuna çevir.
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(launchPowerText.rectTransform.parent.GetComponent<RectTransform>(), screenPoint, null, out Vector2 localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(UIElement.parent.GetComponent<RectTransform>(), screenPoint, null, out Vector2 localPoint);
         // Yeni pozisyonu ayarla.
-        launchPowerText.rectTransform.anchoredPosition = localPoint;
+        UIElement.anchoredPosition = localPoint;
     }
+
 
     /// <summary>
     /// Düşmanları korkut. Mühimmatın bulunduğu konumun çevresindeki düşmanların korkma animasyonlarını çalıştırır.
@@ -75,8 +101,6 @@ public class Ammo : ExplosiveBase
         foreach (var hitCollider in hitColliders)
         {
             hitCollider.TryGetComponent<Enemy>(out var enemy);
-            if (enemy != null)
-                enemy.animator.SetTrigger("terrified");
         }
     }
 
