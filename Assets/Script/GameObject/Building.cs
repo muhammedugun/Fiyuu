@@ -22,7 +22,7 @@ public class Building : SmashableObjectBase
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
-    internal float[] armorDurabilitiy = new float[4] { 100f, 200f, 600f, 800f };
+    public float[] armorDurabilitiy = new float[4] { 100f, 200f, 600f, 800f };
 
 
     /// <summary>
@@ -54,7 +54,7 @@ public class Building : SmashableObjectBase
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        
         DoDamage(collision);
         if (CheckSmash())
         {
@@ -62,13 +62,14 @@ public class Building : SmashableObjectBase
             int score = InLevelManager.CalculateScore(_volumeSize, armor, 1f);
             destroyFeedbacks.PlayFeedbacks(this.transform.position, score);
         }
-  
+        
+ 
     }
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
         var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        if (durability > 0 && collisionForce / _rigidbody.mass > 100f)
+        if (durability > 0 && collisionForce / _rigidbody.mass > 200f)
         {
             if (collision.transform.CompareTag("Ammo"))
             {

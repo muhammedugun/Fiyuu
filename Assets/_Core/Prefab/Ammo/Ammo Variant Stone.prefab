@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: matter
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7579927785406351002, guid: b54eb14662c805e419642ba892163856,
         type: 3}
       propertyPath: m_Name
@@ -72,11 +67,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7579927785749324407, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -1580535799172915004, guid: 175ec36b830bb2b45992d705ce6559fc,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b54eb14662c805e419642ba892163856, type: 3}

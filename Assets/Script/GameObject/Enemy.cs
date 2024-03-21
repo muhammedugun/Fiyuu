@@ -44,8 +44,8 @@ public class Enemy : DamagableObjectBase
     private void Die()
     {
         _isDead = true;
-        dieFeedback?.PlayFeedbacks(this.transform.position, 200);
         OnDied?.Invoke();
+        dieFeedback?.PlayFeedbacks(this.transform.position, 200);
     }
 
     /// <summary>

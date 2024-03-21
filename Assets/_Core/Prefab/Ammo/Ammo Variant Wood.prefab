@@ -7,21 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: scareRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: _explosionForce
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7579927785406350979, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: _explosionRadius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7579927785406351002, guid: b54eb14662c805e419642ba892163856,
         type: 3}
       propertyPath: m_Name
@@ -31,21 +16,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7579927785406351005, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7579927785406351005, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7579927785406351005, guid: b54eb14662c805e419642ba892163856,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7579927785406351005, guid: b54eb14662c805e419642ba892163856,
         type: 3}
@@ -101,6 +71,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 236a038e62b0c794688a92c165de038e, type: 2}
+      objectReference: {fileID: -8067726398312463513, guid: d84144d9069b15a4f882e875c2bf1c84,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b54eb14662c805e419642ba892163856, type: 3}

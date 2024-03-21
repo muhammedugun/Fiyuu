@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class RigidObjectBase : MonoBehaviour
 {
-    public Renderer meshRenderer;
+    public MeshFilter meshFilter;
 
     protected Rigidbody _rigidbody;
     /// <summary>
@@ -23,18 +23,44 @@ public abstract class RigidObjectBase : MonoBehaviour
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        AssignVolume(meshRenderer, ref _volumeSize);
+        AssignVolume(meshFilter.mesh, ref _volumeSize);
         AssignMass(_rigidbody, _volumeSize, _massMultiplier);
     }
 
     /// <summary>
     /// Objenin hacmini atar
     /// </summary>
-    protected void AssignVolume(Renderer renderer, ref float volumeSize)
+    protected void AssignVolume(Mesh mesh, ref float volumeSize)
     {
-        Bounds bounds = renderer.bounds;
-        volumeSize = bounds.size.x * bounds.size.y * bounds.size.z;
+        float volume = 0;
+        Vector3[] vertices = mesh.vertices;
+        int[] triangles = mesh.triangles;
+        for (int i = 0; i < mesh.triangles.Length; i += 3)
+        {
+            Vector3 p1 = vertices[triangles[i + 0]];
+            Vector3 p2 = vertices[triangles[i + 1]];
+            Vector3 p3 = vertices[triangles[i + 2]];
+            volume += SignedVolumeOfTriangle(p1, p2, p3);
+        }
+        volume *= transform.localScale.x * transform.localScale.y * transform.localScale.z;
+
+        volumeSize = Mathf.Abs(volume);
     }
+
+    /// <summary>
+    /// Hacim hesabý için gerekli bir fonksiyon
+    /// </summary>
+    float SignedVolumeOfTriangle(Vector3 p1, Vector3 p2, Vector3 p3)
+    {
+        float v321 = p3.x * p2.y * p1.z;
+        float v231 = p2.x * p3.y * p1.z;
+        float v312 = p3.x * p1.y * p2.z;
+        float v132 = p1.x * p3.y * p2.z;
+        float v213 = p2.x * p1.y * p3.z;
+        float v123 = p1.x * p2.y * p3.z;
+        return (1.0f / 6.0f) * (-v321 + v231 + v312 - v132 - v213 + v123);
+    }
+
 
     /// <summary>
     /// Objenin aðýrlýðýný atar

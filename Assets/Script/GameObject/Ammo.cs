@@ -12,15 +12,16 @@ public class Ammo : ExplosiveBase
     [Header("Ammo")]
     [Tooltip("Mühimmatın maddesi")]
     public AmmoMatter matter;
+    public MMF_Player inAirFeedback;
 
     [Tooltip("Mühimmat düştükten sonra ne kadar yakınındaki düşmanları korkutsun?")]
     [SerializeField] private float scareRadius;
-    [SerializeField] private TextMeshProUGUI launchPowerText;
     [Tooltip("Trail Renderer'in görülmesini sağlayacak materyal")]
     [SerializeField] private Material visibleMaterial;
     [SerializeField] private float durabilityMultiplier = 100f;
     [SerializeField] private float massMultiplier = 10f;
     [SerializeField] private MMF_Player hitFeedback;
+    [SerializeField] private float maxHitVolume;
 
     internal Vector3 throwPos;
 
@@ -44,7 +45,6 @@ public class Ammo : ExplosiveBase
     {
         base.Start();
         _trailRenderer = GetComponent<TrailRenderer>();
-        launchPowerText = GameObject.Find("/UI/Canvas/LaunchPowerText").GetComponent<TextMeshProUGUI>();
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
     }
 
@@ -54,6 +54,7 @@ public class Ammo : ExplosiveBase
         if (!isHit )
         {
             isHit = true;
+            inAirFeedback.StopFeedbacks();
 
             bool isHitBuilding = collision.gameObject.TryGetComponent<Building>(out Building building);
             bool isHitEnemy = collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy);
@@ -64,18 +65,18 @@ public class Ammo : ExplosiveBase
                 var colForce = collision.impulse.magnitude / Time.fixedDeltaTime;
                 if(colForce>600)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = 1f;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = 1f;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume;
                 }
                 else if (colForce > 300)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .65f;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .65f;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume*0.8f;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume * 0.8f;
                 }
                 else if (colForce > 0)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .4f;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .4f;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume * 0.6f;
+                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume * 0.6f;
                 }
             }
             else
@@ -95,8 +96,6 @@ public class Ammo : ExplosiveBase
             Smash(collision);
             GetComponent<Rigidbody>().isKinematic = true;
             _trailRenderer.material = visibleMaterial;
-            // Fırlatma gücünü fırlatılan noktada text olarak gösteriyoruz
-            MoveUIToWorldPos(launchPowerText.rectTransform, throwPos);
             Explode(collision);
             isExplode = true;
             if (isDestroyable)
@@ -114,6 +113,7 @@ public class Ammo : ExplosiveBase
         if(!isCollisionShowed)
         {
             isCollisionShowed = true;
+            _collisionIconText.enabled = true;
             MoveUIToWorldPos(_collisionIconText.rectTransform, transform.position);
         }
     }

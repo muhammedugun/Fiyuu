@@ -1,6 +1,7 @@
 using Blobcreate.ProjectileToolkit;
 using MoreMountains.Feedbacks;
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Launcher : MonoBehaviour
@@ -27,6 +28,7 @@ public class Launcher : MonoBehaviour
     [SerializeField] private MMF_Player loadFeedback;
     [SerializeField] private MMF_Player throwFeedback;
 
+    private TextMeshProUGUI _collisionIconText;
     private Vector3 _throwVelocity;
     private GameObject _ammo;
     private GameObject _lastAmmo;
@@ -51,6 +53,7 @@ public class Launcher : MonoBehaviour
 
     private void Start()
     {
+        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
         AssignAmmoType();
         _ammoStartY = ammoSpawnPosition.position.y;
         CreateAmmo();
@@ -63,7 +66,7 @@ public class Launcher : MonoBehaviour
           _height = _ammo.transform.position.y - _ammoStartY;
           if(_height>.02f)
           {
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Firing") || animator.GetCurrentAnimatorStateInfo(0).IsName("Mirror Firing"))
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Load") || animator.GetCurrentAnimatorStateInfo(0).IsName("Mirror Load"))
                     trajectoryPredictor.enabled = true;
                 _throwVelocity = _ammo.transform.up * throwPower * _height;
                 trajectoryPredictor.Render(_ammo.transform.position, _throwVelocity, endTransform.position, 25);
@@ -163,7 +166,9 @@ public class Launcher : MonoBehaviour
         {
             loadFeedback.StopFeedbacks();
             throwFeedback.PlayFeedbacks();
+            _ammo.GetComponent<Ammo>().inAirFeedback.PlayFeedbacks();
             trajectoryPredictor.enabled = false;
+            _collisionIconText.enabled = false;
             _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
             _ammo.GetComponent<Ammo>().throwPos = _ammo.transform.position;
             if (_lastAmmo!=null && _lastAmmo != _ammo)
