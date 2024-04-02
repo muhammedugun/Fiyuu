@@ -54,7 +54,6 @@ public class Building : SmashableObjectBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        
         DoDamage(collision);
         if (CheckSmash())
         {
@@ -62,8 +61,6 @@ public class Building : SmashableObjectBase
             int score = InLevelManager.CalculateScore(_volumeSize, armor, 1f);
             destroyFeedbacks.PlayFeedbacks(this.transform.position, score);
         }
-        
- 
     }
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)

@@ -670,6 +670,7 @@ MonoBehaviour:
   armor: 1
   damageFeedbacks: {fileID: 5188430518157930546}
   destroyFeedbacks: {fileID: 3392304912862429252}
+  movebleDamageMultiplier: 30000
   armorDurabilitiy:
   - 450
   - 500

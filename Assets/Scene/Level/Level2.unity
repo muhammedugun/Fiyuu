@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.75
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 60dd2e7b10f2ce74e9c4478520e3f06a, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e74324e36b5e05b4b90fcfe39d80b5fb, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.072367206, g: 0.42360148, b: 0.977921, a: 1}
+  m_IndirectSpecularColor: {r: 0.21136133, g: 0.37990284, b: 0.717307, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 6760962957907358881, guid: 41511012728445c45a7d9e0e91798833,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 18.25
       objectReference: {fileID: 0}
     - target: {fileID: 6760962957907358881, guid: 41511012728445c45a7d9e0e91798833,
         type: 3}
@@ -358,7 +358,7 @@ PrefabInstance:
     - target: {fileID: 6760962957907358881, guid: 41511012728445c45a7d9e0e91798833,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19
+      value: 19.5
       objectReference: {fileID: 0}
     - target: {fileID: 6760962957907358881, guid: 41511012728445c45a7d9e0e91798833,
         type: 3}
@@ -1446,7 +1446,7 @@ PrefabInstance:
     - target: {fileID: 7996284414898347709, guid: 13805426e0ec5cc4d847827bffcd3cc2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 18.25
       objectReference: {fileID: 0}
     - target: {fileID: 7996284414898347709, guid: 13805426e0ec5cc4d847827bffcd3cc2,
         type: 3}
@@ -1615,6 +1615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: managedReferences[2245755074879160328].MinVolume
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419108244356484467, guid: 756bf1c0d848b8e48ad9821cb16a6d2b,
+        type: 3}
+      propertyPath: throwPower
+      value: 3.7
       objectReference: {fileID: 0}
     - target: {fileID: 7419108244356484467, guid: 756bf1c0d848b8e48ad9821cb16a6d2b,
         type: 3}

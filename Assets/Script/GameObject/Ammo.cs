@@ -48,7 +48,7 @@ public class Ammo : ExplosiveBase
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
     }
 
-
+    GameObject moveble;
     private void OnCollisionEnter(Collision collision)
     {
         if (!isHit )
@@ -85,6 +85,12 @@ public class Ammo : ExplosiveBase
                 hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .2f;
             }
 
+            if(collision.transform.CompareTag("Moveble"))
+            {
+                moveble = collision.gameObject;
+                Invoke(nameof(Moveble), 0.1f);
+            }
+
             hitFeedback.PlayFeedbacks();
         }
         
@@ -103,6 +109,10 @@ public class Ammo : ExplosiveBase
                 Destroy(gameObject);
             }
         }
+    }
+    private void Moveble()
+    {
+        moveble.GetComponent<Rigidbody>().mass = 5f;
     }
 
     /// <summary>

@@ -14,20 +14,26 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private MMF_Player dieFeedback;
     [SerializeField] private MMF_Player damageFeedback;
     [SerializeField] private float durabilityMultiplier=50f;
+    [SerializeField] private float massMultiplier = 1f;
 
     private bool _isDead;
-
+    private Animator _animator;
     private void Awake()
     {
-        _massMultiplier = 1f;
+        _massMultiplier = massMultiplier;
         _durabilityMultiplier = durabilityMultiplier;
     }
 
     protected override void Start()
     {
+        _animator = GetComponent<Animator>();
         base.Start();
         gameObject.tag = "Enemy";
+
+
     }
+
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -37,6 +43,10 @@ public class Enemy : DamagableObjectBase
             Die();
     }
 
+    public void SetEnableAnimator()
+    {
+        _animator.enabled = true;
+    }
     /// <summary>
     /// Ölmeyi gerçekleþtir
     /// </summary>

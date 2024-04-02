@@ -17,13 +17,15 @@ public abstract class RigidObjectBase : MonoBehaviour
     /// <summary>
     /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
     /// </summary>
-    protected float _volumeSize;
+    protected float _volumeSize=1f;
 
 
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        AssignVolume(meshFilter.mesh, ref _volumeSize);
+        if(meshFilter!=null)
+            AssignVolume(meshFilter.mesh, ref _volumeSize);
+
         AssignMass(_rigidbody, _volumeSize, _massMultiplier);
     }
 

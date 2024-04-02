@@ -12,6 +12,7 @@ TagManager:
   - Projectile
   - Enemy
   - FxTemporaire
+  - Moveble
   layers:
   - Default
   - TransparentFX

@@ -1212,7 +1212,7 @@ MonoBehaviour:
   ammoType: 1
   trajectoryPredictor: {fileID: 0}
   animator: {fileID: 7998918369045621905}
-  throwPower: 4
+  throwPower: 3.7
   loadFeedback: {fileID: 97117170}
   throwFeedback: {fileID: 346032673}
 --- !u!95 &7998918369045621905

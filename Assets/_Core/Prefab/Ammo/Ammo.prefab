@@ -353,7 +353,7 @@ MonoBehaviour:
   scareRadius: 1
   visibleMaterial: {fileID: 2100000, guid: 695873166113ab64997efed81c2426c7, type: 2}
   durabilityMultiplier: 500
-  massMultiplier: 2.8
+  massMultiplier: 9
   hitFeedback: {fileID: 7353795084853192635}
   maxHitVolume: 0.7
 --- !u!54 &7579927785406350983
