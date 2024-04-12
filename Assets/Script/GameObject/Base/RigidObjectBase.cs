@@ -34,19 +34,7 @@ public abstract class RigidObjectBase : MonoBehaviour
     /// </summary>
     protected void AssignVolume(Mesh mesh, ref float volumeSize)
     {
-        float volume = 0;
-        Vector3[] vertices = mesh.vertices;
-        int[] triangles = mesh.triangles;
-        for (int i = 0; i < mesh.triangles.Length; i += 3)
-        {
-            Vector3 p1 = vertices[triangles[i + 0]];
-            Vector3 p2 = vertices[triangles[i + 1]];
-            Vector3 p3 = vertices[triangles[i + 2]];
-            volume += SignedVolumeOfTriangle(p1, p2, p3);
-        }
-        volume *= transform.localScale.x * transform.localScale.y * transform.localScale.z;
-
-        volumeSize = Mathf.Abs(volume);
+        volumeSize = transform.localScale.x * transform.localScale.y * transform.localScale.z;
     }
 
     /// <summary>

@@ -213,7 +213,7 @@ Material:
     - _EnableSunMoonMask: 1
     - _EnableTwinkling: 0
     - _EqHeight: 0.419
-    - _EquatorHeight: 1
+    - _EquatorHeight: 0.395
     - _EquatorSmoothness: 0.01
     - _Exposure: 0
     - _Fade: 0.463
@@ -241,7 +241,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PatternCat: 1
-    - _PatternContrast: 0.2
+    - _PatternContrast: 0.133
     - _RoatationSpeed: 0.4
     - _Rotation: 0
     - _RotationSpeed: 0.5

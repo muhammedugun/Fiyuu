@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
   m_Name: ColorLookup
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 2800000, guid: afaed13bc53def7428256915ab4e219b, type: 3}
@@ -82,13 +82,13 @@ MonoBehaviour:
   active: 0
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.5845139, z: 0.7779159, w: 0}
+    m_Value: {x: 1, y: 0.8972849, z: 0.99911195, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9290137, y: 1, z: 0.9186873, w: 0}
+    m_Value: {x: 0.7405413, y: 1, z: 0.74489236, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9570614, z: 0.9127685, w: 0}
+    m_Value: {x: 1, y: 0.44984943, z: 0.73909116, w: 0}
 --- !u!114 &6992681034779243572
 MonoBehaviour:
   m_ObjectHideFlags: 3

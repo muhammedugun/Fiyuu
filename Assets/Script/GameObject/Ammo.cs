@@ -49,6 +49,7 @@ public class Ammo : ExplosiveBase
     }
 
     GameObject moveble;
+    float _moveableMass;
     private void OnCollisionEnter(Collision collision)
     {
         if (!isHit )
@@ -84,12 +85,13 @@ public class Ammo : ExplosiveBase
                 hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .2f;
                 hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .2f;
             }
-
+            /*
             if(collision.transform.CompareTag("Moveble"))
             {
                 moveble = collision.gameObject;
+                _moveableMass = moveble.GetComponent<Rigidbody>().mass;
                 Invoke(nameof(Moveble), 0.1f);
-            }
+            }*/
 
             hitFeedback.PlayFeedbacks();
         }
