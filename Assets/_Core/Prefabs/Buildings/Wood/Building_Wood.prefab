@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8706926328062227430, guid: 9a7830c2eff1203409b85e5cc6f58b48,
+        type: 3}
+      propertyPath: armor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

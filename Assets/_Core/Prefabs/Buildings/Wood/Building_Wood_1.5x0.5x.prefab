@@ -139,6 +139,11 @@ PrefabInstance:
       propertyPath: fractureOptions.fragmentCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6145958602607736749, guid: 5e5376570c1bb9a4fa610e0322d263ca,
+        type: 3}
+      propertyPath: meshDemolition.am
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
