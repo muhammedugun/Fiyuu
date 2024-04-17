@@ -206,9 +206,9 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 1
-        MinVolume: 0.7
-        MaxVolume: 0.7
-        MinPitch: 0.8
+        MinVolume: 0.15
+        MaxVolume: 0.2
+        MinPitch: 0.6
         MaxPitch: 1
         SfxAudioMixerGroup: {fileID: 0}
         Priority: 128
@@ -453,9 +453,9 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 1
-        MinVolume: 0.3
-        MaxVolume: 0.3
-        MinPitch: 0.8
+        MinVolume: 0.15
+        MaxVolume: 0.19
+        MinPitch: 0.9
         MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}
         Priority: 128
@@ -653,7 +653,7 @@ MonoBehaviour:
     onCompleted:
       m_PersistentCalls:
         m_Calls: []
-  visual: {fileID: 0}
+  visual: {fileID: 7065403580535440323}
   currentRefractureCount: 0
 --- !u!114 &7729393058448924063
 MonoBehaviour:
@@ -679,7 +679,7 @@ MonoBehaviour:
   durabilityMultiplier: 500
   massMultiplier: 9
   hitFeedback: {fileID: 3799607032337077361}
-  maxHitVolume: 0.7
+  maxHitVolume: 0.35
 --- !u!96 &8982307906299910943
 TrailRenderer:
   serializedVersion: 3
@@ -855,6 +855,12 @@ PrefabInstance:
 --- !u!33 &6839085635562231516 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: bc748f60e544cdf4a851733f8c382f80,
+    type: 3}
+  m_PrefabInstance: {fileID: 7983812102728695442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7065403580535440323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bc748f60e544cdf4a851733f8c382f80,
     type: 3}
   m_PrefabInstance: {fileID: 7983812102728695442}
   m_PrefabAsset: {fileID: 0}

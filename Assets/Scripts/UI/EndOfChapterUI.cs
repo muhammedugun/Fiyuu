@@ -1,22 +1,19 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 
 public class EndOfChapterUI : MonoBehaviour
 {
-    private InLevelManager _inLevelManager;
+    private ScoreManager _scoreManager;
+
+    private EnemyCountManager _enemyCountManager;
     [SerializeField] private GameObject[] stars;
     [Tooltip("Bölüm sonundaki çýkan yýldýzlar için gerekli skorlar")]
     [SerializeField] private int[] starScore;
     [SerializeField] private GameObject endOfLevelPanel;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject failPanel;
 
-    [Tooltip("Her 3 yýldýz için kazanýlan tecrübe puaný")]
-    [SerializeField] private int[] rewardXP;
-    [Tooltip("Her 3 yýldýz için kazanýlan altýn miktarý")]
-    [SerializeField] private int[] rewardGold;
-
-    [SerializeField] private TextMeshProUGUI rewardXPText, rewardGoldText;
     /// <summary>
     /// Bölüm geçildi mi?
     /// </summary>
@@ -28,29 +25,35 @@ public class EndOfChapterUI : MonoBehaviour
 
     private void Start()
     {
-        _inLevelManager = FindObjectOfType<InLevelManager>();
-        Subscribe();
+        _enemyCountManager = FindObjectOfType<EnemyCountManager>();
+        _scoreManager = FindObjectOfType<ScoreManager>();
     }
-
-    void Subscribe()
+    private void OnEnable()
     {
-        InLevelManager.OnGameOver += SetPanelActive;
-        InLevelManager.OnGameOver += SetActiveStars;
-        InLevelManager.OnGameOver += LevelPassControl;
-        InLevelManager.OnGameOver += SetRewards;
+        EventBus.Subscribe(EventType.GameOver, SetPanelActive);
+        EventBus.Subscribe(EventType.GameOver, SetActiveStars);
+        EventBus.Subscribe(EventType.GameOver, LevelPassControl);
+    }
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe(EventType.GameOver, SetPanelActive);
+        EventBus.Unsubscribe(EventType.GameOver, SetActiveStars);
+        EventBus.Unsubscribe(EventType.GameOver, LevelPassControl);
     }
 
+    
     /// <summary>
     /// Skora göre bölümün geçilip geçilmediðini kontrol eder.
     /// </summary>
     void LevelPassControl()
     {
-        if (_inLevelManager.score > starScore[0])
+        if (_scoreManager.currentScore > starScore[0])
         {
             isLevelPassed = true;
         }
     }
 
+    
     /// <summary>
     /// Skora göre aktif yýldýzlarý ayarlar.
     /// </summary>
@@ -58,7 +61,7 @@ public class EndOfChapterUI : MonoBehaviour
     {
         for (int i = 0; i < starScore.Length; i++)
         {
-            if (_inLevelManager.score > starScore[i])
+            if (_scoreManager.currentScore > starScore[i])
             {
                 _rewardedStarCount++;
             }
@@ -68,18 +71,7 @@ public class EndOfChapterUI : MonoBehaviour
             stars[i]?.SetActive(true);
         }
     }
-
-    /// <summary>
-    /// Bölüm geçme durumuna ve yýldýz sayýsýna göre ödülleri ayarlar.
-    /// </summary>
-    void SetRewards()
-    {
-        int rewardXPAmount = isLevelPassed ? rewardXP[_rewardedStarCount - 1] : 0;
-        int rewardGoldAmount = isLevelPassed ? rewardGold[_rewardedStarCount - 1] : 0;
-
-        rewardXPText.text = $"XP: {rewardXPAmount}";
-        rewardGoldText.text = $"Gold: {rewardGoldAmount}";
-    }
+    
 
     /// <summary>
     /// Bölüm sonu panelini aktif hale getirir.
@@ -87,6 +79,16 @@ public class EndOfChapterUI : MonoBehaviour
     void SetPanelActive()
     {
         endOfLevelPanel.SetActive(true);
+        Debug.Log(_enemyCountManager._enemyCount);
+        if(_enemyCountManager._enemyCount<=0)
+        {
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            failPanel.SetActive(true);
+        }
+
     }
 
     /// <summary>
