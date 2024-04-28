@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject InLevelPopUps;
+    [SerializeField] private GameObject areYouSure;
 
     public void PauseGame()
     {
@@ -39,6 +40,29 @@ public class UIManager : MonoBehaviour
     public void OnClickRestartButton()
     {
         RestartLevel();
+    }
+
+    public void OpenAreYouSure()
+    {
+        areYouSure.SetActive(true);
+    }
+
+    public void CloseAreYouSure()
+    {
+        areYouSure.SetActive(false);
+    }
+
+    public void OpenMainMenu()
+    {
+        Infrastructure.LoadScene("MainMenu");
+    }
+
+    public void OpenNextLevel()
+    {
+        string thisSceneName = SceneManager.GetActiveScene().name;
+        int levelNumber = int.Parse(thisSceneName.Substring(5, thisSceneName.Length - 5));
+        Infrastructure.LoadScene("Level"+(levelNumber+1));
+
     }
 
 }

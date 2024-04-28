@@ -12,7 +12,6 @@ public class Ammo : ExplosiveBase
     [Header("Ammo")]
     [Tooltip("Mühimmatın maddesi")]
     public AmmoMatter matter;
-    public MMF_Player inAirFeedback;
 
     [Tooltip("Mühimmat düştükten sonra ne kadar yakınındaki düşmanları korkutsun?")]
     [SerializeField] private float scareRadius;
@@ -21,11 +20,11 @@ public class Ammo : ExplosiveBase
     [SerializeField] private float durabilityMultiplier = 100f;
     [SerializeField] private float massMultiplier = 10f;
     [SerializeField] private MMF_Player hitFeedback;
+    [SerializeField] private MMF_Player destroyFeedback;
     [SerializeField] private float maxHitVolume;
 
     internal Vector3 throwPos;
 
-    internal bool isDestroyable;
 
     private bool isHit;
 
@@ -52,10 +51,11 @@ public class Ammo : ExplosiveBase
     float _moveableMass;
     private void OnCollisionEnter(Collision collision)
     {
+        // İlk kez çarpışıldığı için ses efekti çalmakla ilgili işlemler yapılıyor
         if (!isHit )
         {
             isHit = true;
-            inAirFeedback.StopFeedbacks();
+            _trailRenderer.material = visibleMaterial;
 
             bool isHitBuilding = collision.gameObject.TryGetComponent<Building>(out Building building);
             bool isHitEnemy = collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy);
@@ -97,19 +97,19 @@ public class Ammo : ExplosiveBase
         }
         
         ShowCollisionIcon();
-        //ScareEnemies(scareRadius);
+        RunResponseAnim(scareRadius);
         DoDamage(collision);
         if (CheckSmash())
         {
             Smash(collision);
-            GetComponent<Rigidbody>().isKinematic = true;
-            _trailRenderer.material = visibleMaterial;
             Explode(collision);
             isExplode = true;
+            destroyFeedback.PlayFeedbacks();
+            /*
             if (isDestroyable)
             {
                 Destroy(gameObject);
-            }
+            }*/
         }
     }
     private void Moveble()
@@ -147,14 +147,17 @@ public class Ammo : ExplosiveBase
 
 
     /// <summary>
-    /// Düşmanları korkut. Mühimmatın bulunduğu konumun çevresindeki düşmanların korkma animasyonlarını çalıştırır.
+    /// Mühimmatın çarpması sonucu düşmanların tepki verme animasyonunu çalıştır.
     /// </summary>
-    private void ScareEnemies(float radius)
+    private void RunResponseAnim(float radius)
     {
         var hitColliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var hitCollider in hitColliders)
         {
-            hitCollider.TryGetComponent<Enemy>(out var enemy);
+            bool isThereEnemy = hitCollider.TryGetComponent<Enemy>(out var enemy);
+            if(isThereEnemy)
+                enemy.gameObject.GetComponent<Animator>().SetTrigger("Response");
+            
         }
     }
 

@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,13 +7,18 @@ public class ScoreManager : MonoBehaviour
 {
     private AmmoManager _ammoManager;
 
-    [Header("GUI")]
+    [Header("UI")]
     [SerializeField] private Text scoreText;
-    [SerializeField] private Image scoreFill;
-    [SerializeField] private Image[] scoreIcons;
+    [SerializeField] private Slider scoreSlider;
+    [SerializeField] private GameObject stars;
+    [Header("EndOfLevel")]
+    [SerializeField] private Text winScoreText;
+    [SerializeField] private List<Image> winStars;
 
+
+    [SerializeField] private int levelScore;
     [HideInInspector] public int currentScore;
-    [HideInInspector] public int levelScore;
+    
 
     private void Start()
     {
@@ -28,7 +35,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Subscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
         EventBus.Subscribe(EventType.GameOver, CalculateGameEndScore);
-        
+        EventBus.Subscribe(EventType.GameOver, UpdateWinPopUp);
+
     }
 
     private void OnDisable()
@@ -40,6 +48,7 @@ public class ScoreManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
         EventBus.Unsubscribe(EventType.GameOver, CalculateGameEndScore);
+        EventBus.Unsubscribe(EventType.GameOver, UpdateWinPopUp);
     }
 
     /// <summary>
@@ -48,7 +57,7 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScoreOnGUI()
     {
         scoreText.text = "Score: " + currentScore;
-        //UpdateScoreBar();
+        UpdateScoreBar();
     }
 
     /*
@@ -59,6 +68,7 @@ public class ScoreManager : MonoBehaviour
     void CalculateBuildingScore(float volumeSize, BuildingMatter buildingArmor)
     {
         currentScore += (int)(volumeSize * 50) * (int)buildingArmor;
+
     }
 
     /// <summary>
@@ -79,6 +89,7 @@ public class ScoreManager : MonoBehaviour
         {
             currentScore += 100 * _ammoManager.ammunition.Count / firedCount;
         }
+        UpdateScoreBar();
     }
 
     public static int CalculateScore(float volumeSize, BuildingMatter buildingArmor)
@@ -90,24 +101,50 @@ public class ScoreManager : MonoBehaviour
 
     internal void UpdateScoreBar()
     {
-        if (scoreFill != null)
-            scoreFill.fillAmount = ((float)currentScore / levelScore);
-        if (scoreFill.fillAmount >= 0.3f)
+
+        scoreSlider.value = ((float)currentScore / levelScore);
+        if (scoreSlider.value >= 0.25f)
         {
-            if (scoreIcons[0] != null)
-                scoreIcons[0].color = Color.yellow;
+            stars.transform.GetChild(0).GetComponent<Image>().color = Color.yellow;
+            stars.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
-        if (scoreFill.fillAmount >= 0.66f)
+        if (scoreSlider.value >= 0.50f)
         {
-            if (scoreIcons[1] != null)
-                scoreIcons[1].color = Color.yellow;
+            stars.transform.GetChild(1).GetComponent<Image>().color = Color.yellow;
+            stars.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
-        if (scoreFill.fillAmount >= 1f)
+        if (scoreSlider.value >= 0.75f)
         {
-            if (scoreIcons[2] != null)
-                scoreIcons[2].color = Color.yellow;
+            stars.transform.GetChild(2).GetComponent<Image>().color = Color.yellow;
+            stars.transform.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
 
+    }
+
+    /// <summary>
+    /// Bölüm sonundaki win ekranýndaki skoru günceller
+    /// </summary>
+    private void UpdateWinPopUp()
+    {
+        winScoreText.text = currentScore.ToString();
+
+        UpdateWinStar(0.25f, winStars[0]);
+        UpdateWinStar(0.25f, winStars[0].transform.GetChild(0).GetComponent<Image>());
+
+        UpdateWinStar(0.50f, winStars[1]);
+        UpdateWinStar(0.50f, winStars[1].transform.GetChild(0).GetComponent<Image>());
+
+        UpdateWinStar(0.75f, winStars[2]);
+        UpdateWinStar(0.75f, winStars[2].transform.GetChild(0).GetComponent<Image>());
+
+    }
+
+    private void UpdateWinStar(float condition, Image image)
+    {
+        if (scoreSlider.value >= condition)
+        {
+            image.DOFade(1f, 2f).SetEase(Ease.InBounce);
+        }
     }
 
 }

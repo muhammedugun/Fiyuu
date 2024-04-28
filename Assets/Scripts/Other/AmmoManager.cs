@@ -36,8 +36,7 @@ public class AmmoManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.
-            LauncherThrowed, RemoveAtAmmunition);
+        EventBus.Subscribe(EventType.LauncherThrowed, RemoveAtAmmunition);
 
     }
     private void OnDisable()

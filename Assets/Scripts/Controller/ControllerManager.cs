@@ -12,7 +12,7 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
-        action = new PlayerControllerAction();
+        action = new PlayerControllerAction(); 
     }
 
     private void OnDisable()

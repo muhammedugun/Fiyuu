@@ -28,13 +28,14 @@ public abstract class ExplosiveBase : SmashableObjectBase
     protected void Explode(Collision collision)
     {
         var surroundingObjects = Physics.OverlapSphere(transform.position, _explosionRadius);
+        if (_isParticleEffect)
+            Instantiate(_explosionParticle, transform.position, Quaternion.identity);
         foreach (var obj in surroundingObjects)
         {
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
             rb.AddExplosionForce(_explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
-            if(_isParticleEffect)
-                Instantiate(_explosionParticle, transform.position, Quaternion.identity);
+
             if (rb.TryGetComponent<SmashableObjectBase>(out SmashableObjectBase smashableObject))
             {
                 var differentPosition = rb.transform.position - transform.position;

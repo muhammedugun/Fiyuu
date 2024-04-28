@@ -12,10 +12,6 @@ public class Launcher : MonoBehaviour
     [SerializeField] private GameObject[] ammoTypePrefabs;
     [SerializeField] private Transform ammoSpawnPosition;
 
-    [Header("Project Tile")]
-    [SerializeField] private TrajectoryPredictor trajectoryPredictor;
-    [SerializeField] private int trajectorySize=40;
-
     [Header("Launcher")]
     [SerializeField] private Animator animator;
     [Tooltip("Fırlatma gücü")]
@@ -54,9 +50,11 @@ public class Launcher : MonoBehaviour
         _ammoStartY = ammoSpawnPosition.position.y;
         CreateAmmo();
     }
-
+    
+    /*
     private void LateUpdate()
     {
+        
         if(_ammo!=null)
         {
           _height = _ammo.transform.position.y - _ammoStartY;
@@ -68,7 +66,8 @@ public class Launcher : MonoBehaviour
                 //trajectoryPredictor.Render(_ammoRigidBody.position, _throwVelocity, endTransform.position, trajectorySize);
           }
         }
-    }
+    }*/
+    
 
     private void Subscribe()
     {
@@ -131,16 +130,17 @@ public class Launcher : MonoBehaviour
         }
         else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave"))
         {
+            Debug.LogWarning("Fırlatma Gerçekleşti");
             loadFeedback.StopFeedbacks();
             throwFeedback.PlayFeedbacks();
-            _ammo.GetComponent<Ammo>().inAirFeedback.PlayFeedbacks();
-            trajectoryPredictor.enabled = false;
+
             _collisionIconText.enabled = false;
+
             _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
             _ammo.GetComponent<Ammo>().throwPos = _ammo.transform.position;
+            
             if (_lastAmmo!=null && _lastAmmo != _ammo)
             {
-                _lastAmmo.GetComponent<Ammo>().isDestroyable=true;
                 if(_lastAmmo.GetComponent<ExplosiveBase>().isExplode)
                     Destroy(_lastAmmo.gameObject);
             }

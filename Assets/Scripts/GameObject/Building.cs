@@ -1,8 +1,7 @@
 // Refactor 12.03.24
 using MoreMountains.Feedbacks;
-using RayFire;
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
@@ -14,6 +13,8 @@ public class Building : SmashableObjectBase
 
     [SerializeField] private MMF_Player damageFeedbacks;
     [SerializeField] private MMF_Player destroyFeedbacks;
+    [SerializeField] private MMF_Player beginningFeedback;
+    [SerializeField] private MMF_Player skipBeginningFeedback;
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
@@ -45,6 +46,8 @@ public class Building : SmashableObjectBase
 
     protected override void Start()
     {
+        ControllerManager.action.InLevel.Attack.started += SkipBeginning;
+        MMFloatingTextSpawner floatingTextSpawner = FindObjectOfType<MMFloatingTextSpawner>();
         base.Start();
     }
 
@@ -54,9 +57,15 @@ public class Building : SmashableObjectBase
         if (CheckSmash())
         {
             Smash(collision);
-            //int score = InLevelManager.CalculateScore(_volumeSize, armor, 1f);
-            //destroyFeedbacks.PlayFeedbacks(this.transform.position, score);
         }
+    }
+
+    public void SkipBeginning(InputAction.CallbackContext context)
+    {
+        ControllerManager.action.InLevel.Attack.started -= SkipBeginning;
+        beginningFeedback.StopFeedbacks();
+        skipBeginningFeedback.PlayFeedbacks();
+        
     }
 
 
@@ -87,11 +96,18 @@ public class Building : SmashableObjectBase
         }
     }
 
+    
     public override void Smash(Collision collision)
     {
         base.Smash(collision);
         EventBus<float, BuildingMatter>.Publish(EventType.BuildSmashed, _volumeSize, armor);
+        EventBus.Publish(EventType.BuildSmashed);
+        
+        destroyFeedbacks.PlayFeedbacks(this.transform.position, ScoreManager.CalculateScore(_volumeSize, armor));
+
     }
+
+   
 }
 
 

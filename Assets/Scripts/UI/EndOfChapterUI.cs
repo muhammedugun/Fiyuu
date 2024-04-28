@@ -59,17 +59,21 @@ public class EndOfChapterUI : MonoBehaviour
     /// </summary>
     void SetActiveStars()
     {
-        for (int i = 0; i < starScore.Length; i++)
+        if(stars.Length>0)
         {
-            if (_scoreManager.currentScore > starScore[i])
+            for (int i = 0; i < starScore.Length; i++)
             {
-                _rewardedStarCount++;
+                if (_scoreManager.currentScore > starScore[i])
+                {
+                    _rewardedStarCount++;
+                }
+            }
+            for (int i = 0; i < _rewardedStarCount; i++)
+            {
+                stars[i]?.SetActive(true);
             }
         }
-        for (int i = 0; i < _rewardedStarCount; i++)
-        {
-            stars[i]?.SetActive(true);
-        }
+        
     }
     
 

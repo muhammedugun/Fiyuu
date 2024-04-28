@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class InLevelManager : MonoBehaviour
 {
-
+    [SerializeField] private List<ParticleSystem> winFireworks;
     private void OnEnable()
     {
         EventBus.Subscribe(EventType.OutOfAmmo, GameOver);
@@ -19,8 +20,12 @@ public class InLevelManager : MonoBehaviour
     void GameOver()
     {
         EventBus.Publish(EventType.GameOver);
+        foreach (var item in winFireworks)
+        {
+            item.Play();
+        }
         Debug.LogWarning("Oyun Bitti");
-        Invoke(nameof(StopGame), 0.1f);
+        Invoke(nameof(StopGame), 2f);
     }
 
     private void StopGame()
