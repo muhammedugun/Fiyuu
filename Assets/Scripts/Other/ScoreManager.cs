@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
@@ -34,8 +35,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Subscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Subscribe(EventType.GameOver, CalculateGameEndScore);
-        EventBus.Subscribe(EventType.GameOver, UpdateWinPopUp);
+        EventBus.Subscribe(EventType.LevelEnd, CalculateGameEndScore);
+        EventBus.Subscribe(EventType.LevelEnd, UpdateWinPopUp);
 
     }
 
@@ -47,8 +48,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Unsubscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Unsubscribe(EventType.GameOver, CalculateGameEndScore);
-        EventBus.Unsubscribe(EventType.GameOver, UpdateWinPopUp);
+        EventBus.Unsubscribe(EventType.LevelEnd, CalculateGameEndScore);
+        EventBus.Unsubscribe(EventType.LevelEnd, UpdateWinPopUp);
     }
 
     /// <summary>
@@ -89,6 +90,11 @@ public class ScoreManager : MonoBehaviour
         {
             currentScore += 100 * _ammoManager.ammunition.Count / firedCount;
         }
+        int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
+        if (levelIndex > (PlayerPrefs.GetInt("LevelScore" + levelIndex)))
+        {
+            PlayerPrefs.SetInt("LevelScore" + levelIndex, currentScore);
+        }
         UpdateScoreBar();
     }
 
@@ -127,6 +133,25 @@ public class ScoreManager : MonoBehaviour
     private void UpdateWinPopUp()
     {
         winScoreText.text = currentScore.ToString();
+
+        int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
+
+        if (scoreSlider.value>=0.75f)
+        {
+            PlayerPrefs.SetInt("LevelStars" + levelIndex, 3);
+        }
+        else if (scoreSlider.value >= 0.5f)
+        {
+            PlayerPrefs.SetInt("LevelStars" + levelIndex, 2);
+        }
+        else if (scoreSlider.value >= 0.25f)
+        {
+            PlayerPrefs.SetInt("LevelStars" + levelIndex, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("LevelStars" + levelIndex, 0);
+        }
 
         UpdateWinStar(0.25f, winStars[0]);
         UpdateWinStar(0.25f, winStars[0].transform.GetChild(0).GetComponent<Image>());

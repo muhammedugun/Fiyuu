@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class InLevelManager : MonoBehaviour
 {
@@ -19,13 +19,16 @@ public class InLevelManager : MonoBehaviour
 
     void GameOver()
     {
-        EventBus.Publish(EventType.GameOver);
+        ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)));
+        ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5))+1);
+        EventBus.Publish(EventType.LevelEnd);
         foreach (var item in winFireworks)
         {
             item.Play();
         }
         Debug.LogWarning("Oyun Bitti");
         Invoke(nameof(StopGame), 2f);
+
     }
 
     private void StopGame()

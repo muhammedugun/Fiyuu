@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public enum EventType
 {
-    OutOfAmmo, GameOver, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead
+    OutOfAmmo, LevelEnd, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead
 }
 
 

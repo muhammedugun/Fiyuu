@@ -30,15 +30,15 @@ public class EndOfChapterUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.GameOver, SetPanelActive);
-        EventBus.Subscribe(EventType.GameOver, SetActiveStars);
-        EventBus.Subscribe(EventType.GameOver, LevelPassControl);
+        EventBus.Subscribe(EventType.LevelEnd, SetPanelActive);
+        EventBus.Subscribe(EventType.LevelEnd, SetActiveStars);
+        EventBus.Subscribe(EventType.LevelEnd, LevelPassControl);
     }
     private void OnDisable()
     {
-        EventBus.Unsubscribe(EventType.GameOver, SetPanelActive);
-        EventBus.Unsubscribe(EventType.GameOver, SetActiveStars);
-        EventBus.Unsubscribe(EventType.GameOver, LevelPassControl);
+        EventBus.Unsubscribe(EventType.LevelEnd, SetPanelActive);
+        EventBus.Unsubscribe(EventType.LevelEnd, SetActiveStars);
+        EventBus.Unsubscribe(EventType.LevelEnd, LevelPassControl);
     }
 
     
