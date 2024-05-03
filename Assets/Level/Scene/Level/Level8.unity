@@ -367,6 +367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6379582726938644485, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
+      propertyPath: _inputRange
+      value: 
+      objectReference: {fileID: 338296528}
+    - target: {fileID: 6379582726938644485, guid: 455ea73fb8a0e274797025014961f5e1,
+        type: 3}
       propertyPath: ammoSelectionUI
       value: 
       objectReference: {fileID: 338296526}
@@ -1189,6 +1194,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 338296524}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &338296528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1521033365316319096, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+    type: 3}
+  m_PrefabInstance: {fileID: 338296524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338296527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708f980001feea46a5d3b70d19c7382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &346798090
 PrefabInstance:
   m_ObjectHideFlags: 0

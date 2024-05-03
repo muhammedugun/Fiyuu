@@ -13,6 +13,7 @@ public class EndOfChapterUI : MonoBehaviour
     [SerializeField] private GameObject endOfLevelPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject failPanel;
+    [SerializeField] private GameObject collisionIcon;
 
     /// <summary>
     /// Bölüm geçildi mi?
@@ -82,6 +83,7 @@ public class EndOfChapterUI : MonoBehaviour
     /// </summary>
     void SetPanelActive()
     {
+        collisionIcon.SetActive(false);
         endOfLevelPanel.SetActive(true);
         Debug.Log(_enemyCountManager._enemyCount);
         if(_enemyCountManager._enemyCount<=0)

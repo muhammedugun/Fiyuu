@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
-    [Tooltip("Projectile için son transform noktası")]
-    public Transform endTransform;
 
     [Header("Ammo")]
     [SerializeField] private GameObject[] ammoTypePrefabs;
@@ -20,13 +18,14 @@ public class Launcher : MonoBehaviour
     [SerializeField] private MMF_Player throwFeedback;
 
     [SerializeField] private AmmoManager ammoSelectionUI;
-    
+
+    [SerializeField] private InputRange _inputRange;
 
     private TextMeshProUGUI _collisionIconText;
     private Vector3 _throwVelocity;
     private GameObject _ammo;
     private GameObject _lastAmmo;
-    private InputRange _inputRange;
+    
     private Rigidbody _ammoRigidBody;
     /// <summary>
     /// Mühimmatın başlangıçtaki y pozisyonu
@@ -34,10 +33,6 @@ public class Launcher : MonoBehaviour
     private float _ammoStartY;
     private float _height;
 
-    private void OnEnable()
-    {
-        Subscribe();
-    }
 
     private void OnDisable()
     {
@@ -46,32 +41,15 @@ public class Launcher : MonoBehaviour
 
     private void Start()
     {
-        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
+        Subscribe();
+        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
         _ammoStartY = ammoSpawnPosition.position.y;
         CreateAmmo();
     }
-    
-    /*
-    private void LateUpdate()
-    {
-        
-        if(_ammo!=null)
-        {
-          _height = _ammo.transform.position.y - _ammoStartY;
-          if(_height>.02f)
-          {
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Load") || animator.GetCurrentAnimatorStateInfo(0).IsName("Mirror Load"))
-                    trajectoryPredictor.enabled = true;
-                _throwVelocity = _ammoRigidBody.transform.right * throwPower;
-                //trajectoryPredictor.Render(_ammoRigidBody.position, _throwVelocity, endTransform.position, trajectorySize);
-          }
-        }
-    }*/
-    
+
 
     private void Subscribe()
     {
-        _inputRange = FindObjectOfType<InputRange>();
         _inputRange.started += Throw;
     }
 

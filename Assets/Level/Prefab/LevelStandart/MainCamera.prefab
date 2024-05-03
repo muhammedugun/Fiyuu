@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
         Mode: 0
         Space: 0
         RandomizeRemap: 0
-        AnimatePositionDuration: 0
+        AnimatePositionDuration: 0.01
         AnimatePositionTween:
           MMTweenDefinitionType: 1
           MMTweenCurve: 4
@@ -711,10 +711,10 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 3
               time: 0
-              value: 0
+              value: 1
               inSlope: 0
               outSlope: 0
-              tangentMode: 0
+              tangentMode: 34
               weightedMode: 0
               inWeight: 0
               outWeight: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
               value: 1
               inSlope: 0
               outSlope: 0
-              tangentMode: 0
+              tangentMode: 34
               weightedMode: 0
               inWeight: 0
               outWeight: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 3725079145872377945}
         DebugActive: 0
-        Duration: 0.01
+        Duration: 0.1
         ResetShakerValuesAfterShake: 0
         ResetTargetValuesAfterShake: 0
         RelativeOrthographicSize: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 3725079145872377945}
         DebugActive: 0
-        Duration: 3
+        Duration: 2
         ResetShakerValuesAfterShake: 0
         ResetTargetValuesAfterShake: 0
         RelativeOrthographicSize: 0
@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -289,14 +289,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7382363627927625730}
+  - component: {fileID: 7729393058448924063}
   - component: {fileID: 8337152884709300063}
   - component: {fileID: 2184870441401952303}
   - component: {fileID: 4862965431110552596}
-  - component: {fileID: 7729393058448924063}
   - component: {fileID: 8982307906299910943}
   m_Layer: 0
   m_Name: Ammo
-  m_TagString: Untagged
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,6 +318,31 @@ Transform:
   - {fileID: 2260872925041833871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7729393058448924063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041350673474911951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshFilter: {fileID: 6839085635562231516}
+  _isParticleEffect: 0
+  _explosionParticle: {fileID: 0}
+  _explosionRadius: 1
+  _explosionForce: 2
+  matter: 1
+  scareRadius: 5
+  visibleMaterial: {fileID: 2100000, guid: 695873166113ab64997efed81c2426c7, type: 2}
+  durabilityMultiplier: 100
+  massMultiplier: 9
+  hitFeedback: {fileID: 3799607032337077361}
+  destroyFeedback: {fileID: 2317290020844537159}
+  maxHitVolume: 1
 --- !u!135 &8337152884709300063
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -408,31 +433,6 @@ MonoBehaviour:
         m_Calls: []
   visual: {fileID: 7065403580535440323}
   currentRefractureCount: 0
---- !u!114 &7729393058448924063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7041350673474911951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshFilter: {fileID: 6839085635562231516}
-  _isParticleEffect: 0
-  _explosionParticle: {fileID: 0}
-  _explosionRadius: 1
-  _explosionForce: 2
-  matter: 1
-  scareRadius: 5
-  visibleMaterial: {fileID: 2100000, guid: 695873166113ab64997efed81c2426c7, type: 2}
-  durabilityMultiplier: 500
-  massMultiplier: 9
-  hitFeedback: {fileID: 3799607032337077361}
-  destroyFeedback: {fileID: 2317290020844537159}
-  maxHitVolume: 1
 --- !u!96 &8982307906299910943
 TrailRenderer:
   serializedVersion: 3
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -754,6 +754,18 @@ MonoBehaviour:
               m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
               m_MethodName: Sleep
               m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+            - m_Target: {fileID: 2184870441401952303}
+              m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+              m_MethodName: set_useGravity
+              m_Mode: 6
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

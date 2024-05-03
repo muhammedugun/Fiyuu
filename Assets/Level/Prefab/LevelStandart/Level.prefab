@@ -611,7 +611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899569814675743406}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1585,7 +1585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ae4facaa34dd34f99a4f9aed0d8b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endTransform: {fileID: 0}
   ammoTypePrefabs:
   - {fileID: 1914980501386592884, guid: 5f9d2287f2334e74d8abd9199a914451, type: 3}
   - {fileID: 2591240448987843038, guid: fceb9ec005b55a7428e8ebefd934c143, type: 3}
@@ -1595,6 +1594,7 @@ MonoBehaviour:
   loadFeedback: {fileID: 7107647153649465858}
   throwFeedback: {fileID: 5854591264245220584}
   ammoSelectionUI: {fileID: 0}
+  _inputRange: {fileID: 0}
 --- !u!95 &1307464940851176877
 Animator:
   serializedVersion: 5

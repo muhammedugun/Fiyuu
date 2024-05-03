@@ -38,8 +38,23 @@ public abstract class ExplosiveBase : SmashableObjectBase
 
             if (rb.TryGetComponent<SmashableObjectBase>(out SmashableObjectBase smashableObject))
             {
-                var differentPosition = rb.transform.position - transform.position;
-                smashableObject.durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                if(this.gameObject.CompareTag("Ammo") && obj.gameObject.transform.CompareTag("Building"))
+                {
+                    var building = obj.gameObject.GetComponent<Building>();
+                    var ammo = gameObject.GetComponent<Ammo>();
+                    if (Building.armorStrengths[(int)building.armor - 1, (int)ammo.matter - 1] == 0)
+                    {
+                        var differentPosition = rb.transform.position - transform.position;
+                        smashableObject.durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                    }
+                    
+                }
+                else
+                {
+                    var differentPosition = rb.transform.position - transform.position;
+                    smashableObject.durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                }
+                
             }
         }
         

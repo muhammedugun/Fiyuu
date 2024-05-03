@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class ChaptersManager : MonoBehaviour
     [SerializeField] Text popUpTitleText;
     [SerializeField] Text scoreText;
     [SerializeField] private Sprite lockIcon;
+    [SerializeField] private RectTransform playPopUpWindow;
+
     string levelName;
 
     private void Start()
@@ -52,7 +55,14 @@ public class ChaptersManager : MonoBehaviour
                 child.color = new Color(child.color.r, child.color.g, child.color.b, 1f);
             }
         }
-        
+        else if (levelNumber == 1)
+        {
+            Debug.LogWarning("Level1open");
+            playPopUp.SetActive(true);
+            popUpTitleText.text = "Level " + levelNumber;
+            levelName = "Level" + levelNumber;
+        }
+
     }
 
     public void ClosePlayPopUp()
@@ -65,7 +75,14 @@ public class ChaptersManager : MonoBehaviour
             child.color = new Color(child.color.r, child.color.g, child.color.b, 0.5f);
         }
         levelName = null;
-        playPopUp.SetActive(false);
+
+        playPopUpWindow.localScale = Vector3.one;
+
+        playPopUpWindow.DOScale(Vector3.zero, 0.2f)
+                 .SetEase(Ease.InOutQuad).OnComplete(() =>
+                 {
+                     playPopUp.SetActive(false);
+                 });
         
     }
 
@@ -98,7 +115,7 @@ public class ChaptersManager : MonoBehaviour
     public void CanEnterLevel()
     {
         // Önceki tüm bölümlerin tamamlanýp tamamlanmadýðýný kontrol eder
-        for (int i = 1; i <= 10; i++)
+        for (int i = 2; i <= 10; i++)
         {
             if (!IsLevelCompleted(i))
             {

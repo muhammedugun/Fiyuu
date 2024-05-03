@@ -1,8 +1,13 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
+
 public class SwipeController : MonoBehaviour
 {
+    [SerializeField] private Text titleText;
     [SerializeField] private int pageCount;
+    
+
     int currentPage;
     Vector3 targetPos;
     public Vector3 pageStep;
@@ -24,6 +29,7 @@ public class SwipeController : MonoBehaviour
         {
             Debug.Log("Next");
             currentPage++;
+            titleText.text = "Chapter " + currentPage;
             targetPos += pageStep;
             MovePage();
 
@@ -35,6 +41,7 @@ public class SwipeController : MonoBehaviour
         {
             Debug.Log("Previous");
             currentPage--;
+            titleText.text = "Chapter " + currentPage;
             targetPos -= pageStep;
             MovePage();
         }

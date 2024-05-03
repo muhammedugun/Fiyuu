@@ -24,17 +24,15 @@ public class Building : SmashableObjectBase
 
     /// <summary>
     /// Zýrhýn güçlü yönleri. Zýrhýn neye dayanýklý olup neye dayanýklý olmadýðý. 
-    /// <para> Satýrlar: Bina maddesi(zýrhý), Sütunlar: mühimmat maddesi </para>
+    /// <para> Satýrlar: Bina zýrhý, Sütunlar: mühimmat zýrhý </para>
     /// </summary>
-    private int[,] _armorStrengths = new int[4, 8]
+    public static int[,] armorStrengths = new int[2, 4]
     {
         // Mühimmat maddesi türleri (sütunlar).
-        // Ahþap=1, taþ=2, demir=3, çelik=4, ateþ=5, buz=6, patlama=7, elektrik=8
+        // Ahþap=0, taþ=1, ateþ=2, patlayýcý=3
         // Bina maddesi türleri (satýrlar)
-        { 0,0,0,0,0,0,0,1 }, // Ahþap
-        { 1,0,0,0,1,0,0,1 }, // Taþ
-        { 1,1,0,0,1,0,0,0 }, // Demir
-        { 1,1,1,1,1,1,1,0 }  // Çelik
+        { 0,0,0,0}, // Ahþap
+        { 1,0,1,0}, // Taþ
     };
 
 
@@ -81,8 +79,7 @@ public class Building : SmashableObjectBase
                 {
                     damageFeedbacks?.PlayFeedbacks();
                     var ammoArmor = ammo.matter;
-
-                    if (_armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
+                    if (armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
                     {
                         base.DoDamage(collision);
                     }
@@ -118,7 +115,5 @@ public class Building : SmashableObjectBase
 public enum BuildingMatter
 {
     Wood = 1,
-    Stone,
-    Iron,
-    Steel
+    Stone
 }

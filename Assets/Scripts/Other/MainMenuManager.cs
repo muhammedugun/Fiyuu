@@ -1,8 +1,11 @@
+
+using DG.Tweening;
 using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject settingsPopUp;
+    [SerializeField] private RectTransform settingsPopUpWindow;
 
     public void LoadScene(string sceneName)
     {
@@ -16,11 +19,19 @@ public class MainMenuManager : MonoBehaviour
 
     public void CloseSettingsPopUp()
     {
-        settingsPopUp.SetActive(false);
+        settingsPopUpWindow.localScale = Vector3.one;
+
+        settingsPopUpWindow.DOScale(Vector3.zero, 0.2f)
+                 .SetEase(Ease.InOutQuad).OnComplete(() =>
+                 {
+                     settingsPopUp.SetActive(false);
+                 });
     }
 
     public void ExitButton()
     {
         Application.Quit();
     }
+
+    
 }

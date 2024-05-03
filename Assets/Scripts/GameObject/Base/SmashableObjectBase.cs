@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Fracture))]
 public abstract class SmashableObjectBase : DamagableObjectBase
 {
-    protected Fracture _fracture;
+    public Fracture _fracture;
     /// <summary>
     /// Parçalanma gerçekleþti mi?
     /// </summary>
@@ -13,7 +13,7 @@ public abstract class SmashableObjectBase : DamagableObjectBase
     protected override void Start()
     {
         base.Start();
-        _fracture = GetComponent<Fracture>();
+        _fracture = gameObject.GetComponent<Fracture>();
     }
 
     /// <summary>
@@ -25,6 +25,10 @@ public abstract class SmashableObjectBase : DamagableObjectBase
         {
             _isSmash = true;
             var contact = collision.contacts[0];
+            if(_fracture==null)
+            {
+                Debug.Log("Fracture is null");
+            }
             _fracture.callbackOptions.CallOnFracture(contact.otherCollider, gameObject, contact.point);
             _fracture.ComputeFracture();
         }

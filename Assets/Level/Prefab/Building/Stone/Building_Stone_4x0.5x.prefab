@@ -171,6 +171,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3083440372464770690, guid: fc61dcaf7a2236c40b2e5ba9f397e86c,
+        type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

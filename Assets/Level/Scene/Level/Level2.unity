@@ -1947,6 +1947,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1373164438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1521033365316319096, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1373164434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373164436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708f980001feea46a5d3b70d19c7382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1391935626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7277909156266282001, guid: 4467b0bdf1b6bcd4eb2353c2ae5dfef9,
@@ -2462,6 +2474,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
+    - target: {fileID: 6379582726938644485, guid: 455ea73fb8a0e274797025014961f5e1,
+        type: 3}
+      propertyPath: _inputRange
+      value: 
+      objectReference: {fileID: 1373164438}
     - target: {fileID: 6379582726938644485, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
       propertyPath: ammoSelectionUI
@@ -3190,9 +3207,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1296137808}
   - {fileID: 1373164434}
   - {fileID: 290820125}
   - {fileID: 991472396}
-  - {fileID: 1296137808}
   - {fileID: 743160766}
   - {fileID: 1745528119}

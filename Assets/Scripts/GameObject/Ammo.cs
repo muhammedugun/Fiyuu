@@ -44,7 +44,7 @@ public class Ammo : ExplosiveBase
     {
         base.Start();
         _trailRenderer = GetComponent<TrailRenderer>();
-        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIconText").GetComponent<TextMeshProUGUI>();
+        _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
     }
 
     GameObject moveble;
@@ -137,11 +137,9 @@ public class Ammo : ExplosiveBase
     /// <param name="worldPos"></param>
     private void MoveUIToWorldPos(RectTransform UIElement, Vector3 worldPos)
     {
-        // Dünya pozisyonunu ekran pozisyonuna çevir.
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
-        // Ekran pozisyonunu RectTransform'ın yerel pozisyonuna çevir.
         RectTransformUtility.ScreenPointToLocalPointInRectangle(UIElement.parent.GetComponent<RectTransform>(), screenPoint, null, out Vector2 localPoint);
-        // Yeni pozisyonu ayarla.
+
         UIElement.anchoredPosition = localPoint;
     }
 
@@ -157,7 +155,6 @@ public class Ammo : ExplosiveBase
             bool isThereEnemy = hitCollider.TryGetComponent<Enemy>(out var enemy);
             if(isThereEnemy)
                 enemy.gameObject.GetComponent<Animator>().SetTrigger("Response");
-            
         }
     }
 
@@ -170,10 +167,6 @@ public enum AmmoMatter
 {
     Wood = 1,
     Stone,
-    Iron,
-    Steel,
     Fire,
-    Ice,
-    Explosion,
-    Electric
+    Explosion
 }
