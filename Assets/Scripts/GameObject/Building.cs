@@ -35,34 +35,51 @@ public class Building : SmashableObjectBase
         { 1,0,1,0}, // Taþ
     };
 
+    private static int frameCount;
 
     private void Awake()
     {
         _massMultiplier = (int)armor;
         _durabilityMultiplier = armorDurabilitiy[(int)armor - 1];
     }
+    private Rigidbody rb;
 
     protected override void Start()
     {
-        ControllerManager.action.InLevel.Attack.started += SkipBeginning;
+        rb = GetComponent<Rigidbody>();
+       
         MMFloatingTextSpawner floatingTextSpawner = FindObjectOfType<MMFloatingTextSpawner>();
         base.Start();
     }
 
+    private void OnEnable()
+    {
+        ControllerManager.Subscribe(SkipBeginning);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+
         DoDamage(collision);
         if (CheckSmash())
         {
             Smash(collision);
         }
+       
     }
+
+
 
     public void SkipBeginning(InputAction.CallbackContext context)
     {
-        ControllerManager.action.InLevel.Attack.started -= SkipBeginning;
-        beginningFeedback.StopFeedbacks();
-        skipBeginningFeedback.PlayFeedbacks();
+        ControllerManager.UpdateLog();
+        ControllerManager.Unsubscribe(SkipBeginning);
+        if (beginningFeedback.IsPlaying)
+        {
+            beginningFeedback.StopFeedbacks();
+            skipBeginningFeedback.PlayFeedbacks();
+        }
+            
         
     }
 

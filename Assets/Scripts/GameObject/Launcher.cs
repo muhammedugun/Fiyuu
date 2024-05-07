@@ -1,4 +1,3 @@
-using Blobcreate.ProjectileToolkit;
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
@@ -31,7 +30,6 @@ public class Launcher : MonoBehaviour
     /// Mühimmatın başlangıçtaki y pozisyonu
     /// </summary>
     private float _ammoStartY;
-    private float _height;
 
 
     private void OnDisable()
@@ -73,7 +71,7 @@ public class Launcher : MonoBehaviour
             _lastAmmo = _ammo;
         _ammo.transform.position = ammoSpawnPosition.position;
         _ammo.transform.rotation = ammoSpawnPosition.rotation;
-        _ammoRigidBody = _ammo.GetComponent<Rigidbody>();
+        _ammoRigidBody = _ammo.transform.GetChild(0).GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -108,18 +106,17 @@ public class Launcher : MonoBehaviour
         }
         else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave"))
         {
-            Debug.LogWarning("Fırlatma Gerçekleşti");
             loadFeedback.StopFeedbacks();
             throwFeedback.PlayFeedbacks();
 
             _collisionIconText.enabled = false;
 
-            _ammo.GetComponent<Ammo>().GetComponent<TrailRenderer>().enabled = true;
-            _ammo.GetComponent<Ammo>().throwPos = _ammo.transform.position;
+            _ammo.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
+            _ammo.transform.GetChild(0).GetComponent<Ammo>().throwPos = _ammo.transform.position;
             
             if (_lastAmmo!=null && _lastAmmo != _ammo)
             {
-                if(_lastAmmo.GetComponent<ExplosiveBase>().isExplode)
+                if(_lastAmmo.transform.GetChild(0).GetComponent<ExplosiveBase>().isExplode)
                     Destroy(_lastAmmo.gameObject);
             }
                 
@@ -129,9 +126,8 @@ public class Launcher : MonoBehaviour
             _ammoRigidBody.isKinematic = false;
             _ammoRigidBody.useGravity = true;
             _ammoRigidBody.GetComponent<Collider>().enabled = true;
-            _height = _ammoRigidBody.transform.position.y - _ammoStartY;
 
-            _ammoRigidBody.transform.parent = null;
+            _ammo.transform.parent = null;
             _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * throwPower, ForceMode.VelocityChange);
             OnThrowedInvoke();
 

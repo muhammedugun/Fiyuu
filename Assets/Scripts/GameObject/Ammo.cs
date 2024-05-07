@@ -34,6 +34,8 @@ public class Ammo : ExplosiveBase
     private TextMeshProUGUI _collisionIconText;
     private TrailRenderer _trailRenderer;
     private bool isCollisionShowed;
+
+    public static int frameCount;
     
     private void Awake()
     {
@@ -95,7 +97,8 @@ public class Ammo : ExplosiveBase
 
             hitFeedback.PlayFeedbacks();
         }
-        
+
+
         ShowCollisionIcon();
         RunResponseAnim(scareRadius);
         DoDamage(collision);
@@ -105,13 +108,11 @@ public class Ammo : ExplosiveBase
             Explode(collision);
             isExplode = true;
             destroyFeedback.PlayFeedbacks();
-            /*
-            if (isDestroyable)
-            {
-                Destroy(gameObject);
-            }*/
         }
     }
+
+
+
     private void Moveble()
     {
         moveble.GetComponent<Rigidbody>().mass = 5f;

@@ -27,7 +27,6 @@ public class EnemyCountManager : MonoBehaviour
     private void CalculateEnemyCount()
     {
         _enemyCount = FindObjectsOfType<Enemy>().Length;
-        Debug.Log("EnemyCount: " + _enemyCount);
     }
 
     private void UpdateEnemyCount()

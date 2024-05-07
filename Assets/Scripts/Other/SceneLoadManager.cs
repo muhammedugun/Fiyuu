@@ -7,13 +7,19 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneLoadManager : MonoBehaviour
 {
-    private void Awake()
+    /*
+    private void OnEnable()
     {
-        ControllerManager.action.InLevel.RestartScene.started += RestartCurrentScene;
+        ControllerManager.Subscribe(RestartCurrentScene);
+    }
+
+    private void OnDisable()
+    {
+        ControllerManager.Unsubscribe(RestartCurrentScene);
     }
 
     public void RestartCurrentScene(InputAction.CallbackContext context)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }*/
 }

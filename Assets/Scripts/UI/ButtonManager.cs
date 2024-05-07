@@ -26,15 +26,21 @@ public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         float targetWidth = defaultWidth * 1.15f;
         float targetHeight = defaultHeight * 1.15f;
 
-
-        rectTransform.DOSizeDelta(new Vector2(targetWidth, targetHeight), duration)
+        if (rectTransform != null)
+        {
+            rectTransform?.DOSizeDelta(new Vector2(targetWidth, targetHeight), duration)
                  .SetEase(Ease.InOutQuad).SetUpdate(true);
+        }
+        
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rectTransform.DOSizeDelta(new Vector2(defaultWidth, defaultHeight), duration)
+        if (rectTransform != null)
+        {
+            rectTransform?.DOSizeDelta(new Vector2(defaultWidth, defaultHeight), duration)
                  .SetEase(Ease.InOutQuad).SetUpdate(true);
+        }
     }
 }

@@ -5,16 +5,38 @@ using UnityEngine.SceneManagement;
 public class InLevelManager : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> winFireworks;
+    [SerializeField] private InputRange _inputRange;
+    [SerializeField] private GameObject tutorial;
+    [SerializeField] private bool isTutorialScene;
+
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.OutOfAmmo, GameOver);
-        EventBus.Subscribe(EventType.AllEnemiesDead, GameOver);
+        Subscribe();
     }
 
     private void OnDisable()
     {
+        UnSubscribe();
+    }
+
+    private void Subscribe()
+    {
+        EventBus.Subscribe(EventType.OutOfAmmo, GameOver);
+        EventBus.Subscribe(EventType.AllEnemiesDead, GameOver);
+        if(isTutorialScene)
+            _inputRange.started += SetTutorial;
+    }
+
+    private void UnSubscribe()
+    {
         EventBus.Unsubscribe(EventType.OutOfAmmo, GameOver);
         EventBus.Unsubscribe(EventType.AllEnemiesDead, GameOver);
+    }
+
+    private void SetTutorial()
+    {
+        tutorial.SetActive(false);
+        _inputRange.started -= SetTutorial;
     }
 
     void GameOver()

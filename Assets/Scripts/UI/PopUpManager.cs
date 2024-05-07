@@ -9,8 +9,12 @@ public class PopUpManager : MonoBehaviour
     {
         transform.localScale = Vector3.zero;
 
-        transform.DOScale(Vector3.one, duration)
+        if (transform != null)
+        {
+            transform?.DOScale(Vector3.one, duration)
                  .SetEase(Ease.InOutQuad).SetUpdate(true);
+
+        }
     }
 
 }

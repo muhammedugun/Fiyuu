@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -206,8 +206,8 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 0
-        MinVolume: 0.4
-        MaxVolume: 0.5
+        MinVolume: 0.1
+        MaxVolume: 0.1
         MinPitch: 0.9
         MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 6512512550473853589}
   - component: {fileID: 593702872691200232}
   m_Layer: 0
-  m_Name: Owl
+  m_Name: Goat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks: []
   InitializationMode: 2
-  AutoInitialization: 1
+  AutoInitialization: 0
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0

@@ -9,6 +9,8 @@ public abstract class RigidObjectBase : MonoBehaviour
 {
     public MeshFilter meshFilter;
 
+    [SerializeField] private bool disableAssignMass;
+
     protected Rigidbody _rigidbody;
     /// <summary>
     /// Aðýrlýk atamasý yapýlýrken eklenecek çarpan.
@@ -20,13 +22,14 @@ public abstract class RigidObjectBase : MonoBehaviour
     protected float _volumeSize=1f;
 
 
+
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         if(meshFilter!=null)
             AssignVolume(ref _volumeSize);
-
-        AssignMass(_rigidbody, _volumeSize, _massMultiplier);
+        if(!disableAssignMass)
+            AssignMass(_rigidbody, _volumeSize, _massMultiplier);
     }
 
     /// <summary>

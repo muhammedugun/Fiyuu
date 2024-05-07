@@ -30,13 +30,19 @@ public class Enemy : DamagableObjectBase
     protected override void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        ControllerManager.action.InLevel.Attack.started += SkipBeginning;
+        
         _animator = GetComponent<Animator>();
         base.Start();
         gameObject.tag = "Enemy";
 
 
     }
+
+    private void OnEnable()
+    {
+        ControllerManager.Subscribe(SkipBeginning);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         DoDamage(collision);
@@ -56,9 +62,13 @@ public class Enemy : DamagableObjectBase
 
     public void SkipBeginning(InputAction.CallbackContext context)
     {
-        ControllerManager.action.InLevel.Attack.started -= SkipBeginning;
-        beginningFeedback.StopFeedbacks();
-        skipBeginningFeedback.PlayFeedbacks();
+        ControllerManager.Unsubscribe(SkipBeginning);
+        if (beginningFeedback.IsPlaying)
+        {
+            beginningFeedback.StopFeedbacks();
+            skipBeginningFeedback.PlayFeedbacks();
+        }
+        
 
     }
 
@@ -73,7 +83,6 @@ public class Enemy : DamagableObjectBase
     /// <param name="smashableObject">Objenin parçalanabilir halinin örneði</param>
     private void Die()
     {
-        Debug.LogWarning(gameObject.name + " is dead");
         _isDead = true;
         EventBus.Publish(EventType.EnemyDied);
         dieFeedback?.PlayFeedbacks(this.transform.position, 200);

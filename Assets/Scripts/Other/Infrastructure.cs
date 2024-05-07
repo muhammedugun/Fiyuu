@@ -15,12 +15,10 @@ public class Infrastructure : MonoBehaviour
         {
             if (instance == null)
             {
-                // Oyun sahnesinde Singleton nesnesini bul veya oluþtur
                 instance = FindObjectOfType<Infrastructure>();
 
                 if (instance == null)
                 {
-                    // Eðer sahnede bulunamazsa yeni bir GameObject oluþtur
                     GameObject singletonObject = new GameObject(typeof(Infrastructure).Name);
                     instance = singletonObject.AddComponent<Infrastructure>();
                 }
@@ -59,7 +57,6 @@ public class Infrastructure : MonoBehaviour
     {
         if (instance != null && instance == this && SceneManager.GetSceneByBuildIndex(level).name == "Loading")
         {
-            Debug.LogWarning("sahne yüklendi: " + SceneManager.GetSceneByBuildIndex(level).name);
 
             loadingSlider = FindObjectOfType<Slider>();
 
@@ -79,20 +76,16 @@ public class Infrastructure : MonoBehaviour
     public static async void LoadSceneAsync(string sceneName)
     {
         
-        // Sahneyi yükle ve yükleme iþleminin tamamlanmasýný bekle
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         
         while (!asyncLoad.isDone)
         {
-            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f); // progress 0 ile 0.9 arasýnda deðiþir, bu yüzden normalize ediyoruz.
-            Debug.Log("Loading progress: " + (progress * 100f).ToString("F2") + "%");
-            Debug.Log("progress: " + progress);
+            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             loadingSlider.value = progress;
             await Task.Yield();
         }
 
-        // Yükleme tamamlandýktan sonra buraya gelecek kod
-        Debug.Log("Scene loaded: " + SceneManager.GetActiveScene().name);
+
     }
 
 

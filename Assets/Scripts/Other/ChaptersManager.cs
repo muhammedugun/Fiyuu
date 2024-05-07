@@ -132,6 +132,11 @@ public class ChaptersManager : MonoBehaviour
         
     }
 
+    public void LoadScene(string sceneName)
+    {
+        Infrastructure.LoadScene(sceneName);
+    }
+
 
 
 }

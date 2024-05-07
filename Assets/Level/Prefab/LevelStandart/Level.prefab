@@ -1586,8 +1586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoTypePrefabs:
-  - {fileID: 1914980501386592884, guid: 5f9d2287f2334e74d8abd9199a914451, type: 3}
-  - {fileID: 2591240448987843038, guid: fceb9ec005b55a7428e8ebefd934c143, type: 3}
+  - {fileID: 8323522048705883766, guid: 04777b5b973edc14b97b70d4b1c53f15, type: 3}
+  - {fileID: 2530586586199853392, guid: adc6c8b4f11624146a1aeca40dc34517, type: 3}
   ammoSpawnPosition: {fileID: 5518473780971767405}
   animator: {fileID: 1307464940851176877}
   throwPower: 20

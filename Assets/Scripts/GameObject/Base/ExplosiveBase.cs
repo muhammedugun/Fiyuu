@@ -34,6 +34,7 @@ public abstract class ExplosiveBase : SmashableObjectBase
         {
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
+
             rb.AddExplosionForce(_explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
 
             if (rb.TryGetComponent<SmashableObjectBase>(out SmashableObjectBase smashableObject))
