@@ -9,13 +9,13 @@ public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     float defaultHeight;
     [SerializeField] float duration = 0.2f;
 
-    private void Start()
+    private void OnEnable()
     {
         rectTransform = GetComponent<RectTransform>();
         defaultWidth = rectTransform.sizeDelta.x;
         defaultHeight = rectTransform.sizeDelta.y;
     }
-    // UI butonunun üzerine gelindiðinde çaðrýlan iþlev
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         ButtonAnimation();

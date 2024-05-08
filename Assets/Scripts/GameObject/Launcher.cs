@@ -62,16 +62,21 @@ public class Launcher : MonoBehaviour
     /// </summary>
     private void CreateAmmo()
     {
-        // mevcut bir mühimmat varsa ve fırlatılmamışsa onu yok et
-        if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == ammoSpawnPosition.transform.position)
-            Destroy(_ammo.gameObject);
+        
+        if(ammoSelectionUI.ammunition.Count>0)
+        {
+            // mevcut bir mühimmat varsa ve fırlatılmamışsa onu yok et
+            if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == ammoSpawnPosition.transform.position)
+                Destroy(_ammo.gameObject);
 
-        _ammo = Instantiate(ammoTypePrefabs[(int)ammoSelectionUI.ammunition[0]-1], ammoSpawnPosition);
-        if (_lastAmmo == null)
-            _lastAmmo = _ammo;
-        _ammo.transform.position = ammoSpawnPosition.position;
-        _ammo.transform.rotation = ammoSpawnPosition.rotation;
-        _ammoRigidBody = _ammo.transform.GetChild(0).GetComponent<Rigidbody>();
+            _ammo = Instantiate(ammoTypePrefabs[(int)ammoSelectionUI.ammunition[0] - 1], ammoSpawnPosition);
+            if (_lastAmmo == null)
+                _lastAmmo = _ammo;
+            _ammo.transform.position = ammoSpawnPosition.position;
+            _ammo.transform.rotation = ammoSpawnPosition.rotation;
+            _ammoRigidBody = _ammo.transform.GetChild(0).GetComponent<Rigidbody>();
+        }
+        
     }
 
     /// <summary>

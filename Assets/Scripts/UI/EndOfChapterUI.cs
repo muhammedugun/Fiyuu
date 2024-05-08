@@ -14,6 +14,7 @@ public class EndOfChapterUI : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject failPanel;
     [SerializeField] private GameObject collisionIcon;
+    [SerializeField] private GameObject forwardButton;
 
     /// <summary>
     /// Bölüm geçildi mi?
@@ -31,15 +32,17 @@ public class EndOfChapterUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.LevelEnd, SetPanelActive);
-        EventBus.Subscribe(EventType.LevelEnd, SetActiveStars);
-        EventBus.Subscribe(EventType.LevelEnd, LevelPassControl);
+        EventBus.Subscribe(EventType.OutOfAmmo, SetPanelActiveInvoke);
+        EventBus.Subscribe(EventType.AllEnemiesDead, SetForwardButton);
+        EventBus.Subscribe(EventType.AllEnemiesDead, SetActiveStars);
+        EventBus.Subscribe(EventType.AllEnemiesDead, LevelPassControl);
     }
     private void OnDisable()
     {
-        EventBus.Unsubscribe(EventType.LevelEnd, SetPanelActive);
-        EventBus.Unsubscribe(EventType.LevelEnd, SetActiveStars);
-        EventBus.Unsubscribe(EventType.LevelEnd, LevelPassControl);
+        EventBus.Unsubscribe(EventType.OutOfAmmo, SetPanelActiveInvoke);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, SetForwardButton);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, SetActiveStars);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelPassControl);
     }
 
     
@@ -77,15 +80,28 @@ public class EndOfChapterUI : MonoBehaviour
         
     }
     
+    void SetForwardButton()
+    {
+        forwardButton.SetActive(true);
+    }
 
+    public void OnClickForwardButton()
+    {
+        SetPanelActive();
+    }
+
+    void SetPanelActiveInvoke()
+    {
+        Invoke(nameof(SetPanelActive), 2f);
+    }
     /// <summary>
     /// Bölüm sonu panelini aktif hale getirir.
     /// </summary>
     void SetPanelActive()
     {
+        Time.timeScale = 0f;
         collisionIcon.SetActive(false);
         endOfLevelPanel.SetActive(true);
-        Debug.Log(_enemyCountManager._enemyCount);
         if(_enemyCountManager._enemyCount<=0)
         {
             winPanel.SetActive(true);

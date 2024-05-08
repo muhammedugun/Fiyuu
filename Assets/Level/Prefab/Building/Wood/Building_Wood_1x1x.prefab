@@ -119,6 +119,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 0caea4bc53fb74548862aa5f9d065f16, type: 2}
+    - target: {fileID: 8083008934097606564, guid: c508a960296fdaa49b001429d4f93c68,
+        type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -529,8 +529,8 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 1
-        MinVolume: 1
-        MaxVolume: 1
+        MinVolume: 0.2
+        MaxVolume: 0.2
         MinPitch: 0.7
         MaxPitch: 0.9
         SfxAudioMixerGroup: {fileID: 0}
@@ -772,7 +772,7 @@ MonoBehaviour:
   massMultiplier: 9
   hitFeedback: {fileID: 1609441511912315678}
   destroyFeedback: {fileID: 1444521781671833460}
-  maxHitVolume: 1
+  maxHitVolume: 0.3
 --- !u!96 &5682819097927835413
 TrailRenderer:
   serializedVersion: 3

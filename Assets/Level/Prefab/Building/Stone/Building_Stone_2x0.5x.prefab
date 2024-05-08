@@ -36,6 +36,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6694312389017904013, guid: 7fbc38824414e3b43b14143b5f418423,
         type: 3}
+    - target: {fileID: 4452080125502225939, guid: a185dfc3dc1a58341908bc7ba39fb32c,
+        type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6692980428779944533, guid: a185dfc3dc1a58341908bc7ba39fb32c,
         type: 3}
       propertyPath: m_LocalScale.x

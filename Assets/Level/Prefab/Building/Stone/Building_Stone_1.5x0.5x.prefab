@@ -38,6 +38,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4452080125502225939, guid: a185dfc3dc1a58341908bc7ba39fb32c,
         type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452080125502225939, guid: a185dfc3dc1a58341908bc7ba39fb32c,
+        type: 3}
       propertyPath: fractureOptions.insideMaterial
       value: 
       objectReference: {fileID: 2100000, guid: a10c0ab163657e74da3754eebb0e28d3, type: 2}

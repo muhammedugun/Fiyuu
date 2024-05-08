@@ -109,8 +109,33 @@ public class Ammo : ExplosiveBase
             isExplode = true;
             destroyFeedback.PlayFeedbacks();
         }
+
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Building"))
+        {
+            var building = other.GetComponent<Building>();
+            if(building.armor==BuildingMatter.Stone)
+            {
+                gameObject.GetComponent<Rigidbody>().mass = 0.1f;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Building"))
+        {
+            var building = other.GetComponent<Building>();
+            if (building.armor == BuildingMatter.Stone)
+            {
+                gameObject.GetComponent<Rigidbody>().mass = 4f;
+            }
+        }
+    }
 
 
     private void Moveble()

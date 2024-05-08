@@ -2,6 +2,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
@@ -13,7 +14,6 @@ public class Building : SmashableObjectBase
 
     [SerializeField] private MMF_Player damageFeedbacks;
     [SerializeField] private MMF_Player destroyFeedbacks;
-    [SerializeField] private MMF_Player beginningFeedback;
     [SerializeField] private MMF_Player skipBeginningFeedback;
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
@@ -54,7 +54,7 @@ public class Building : SmashableObjectBase
 
     private void OnEnable()
     {
-        ControllerManager.Subscribe(SkipBeginning);
+        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -70,17 +70,9 @@ public class Building : SmashableObjectBase
 
 
 
-    public void SkipBeginning(InputAction.CallbackContext context)
+    public void SkipBeginning()
     {
-        ControllerManager.UpdateLog();
-        ControllerManager.Unsubscribe(SkipBeginning);
-        if (beginningFeedback.IsPlaying)
-        {
-            beginningFeedback.StopFeedbacks();
-            skipBeginningFeedback.PlayFeedbacks();
-        }
-            
-        
+        skipBeginningFeedback.PlayFeedbacks();
     }
 
 

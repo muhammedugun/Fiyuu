@@ -121,6 +121,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ca8dfe90cc7251847a9728138a214fbd, type: 2}
     - target: {fileID: 8083008934097606564, guid: c508a960296fdaa49b001429d4f93c68,
         type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083008934097606564, guid: c508a960296fdaa49b001429d4f93c68,
+        type: 3}
       propertyPath: fractureOptions.insideMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ca8dfe90cc7251847a9728138a214fbd, type: 2}

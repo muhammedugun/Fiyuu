@@ -1,9 +1,9 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +14,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image soundButtonImage;
     [SerializeField] private Sprite soundOnSprite;
     [SerializeField] private Sprite soundOffSprite;
+
+    [SerializeField] private bool isTutorialScene;
+    [SerializeField] private MMF_Player tutorialPlayFeedback;
+    [SerializeField] private MMF_Player tutorialStopFeedback;
+    
 
     private void Start()
     {
@@ -44,6 +49,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPauseButton()
     {
+        if (isTutorialScene)
+            tutorialStopFeedback.PlayFeedbacks();
         collisionIcon.SetActive(false);
         InLevelPopUps.SetActive(true);
         InLevelPopUps.transform.Find("Pause").gameObject.SetActive(true);
@@ -52,18 +59,24 @@ public class UIManager : MonoBehaviour
 
     public void OnClickResumeButton()
     {
+        if (isTutorialScene)
+            tutorialPlayFeedback.PlayFeedbacks();
         collisionIcon.SetActive(true);
         ResumeGame();
         var rectTransform = InLevelPopUps.transform.Find("Pause").GetComponent<RectTransform>();
 
         rectTransform.localScale = Vector3.one;
 
-        rectTransform.DOScale(Vector3.zero, 0.2f)
-                 .SetEase(Ease.InOutQuad).OnComplete(() =>
-                 {
-                     InLevelPopUps.transform.Find("Pause").gameObject.SetActive(false);
-                     InLevelPopUps.SetActive(false);
-                 });
+        if(rectTransform!=null)
+        {
+            rectTransform?.DOScale(Vector3.zero, 0.2f)
+                   .SetEase(Ease.InOutQuad).OnComplete(() =>
+                   {
+                       InLevelPopUps.transform.Find("Pause").gameObject.SetActive(false);
+                       InLevelPopUps.SetActive(false);
+                   });
+        }
+        
     }
 
     public void OnClickRestartButton()
@@ -81,6 +94,8 @@ public class UIManager : MonoBehaviour
     {
         areYouSure.SetActive(false);
     }
+
+    
 
     public void OpenMainMenu()
     {
@@ -102,11 +117,13 @@ public class UIManager : MonoBehaviour
         if(AudioListener.volume!=0f)
         {
             AudioListener.volume = 0f;
+            PlayerPrefs.SetInt("Volume", 0);
             soundButtonImage.sprite = soundOffSprite;
         }
         else
         {
             AudioListener.volume = 1f;
+            PlayerPrefs.SetInt("Volume", 1);
             soundButtonImage.sprite = soundOnSprite;
         }
         

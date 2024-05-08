@@ -2328,7 +2328,7 @@ PrefabInstance:
     - target: {fileID: 2540283019351225920, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}
       propertyPath: ammunition.Array.size
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2540283019351225920, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}

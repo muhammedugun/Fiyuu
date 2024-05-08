@@ -5,13 +5,13 @@ using UnityEngine;
 using MoreMountains.Feedbacks;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Enemy : DamagableObjectBase
 {
     [SerializeField] private GameObject visual;
     [SerializeField] private MMF_Player dieFeedback;
     [SerializeField] private MMF_Player damageFeedback;
-    [SerializeField] private MMF_Player beginningFeedback;
     [SerializeField] private MMF_Player skipBeginningFeedback;
     [SerializeField] private float durabilityMultiplier=50f;
     [SerializeField] private float massMultiplier = 1f;
@@ -40,7 +40,7 @@ public class Enemy : DamagableObjectBase
 
     private void OnEnable()
     {
-        ControllerManager.Subscribe(SkipBeginning);
+        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,15 +60,10 @@ public class Enemy : DamagableObjectBase
         _audioSource.PlayOneShot(voiceClips[index]);
     }
 
-    public void SkipBeginning(InputAction.CallbackContext context)
+    public void SkipBeginning()
     {
-        ControllerManager.Unsubscribe(SkipBeginning);
-        if (beginningFeedback.IsPlaying)
-        {
-            beginningFeedback.StopFeedbacks();
-            skipBeginningFeedback.PlayFeedbacks();
-        }
-        
+
+        skipBeginningFeedback.PlayFeedbacks();
 
     }
 

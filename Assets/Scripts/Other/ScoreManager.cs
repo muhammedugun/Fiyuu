@@ -35,8 +35,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Subscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Subscribe(EventType.LevelEnd, CalculateGameEndScore);
-        EventBus.Subscribe(EventType.LevelEnd, UpdateWinPopUp);
+        EventBus.Subscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
+        EventBus.Subscribe(EventType.AllEnemiesDead, UpdateWinPopUp);
 
     }
 
@@ -48,8 +48,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Unsubscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Unsubscribe(EventType.LevelEnd, CalculateGameEndScore);
-        EventBus.Unsubscribe(EventType.LevelEnd, UpdateWinPopUp);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, UpdateWinPopUp);
     }
 
     /// <summary>
@@ -168,7 +168,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreSlider.value >= condition)
         {
-            image.DOFade(1f, 2f).SetEase(Ease.InBounce);
+            image.DOFade(1f, 2f).SetEase(Ease.InBounce).SetUpdate(true);
         }
     }
 

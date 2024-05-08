@@ -129,6 +129,11 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 8083008934097606564, guid: c508a960296fdaa49b001429d4f93c68,
+        type: 3}
+      propertyPath: fractureOptions.fragmentCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

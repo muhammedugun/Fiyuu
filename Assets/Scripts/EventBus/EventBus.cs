@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public enum EventType
 {
-    OutOfAmmo, LevelEnd, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead
+    OutOfAmmo, LevelEnd, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead, Clicked
 }
 
 
@@ -33,6 +35,16 @@ public class EventBus
             thisEvent.RemoveListener(listener);
         }
     }
+
+    public static void Clear(EventType type)
+    {
+        UnityEvent thisEvent;
+        if (Events.TryGetValue(type, out thisEvent))
+        {
+            thisEvent.RemoveAllListeners();
+        }
+    }
+
     public static void Publish(EventType type)
     {
         UnityEvent thisEvent;

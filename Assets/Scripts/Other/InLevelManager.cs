@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class InLevelManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class InLevelManager : MonoBehaviour
     [SerializeField] private InputRange _inputRange;
     [SerializeField] private GameObject tutorial;
     [SerializeField] private bool isTutorialScene;
+
 
     private void OnEnable()
     {
@@ -21,16 +23,29 @@ public class InLevelManager : MonoBehaviour
 
     private void Subscribe()
     {
-        EventBus.Subscribe(EventType.OutOfAmmo, GameOver);
-        EventBus.Subscribe(EventType.AllEnemiesDead, GameOver);
+        ControllerManager.Subscribe(ManagedFonk);
+        EventBus.Subscribe(EventType.AllEnemiesDead, LevelSuccesful);
         if(isTutorialScene)
             _inputRange.started += SetTutorial;
     }
 
     private void UnSubscribe()
     {
-        EventBus.Unsubscribe(EventType.OutOfAmmo, GameOver);
-        EventBus.Unsubscribe(EventType.AllEnemiesDead, GameOver);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelSuccesful);
+    }
+
+    void ManagedFonk(InputAction.CallbackContext context)
+    {
+        if (SceneManager.GetActiveScene().name == "Level1" && PlayerPrefs.GetInt("Level1Played") == 0)
+        {
+            PlayerPrefs.SetInt("Level1Played", 1);
+        }
+        else
+        {
+            EventBus.Publish(EventType.Clicked);
+        }
+
+        EventBus.Clear(EventType.Clicked);
     }
 
     private void SetTutorial()
@@ -39,23 +54,16 @@ public class InLevelManager : MonoBehaviour
         _inputRange.started -= SetTutorial;
     }
 
-    void GameOver()
+    void LevelSuccesful()
     {
         ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)));
         ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5))+1);
-        EventBus.Publish(EventType.LevelEnd);
         foreach (var item in winFireworks)
         {
             item.Play();
         }
-        Debug.LogWarning("Oyun Bitti");
-        Invoke(nameof(StopGame), 2f);
 
     }
 
-    private void StopGame()
-    {
-        Time.timeScale = 0f;
-    }
 
 }

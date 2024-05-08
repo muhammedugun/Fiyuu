@@ -48,6 +48,12 @@ public class AmmoManager : MonoBehaviour
     {
         switch (ammunition.Count)
         {
+            case 0:
+                for (int i = 0; i < 3; i++)
+                    ammoGridItems.transform.GetChild(i).gameObject.SetActive(false);
+                plusIcon.SetActive(false);
+                break;
+
             case 1:
                 for (int i = 0; i < 2; i++)
                     ammoGridItems.transform.GetChild(i).gameObject.SetActive(false);
@@ -88,9 +94,12 @@ public class AmmoManager : MonoBehaviour
 
     private void RemoveAtAmmunition()
     {
-        ammunition.RemoveAt(0);
-        UpdateAmmunition();
-        UpdateAmmoIcons();
+        if(ammunition.Count>0)
+        {
+            ammunition.RemoveAt(0);
+            UpdateAmmunition();
+            UpdateAmmoIcons();
+        }
         if (ammunition.Count <= 0)
             EventBus.Publish(EventType.OutOfAmmo);
     }
