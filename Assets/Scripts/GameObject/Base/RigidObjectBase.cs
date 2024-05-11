@@ -7,38 +7,28 @@ using UnityEngine;
 /// </summary>
 public abstract class RigidObjectBase : MonoBehaviour
 {
-    public MeshFilter meshFilter;
-
     [SerializeField] private bool disableAssignMass;
+    /// <summary>
+    /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
+    /// </summary>
+    [SerializeField] protected float _volumeSize = 1f;
 
     protected Rigidbody _rigidbody;
     /// <summary>
     /// Aðýrlýk atamasý yapýlýrken eklenecek çarpan.
     /// </summary>
     protected float _massMultiplier=1f;
-    /// <summary>
-    /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
-    /// </summary>
-    protected float _volumeSize=1f;
+    
 
 
 
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        if(meshFilter!=null)
-            AssignVolume(ref _volumeSize);
         if(!disableAssignMass)
             AssignMass(_rigidbody, _volumeSize, _massMultiplier);
     }
 
-    /// <summary>
-    /// Objenin hacmini atar
-    /// </summary>
-    protected void AssignVolume(ref float volumeSize)
-    {
-        volumeSize = transform.localScale.x * transform.localScale.y * transform.localScale.z;
-    }
 
 
     /// <summary>

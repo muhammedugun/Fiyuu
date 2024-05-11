@@ -201,7 +201,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AnimateColor: 1
+  AnimateColor: 0
   AnimateColorGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.5924529, b: 0.0153220035, a: 1}
@@ -331,12 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7b9e69a064c35468d6652881f0a637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winFireworks:
-  - {fileID: 0}
-  - {fileID: 0}
-  _inputRange: {fileID: 0}
-  tutorial: {fileID: 0}
-  isTutorialScene: 0
+  _winFireworks: []
+  _tutorial: {fileID: 0}
+  _isTutorialScene: 0
 --- !u!1 &6306014348557241654
 GameObject:
   m_ObjectHideFlags: 0

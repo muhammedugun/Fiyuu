@@ -20,7 +20,7 @@ public class Building : SmashableObjectBase
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
     public float[] armorDurabilitiy = new float[4] { 100f, 200f, 600f, 800f };
-
+    private bool _isDamageble;
 
     /// <summary>
     /// Zýrhýn güçlü yönleri. Zýrhýn neye dayanýklý olup neye dayanýklý olmadýðý. 
@@ -54,25 +54,37 @@ public class Building : SmashableObjectBase
 
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
+        EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        DoDamage(collision);
-        if (CheckSmash())
+        if (_isDamageble)
         {
-            Smash(collision);
+            DoDamage(collision);
+            if (CheckSmash())
+            {
+                Smash(collision);
+            }
         }
-       
+           
+    }
+
+    public void SetIsDamageble()
+    {
+        _isDamageble = true;
     }
 
 
+    public void SetIsDamagebleInvoke()
+    {
+        Invoke(nameof(SetIsDamageble), 0.5f);
+    }
 
     public void SkipBeginning()
     {
         skipBeginningFeedback.PlayFeedbacks();
+        EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
 
@@ -109,7 +121,7 @@ public class Building : SmashableObjectBase
         EventBus<float, BuildingMatter>.Publish(EventType.BuildSmashed, _volumeSize, armor);
         EventBus.Publish(EventType.BuildSmashed);
         
-        destroyFeedbacks.PlayFeedbacks(this.transform.position, ScoreManager.CalculateScore(_volumeSize, armor));
+        destroyFeedbacks.PlayFeedbacks(transform.position, ScoreManager.CalculateScore(_volumeSize, armor));
 
     }
 

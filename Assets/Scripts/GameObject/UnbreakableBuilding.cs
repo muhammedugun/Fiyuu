@@ -9,12 +9,12 @@ public class UnbreakableBuilding : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
+        EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
     public void SkipBeginning()
     {
         skipBeginningFeedback.PlayFeedbacks();
-
+        EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 }

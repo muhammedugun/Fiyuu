@@ -18,7 +18,7 @@ public class Launcher : MonoBehaviour
 
     [SerializeField] private AmmoManager ammoSelectionUI;
 
-    [SerializeField] private InputRange _inputRange;
+    [SerializeField] private ThrowInputController _throwInputController;
 
     private TextMeshProUGUI _collisionIconText;
     private Vector3 _throwVelocity;
@@ -32,30 +32,19 @@ public class Launcher : MonoBehaviour
     private float _ammoStartY;
 
 
-    private void OnDisable()
-    {
-        UnSubscribe();
-    }
-
     private void Start()
     {
-        Subscribe();
+        ThrowInputController.Started += Throw;
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
         _ammoStartY = ammoSpawnPosition.position.y;
         CreateAmmo();
     }
 
 
-    private void Subscribe()
+    private void OnDisable()
     {
-        _inputRange.started += Throw;
+        ThrowInputController.Started -= Throw;
     }
-
-    private void UnSubscribe()
-    {
-        _inputRange.started -= Throw;
-    }
-
 
     /// <summary>
     /// Mühimmat oluşturur
@@ -99,6 +88,8 @@ public class Launcher : MonoBehaviour
         animator.SetTrigger("load");
     }
 
+    float _lastClickTime;
+
     /// <summary>
     /// Fırlatma işlemini başlatır
     /// </summary>
@@ -106,10 +97,11 @@ public class Launcher : MonoBehaviour
     {
         if (CheckAnimStateEmpty())
         {
+            _lastClickTime = Time.time;
             TriggerLoadAnim();
             loadFeedback.PlayFeedbacks();
         }
-        else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave"))
+        else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave") && Time.time > _lastClickTime + 0.4f)
         {
             loadFeedback.StopFeedbacks();
             throwFeedback.PlayFeedbacks();
@@ -133,6 +125,7 @@ public class Launcher : MonoBehaviour
             _ammoRigidBody.GetComponent<Collider>().enabled = true;
 
             _ammo.transform.parent = null;
+
             _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * throwPower, ForceMode.VelocityChange);
             OnThrowedInvoke();
 

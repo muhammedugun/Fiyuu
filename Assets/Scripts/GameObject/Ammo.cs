@@ -27,6 +27,7 @@ public class Ammo : ExplosiveBase
 
 
     private bool isHit;
+    private float _mass;
 
     /// <summary>
     /// Mühimmatın ilk çaprıştığı noktayı gösterecek olan X şeklindeki UI elemanı
@@ -47,6 +48,7 @@ public class Ammo : ExplosiveBase
         base.Start();
         _trailRenderer = GetComponent<TrailRenderer>();
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
+        _mass = gameObject.GetComponent<Rigidbody>().mass;
     }
 
     GameObject moveble;
@@ -110,29 +112,45 @@ public class Ammo : ExplosiveBase
             destroyFeedback.PlayFeedbacks();
         }
 
+    }
 
+    public override void DoDamage(Collision collision, float damageMultiplier = 1f)
+    {
+        if (collision.gameObject.CompareTag("Building") && matter == AmmoMatter.Wood)
+        {
+            var building = collision.gameObject.GetComponent<Building>();
+            if (building!=null && building.armor == BuildingMatter.Stone)
+            {
+                gameObject.GetComponent<Rigidbody>().mass = _mass;
+                durability = 0f;
+            }
+        }
+        else
+        {
+            base.DoDamage(collision, damageMultiplier);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Building"))
+        if(other.CompareTag("Building") && matter == AmmoMatter.Wood)
         {
             var building = other.GetComponent<Building>();
-            if(building.armor==BuildingMatter.Stone)
+            if(building!=null && building.armor==BuildingMatter.Stone)
             {
-                gameObject.GetComponent<Rigidbody>().mass = 0.1f;
+                gameObject.GetComponent<Rigidbody>().mass = 0.01f;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Building"))
+        if (other.CompareTag("Building") && matter == AmmoMatter.Wood)
         {
             var building = other.GetComponent<Building>();
-            if (building.armor == BuildingMatter.Stone)
+            if (building!=null && building.armor == BuildingMatter.Stone)
             {
-                gameObject.GetComponent<Rigidbody>().mass = 4f;
+                gameObject.GetComponent<Rigidbody>().mass = _mass;
             }
         }
     }

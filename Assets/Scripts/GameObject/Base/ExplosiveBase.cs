@@ -32,10 +32,9 @@ public abstract class ExplosiveBase : SmashableObjectBase
             Instantiate(_explosionParticle, transform.position, Quaternion.identity);
         foreach (var obj in surroundingObjects)
         {
+            float explosionForce = _explosionForce;
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
-
-            rb.AddExplosionForce(_explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
 
             if (rb.TryGetComponent<SmashableObjectBase>(out SmashableObjectBase smashableObject))
             {
@@ -46,17 +45,22 @@ public abstract class ExplosiveBase : SmashableObjectBase
                     if (Building.armorStrengths[(int)building.armor - 1, (int)ammo.matter - 1] == 0)
                     {
                         var differentPosition = rb.transform.position - transform.position;
-                        smashableObject.durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                        smashableObject.durability -= (explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                    }
+                    if (Building.armorStrengths[(int)building.armor - 1, (int)ammo.matter - 1] == 1)
+                    {
+                        explosionForce = 0f;
                     }
                     
                 }
                 else
                 {
                     var differentPosition = rb.transform.position - transform.position;
-                    smashableObject.durability -= (_explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
+                    smashableObject.durability -= (explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
                 }
                 
             }
+            rb.AddExplosionForce(explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
         }
         
     }

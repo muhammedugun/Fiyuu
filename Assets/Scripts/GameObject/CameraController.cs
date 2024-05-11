@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
+        EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
 
     }
 
@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
         {
             beginningFeedback.StopFeedbacks();
             skipBeginningFeedback.PlayFeedbacks();
+            EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
         }
     }
 

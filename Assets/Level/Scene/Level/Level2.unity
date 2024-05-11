@@ -1518,12 +1518,22 @@ PrefabInstance:
       objectReference: {fileID: 1610929454}
     - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
+      propertyPath: _tutorial
+      value: 
+      objectReference: {fileID: 1610929454}
+    - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
+        type: 3}
       propertyPath: _inputRange
       value: 
-      objectReference: {fileID: 1373164438}
+      objectReference: {fileID: 0}
     - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
       propertyPath: isTutorialScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
+        type: 3}
+      propertyPath: _isTutorialScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
@@ -2734,6 +2744,11 @@ PrefabInstance:
     - target: {fileID: 2701756893053234035, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}
       propertyPath: PlayerTimescaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694914410144015845, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4325160786466639868, guid: 52389e7482e2c5e4f8140e4267a8e4df,
@@ -4201,12 +4216,13 @@ PrefabInstance:
       propertyPath: managedReferences[378572994122350594].PlayEvents.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1521033365316319096, guid: 52389e7482e2c5e4f8140e4267a8e4df, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8635089665197999234, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 1610929455}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52389e7482e2c5e4f8140e4267a8e4df, type: 3}
@@ -4238,18 +4254,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1373164438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1521033365316319096, guid: 52389e7482e2c5e4f8140e4267a8e4df,
-    type: 3}
-  m_PrefabInstance: {fileID: 1373164434}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373164436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4708f980001feea46a5d3b70d19c7382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1457624534
@@ -4881,7 +4885,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _inputRange
       value: 
-      objectReference: {fileID: 1373164438}
+      objectReference: {fileID: 0}
     - target: {fileID: 6379582726938644485, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
       propertyPath: ammoSelectionUI

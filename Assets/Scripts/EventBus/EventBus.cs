@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
+
 
 public enum EventType
 {
-    OutOfAmmo, LevelEnd, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead, Clicked
+    OutOfAmmo, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead, FirstClickInLevel, AllObjectsStopped, EndOfChapterUIOpened
 }
 
 

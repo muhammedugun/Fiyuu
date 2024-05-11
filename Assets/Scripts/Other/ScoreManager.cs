@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider scoreSlider;
-    [SerializeField] private GameObject stars;
+    [SerializeField] private GameObject scoreBarStars;
     [Header("EndOfLevel")]
     [SerializeField] private Text winScoreText;
     [SerializeField] private List<Image> winStars;
@@ -35,8 +35,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Subscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Subscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
-        EventBus.Subscribe(EventType.AllEnemiesDead, UpdateWinPopUp);
+        EventBus.Subscribe(EventType.EndOfChapterUIOpened, CalculateGameEndScore);
+        EventBus.Subscribe(EventType.EndOfChapterUIOpened, UpdateWinPopUp);
 
     }
 
@@ -48,8 +48,8 @@ public class ScoreManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.EnemyDied, CalculateEnemyScore);
         EventBus.Unsubscribe(EventType.EnemyDied, UpdateScoreOnGUI);
 
-        EventBus.Unsubscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
-        EventBus.Unsubscribe(EventType.AllEnemiesDead, UpdateWinPopUp);
+        EventBus.Unsubscribe(EventType.EndOfChapterUIOpened, CalculateGameEndScore);
+        EventBus.Unsubscribe(EventType.EndOfChapterUIOpened, UpdateWinPopUp);
     }
 
     /// <summary>
@@ -111,18 +111,18 @@ public class ScoreManager : MonoBehaviour
         scoreSlider.value = ((float)currentScore / levelScore);
         if (scoreSlider.value >= 0.25f)
         {
-            stars.transform.GetChild(0).GetComponent<Image>().color = Color.yellow;
-            stars.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(0).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
         if (scoreSlider.value >= 0.50f)
         {
-            stars.transform.GetChild(1).GetComponent<Image>().color = Color.yellow;
-            stars.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(1).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
         if (scoreSlider.value >= 0.75f)
         {
-            stars.transform.GetChild(2).GetComponent<Image>().color = Color.yellow;
-            stars.transform.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(2).GetComponent<Image>().color = Color.yellow;
+            scoreBarStars.transform.GetChild(2).GetChild(0).GetComponent<Image>().color = Color.yellow;
         }
 
     }

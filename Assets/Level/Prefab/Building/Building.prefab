@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32143d018a9c5c4f99685abebf0d11f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshFilter: {fileID: 8700645796141067781}
   disableAssignMass: 1
+  _volumeSize: 1
   _fracture: {fileID: 5093296501143758248}
   armor: 0
   damageFeedbacks: {fileID: 3859949310406596290}
@@ -1902,6 +1902,18 @@ MonoBehaviour:
               m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
               m_MethodName: set_isKinematic
               m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+            - m_Target: {fileID: 251229998936384774}
+              m_TargetAssemblyTypeName: Building, Assembly-CSharp
+              m_MethodName: SetIsDamagebleInvoke
+              m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

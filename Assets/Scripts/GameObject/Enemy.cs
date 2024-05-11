@@ -1,12 +1,8 @@
 // Refactor 12.03.24
 
-using System;
 using UnityEngine;
 using MoreMountains.Feedbacks;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-
 public class Enemy : DamagableObjectBase
 {
     [SerializeField] private GameObject visual;
@@ -17,10 +13,12 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private float massMultiplier = 1f;
     [SerializeField] private List<AudioClip> voiceClips;
 
+
     private AudioSource _audioSource;
 
     private bool _isDead;
     private Animator _animator;
+    private bool _isDamageble;
     private void Awake()
     {
         _massMultiplier = massMultiplier;
@@ -40,19 +38,26 @@ public class Enemy : DamagableObjectBase
 
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.Clicked, SkipBeginning);
+        EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        DoDamage(collision);
-        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        if (collisionForce / _rigidbody.mass > 100f)
+
+        if(_isDamageble)
         {
-            damageFeedback.PlayFeedbacks();
+            var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+            if (durability > 0 && collisionForce / _rigidbody.mass > 50f)
+            {
+                damageFeedback.PlayFeedbacks();
+            }
+
+            DoDamage(collision);
+
+            if (CheckDie())
+                Die();
         }
-        if (CheckDie()) 
-        Die();
+
     }
 
     public void PlayVoiceClip(int index)
@@ -62,11 +67,20 @@ public class Enemy : DamagableObjectBase
 
     public void SkipBeginning()
     {
-
         skipBeginningFeedback.PlayFeedbacks();
-
+        EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
+    public void SetIsDamageble()
+    {
+        _isDamageble = true;
+    }
+
+
+    public void SetIsDamagebleInvoke()
+    {
+        Invoke(nameof(SetIsDamageble), 0.5f);
+    }
 
     public void SetEnableAnimator()
     {

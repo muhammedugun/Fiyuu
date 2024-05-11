@@ -3233,11 +3233,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 2975879555636513680}
+  disableAssignMass: 0
   visual: {fileID: 9906542895585512}
   dieFeedback: {fileID: 4052924238646436230}
   damageFeedback: {fileID: 5320704724858819627}
-  durabilityMultiplier: 20
+  skipBeginningFeedback: {fileID: 0}
+  durabilityMultiplier: 10
   massMultiplier: 1
+  voiceClips: []
 --- !u!54 &5798806496454036728
 Rigidbody:
   m_ObjectHideFlags: 0

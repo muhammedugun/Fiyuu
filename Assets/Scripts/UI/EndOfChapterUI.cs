@@ -32,14 +32,14 @@ public class EndOfChapterUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventBus.Subscribe(EventType.OutOfAmmo, SetPanelActiveInvoke);
+        EventBus.Subscribe(EventType.AllObjectsStopped, SetPanelActiveInvoke);
         EventBus.Subscribe(EventType.AllEnemiesDead, SetForwardButton);
         EventBus.Subscribe(EventType.AllEnemiesDead, SetActiveStars);
         EventBus.Subscribe(EventType.AllEnemiesDead, LevelPassControl);
     }
     private void OnDisable()
     {
-        EventBus.Unsubscribe(EventType.OutOfAmmo, SetPanelActiveInvoke);
+        EventBus.Unsubscribe(EventType.AllObjectsStopped, SetPanelActiveInvoke);
         EventBus.Unsubscribe(EventType.AllEnemiesDead, SetForwardButton);
         EventBus.Unsubscribe(EventType.AllEnemiesDead, SetActiveStars);
         EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelPassControl);
@@ -92,13 +92,14 @@ public class EndOfChapterUI : MonoBehaviour
 
     void SetPanelActiveInvoke()
     {
-        Invoke(nameof(SetPanelActive), 2f);
+        Invoke(nameof(SetPanelActive), 3f);
     }
     /// <summary>
     /// Bölüm sonu panelini aktif hale getirir.
     /// </summary>
     void SetPanelActive()
     {
+        EventBus.Publish(EventType.EndOfChapterUIOpened);
         Time.timeScale = 0f;
         collisionIcon.SetActive(false);
         endOfLevelPanel.SetActive(true);

@@ -93,6 +93,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.24999999
       objectReference: {fileID: 0}
+    - target: {fileID: 3890854683133990666, guid: c508a960296fdaa49b001429d4f93c68,
+        type: 3}
+      propertyPath: _volumeSize
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5637799346115206153, guid: c508a960296fdaa49b001429d4f93c68,
         type: 3}
       propertyPath: m_Mesh

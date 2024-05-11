@@ -41,8 +41,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3175606940536158909, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}
+      propertyPath: _explosionForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175606940536158909, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
+        type: 3}
+      propertyPath: _explosionRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175606940536158909, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
+        type: 3}
       propertyPath: durabilityMultiplier
-      value: 450
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3295886525263225491, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}

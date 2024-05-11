@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64a8e73c83e6124ab62e2fb793491a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshFilter: {fileID: 0}
   disableAssignMass: 0
+  _volumeSize: 1
   visual: {fileID: 5467909943051193666}
   dieFeedback: {fileID: 3667324147907310007}
   damageFeedback: {fileID: 2026154078631842477}
@@ -3166,6 +3166,18 @@ MonoBehaviour:
               m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
               m_MethodName: set_isKinematic
               m_Mode: 6
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+            - m_Target: {fileID: 3367366160087345236}
+              m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+              m_MethodName: SetIsDamagebleInvoke
+              m_Mode: 1
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
