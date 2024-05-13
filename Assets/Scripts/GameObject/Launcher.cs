@@ -16,10 +16,8 @@ public class Launcher : MonoBehaviour
     [SerializeField] private MMF_Player loadFeedback;
     [SerializeField] private MMF_Player throwFeedback;
 
-    [SerializeField] private AmmoManager ammoSelectionUI;
-
-    [SerializeField] private ThrowInputController _throwInputController;
-
+    private ThrowInputController _throwInputController;
+    private AmmoManager _ammoManager;
     private TextMeshProUGUI _collisionIconText;
     private Vector3 _throwVelocity;
     private GameObject _ammo;
@@ -34,6 +32,10 @@ public class Launcher : MonoBehaviour
 
     private void Start()
     {
+
+        _ammoManager = FindObjectOfType<AmmoManager>();
+        _throwInputController = FindObjectOfType<ThrowInputController>();
+
         ThrowInputController.Started += Throw;
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
         _ammoStartY = ammoSpawnPosition.position.y;
@@ -52,13 +54,13 @@ public class Launcher : MonoBehaviour
     private void CreateAmmo()
     {
         
-        if(ammoSelectionUI.ammunition.Count>0)
+        if(_ammoManager.ammunition.Count>0)
         {
             // mevcut bir mühimmat varsa ve fırlatılmamışsa onu yok et
             if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == ammoSpawnPosition.transform.position)
                 Destroy(_ammo.gameObject);
 
-            _ammo = Instantiate(ammoTypePrefabs[(int)ammoSelectionUI.ammunition[0] - 1], ammoSpawnPosition);
+            _ammo = Instantiate(ammoTypePrefabs[(int)_ammoManager.ammunition[0] - 1], ammoSpawnPosition);
             if (_lastAmmo == null)
                 _lastAmmo = _ammo;
             _ammo.transform.position = ammoSpawnPosition.position;
@@ -115,6 +117,8 @@ public class Launcher : MonoBehaviour
             {
                 if(_lastAmmo.transform.GetChild(0).GetComponent<ExplosiveBase>().isExplode)
                     Destroy(_lastAmmo.gameObject);
+                else
+                    _lastAmmo.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
             }
                 
             _lastAmmo = _ammo;

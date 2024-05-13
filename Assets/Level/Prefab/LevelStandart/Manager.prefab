@@ -204,9 +204,9 @@ MonoBehaviour:
   AnimateColor: 0
   AnimateColorGradient:
     serializedVersion: 2
-    key0: {r: 0, g: 0.5924529, b: 0.0153220035, a: 1}
-    key1: {r: 0.06900442, g: 1, b: 0, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 0.6109016, b: 0, a: 1}
+    key1: {r: 1, g: 0.6117647, b: 0, a: 1}
+    key2: {r: 0.06900442, g: 1, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -214,7 +214,7 @@ MonoBehaviour:
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 65535
-    ctime2: 0
+    ctime2: 65535
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -297,6 +297,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9109715083570379509}
   - component: {fileID: 6952625672293874636}
+  - component: {fileID: 1581761323924819436}
+  - component: {fileID: 4929624581686577424}
+  - component: {fileID: 6543799693452331901}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -331,9 +334,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7b9e69a064c35468d6652881f0a637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _winFireworks: []
-  _tutorial: {fileID: 0}
-  _isTutorialScene: 0
+  _winFireworks:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1581761323924819436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334629123771267109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bef00a2eb4b9445956d2693898e7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammunition: 01000000010000000100000001000000
+  levelAmmoCount: 0
+--- !u!114 &4929624581686577424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334629123771267109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f3bfdd968464e47bf001059f2036c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starScore: f4010000e8030000dc050000
+  currentScore: 0
+--- !u!114 &6543799693452331901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334629123771267109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ec405e6b264e14eac3e7095f4b0f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCountText: {fileID: 0}
+  _enemyCount: 0
 --- !u!1 &6306014348557241654
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +423,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7794221243773157135}
-  - component: {fileID: 4150536513518340531}
   m_Layer: 0
   m_Name: RestartScene
   m_TagString: Untagged
@@ -401,18 +445,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4222830997534925263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4150536513518340531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512920286881876764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f818426afce04874f8bad1d73f18a511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9109022073778696534
 GameObject:
   m_ObjectHideFlags: 0

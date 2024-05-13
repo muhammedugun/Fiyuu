@@ -1388,7 +1388,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ammoSelectionUI
       value: 
-      objectReference: {fileID: 879715743}
+      objectReference: {fileID: 0}
     - target: {fileID: 7482024952686889074, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2575,31 +2575,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 1985607350979193743, guid: b1414fa70463d3341896bcaa0babe049,
-        type: 3}
-      propertyPath: managedReferences[932757806797029391].TargetGameObject
-      value: 
-      objectReference: {fileID: 879715744}
-    - target: {fileID: 1985607350979193743, guid: b1414fa70463d3341896bcaa0babe049,
-        type: 3}
-      propertyPath: managedReferences[3307975944188461067].PlayEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 879715742}
-    - target: {fileID: 3725079145872377945, guid: b1414fa70463d3341896bcaa0babe049,
-        type: 3}
-      propertyPath: managedReferences[932757806797029390].TargetGameObject
-      value: 
-      objectReference: {fileID: 879715744}
-    - target: {fileID: 3725079145872377945, guid: b1414fa70463d3341896bcaa0babe049,
-        type: 3}
-      propertyPath: managedReferences[932757806797029391].TargetGameObject
-      value: 
-      objectReference: {fileID: 879715744}
-    - target: {fileID: 3725079145872377945, guid: b1414fa70463d3341896bcaa0babe049,
-        type: 3}
-      propertyPath: managedReferences[3307975944188461066].PlayEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 879715742}
     - target: {fileID: 4937731253986432364, guid: b1414fa70463d3341896bcaa0babe049,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2737,6 +2712,16 @@ PrefabInstance:
     - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
       propertyPath: winFireworks.Array.data[1]
+      value: 
+      objectReference: {fileID: 101979940}
+    - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
+        type: 3}
+      propertyPath: _winFireworks.Array.data[0]
+      value: 
+      objectReference: {fileID: 101979941}
+    - target: {fileID: 6952625672293874636, guid: 9bed05b059dafa141b119ac8e820eb7d,
+        type: 3}
+      propertyPath: _winFireworks.Array.data[1]
       value: 
       objectReference: {fileID: 101979940}
     m_RemovedComponents: []
@@ -3555,11 +3540,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2540283019351225920, guid: 52389e7482e2c5e4f8140e4267a8e4df,
-        type: 3}
-      propertyPath: ammunition.Array.data[3]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4325160786466639868, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3715,36 +3695,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52389e7482e2c5e4f8140e4267a8e4df, type: 3}
---- !u!114 &879715742 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8773807715704296080, guid: 52389e7482e2c5e4f8140e4267a8e4df,
-    type: 3}
-  m_PrefabInstance: {fileID: 879715741}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &879715743 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2540283019351225920, guid: 52389e7482e2c5e4f8140e4267a8e4df,
-    type: 3}
-  m_PrefabInstance: {fileID: 879715741}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9bef00a2eb4b9445956d2693898e7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &879715744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1663759576479093262, guid: 52389e7482e2c5e4f8140e4267a8e4df,
-    type: 3}
-  m_PrefabInstance: {fileID: 879715741}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &884445103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 203125496859702518, guid: 08117219845e8494b9a7fbb626df5635,
@@ -7476,9 +7426,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 570619881}
   - {fileID: 1499490867}
-  - {fileID: 101979939}
-  - {fileID: 384612094}
+  - {fileID: 570619881}
   - {fileID: 879715741}
+  - {fileID: 101979939}
   - {fileID: 593797316}
+  - {fileID: 384612094}

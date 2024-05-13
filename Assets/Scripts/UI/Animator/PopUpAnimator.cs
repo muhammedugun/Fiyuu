@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class PopUpManager : MonoBehaviour
+public class PopUpAnimator : MonoBehaviour
 {
     public float duration = 0.2f;
 

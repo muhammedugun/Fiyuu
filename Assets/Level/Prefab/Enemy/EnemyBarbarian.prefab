@@ -1271,7 +1271,7 @@ MonoBehaviour:
           DelayBetweenRepeats: 1
           MMFeedbacksDirectionCondition: 0
           PlayDirection: 0
-          ConstantIntensity: 0
+          ConstantIntensity: 1
           UseIntensityInterval: 0
           IntensityIntervalMin: 0
           IntensityIntervalMax: 0
@@ -1325,8 +1325,8 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 1
-        MinVolume: 0.1
-        MaxVolume: 0.1
+        MinVolume: 0.2
+        MaxVolume: 0.2
         MinPitch: 0.9
         MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}

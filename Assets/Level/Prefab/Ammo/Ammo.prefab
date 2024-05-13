@@ -730,7 +730,7 @@ MonoBehaviour:
     yAxis: 1
     zAxis: 1
     detectFloatingFragments: 0
-    asynchronous: 0
+    asynchronous: 1
     insideMaterial: {fileID: 0}
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
@@ -758,8 +758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cc957f972b68043bd55e196f14dbbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshFilter: {fileID: 111989898224628676}
   disableAssignMass: 1
+  _volumeSize: 1
   _fracture: {fileID: 7717536153865751847}
   _isParticleEffect: 0
   _explosionParticle: {fileID: 0}

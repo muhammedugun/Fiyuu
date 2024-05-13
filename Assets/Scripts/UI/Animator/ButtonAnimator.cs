@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonAnimator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     RectTransform rectTransform;
     float defaultWidth;
@@ -31,8 +31,6 @@ public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             rectTransform?.DOSizeDelta(new Vector2(targetWidth, targetHeight), duration)
                  .SetEase(Ease.InOutQuad).SetUpdate(true);
         }
-        
-
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -4,7 +4,12 @@ using UnityEngine.Events;
 
 public enum EventType
 {
-    OutOfAmmo, BuildSmashed, EnemyDied, LauncherThrowed, AllEnemiesDead, FirstClickInLevel, AllObjectsStopped, EndOfChapterUIOpened
+    // Ammo
+    OutOfAmmo, AmmoReduced,
+    // Enemy
+    EnemyDied, AllEnemiesDead, EnemyCountUpdated,
+    // Other
+    BuildSmashed, LauncherThrowed, FirstClickInLevel, AllObjectsStopped, EnOfLevelPopUpOpened, ScoreUpdated
 }
 
 

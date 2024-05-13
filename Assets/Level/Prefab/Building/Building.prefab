@@ -161,7 +161,7 @@ MonoBehaviour:
     yAxis: 1
     zAxis: 1
     detectFloatingFragments: 0
-    asynchronous: 0
+    asynchronous: 1
     insideMaterial: {fileID: 0}
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
@@ -196,11 +196,10 @@ MonoBehaviour:
   damageFeedbacks: {fileID: 3859949310406596290}
   destroyFeedbacks: {fileID: 6335255932944754190}
   skipBeginningFeedback: {fileID: 1410672776483323578}
+  damageSensitivity: 10
   armorDurabilitiy:
+  - 300
   - 400
-  - 500
-  - 600
-  - 800
 --- !u!114 &4320506391577644817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,7 +882,7 @@ MonoBehaviour:
           DelayBetweenRepeats: 1
           MMFeedbacksDirectionCondition: 0
           PlayDirection: 0
-          ConstantIntensity: 0
+          ConstantIntensity: 1
           UseIntensityInterval: 0
           IntensityIntervalMin: 0
           IntensityIntervalMax: 0
@@ -937,10 +936,10 @@ MonoBehaviour:
         PlayMethod: 1
         PoolSize: 10
         StopSoundOnFeedbackStop: 1
-        MinVolume: 1
-        MaxVolume: 1
-        MinPitch: 1
-        MaxPitch: 1
+        MinVolume: 0.8
+        MaxVolume: 0.8
+        MinPitch: 0.95
+        MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}
         Priority: 128
         PanStereo: 0

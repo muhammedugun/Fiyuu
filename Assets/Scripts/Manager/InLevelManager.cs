@@ -6,11 +6,8 @@ using UnityEngine.SceneManagement;
 public class InLevelManager : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> _winFireworks;
-    [SerializeField] private GameObject _tutorial;
-    [SerializeField] private bool _isTutorialScene;
 
-
-    List<GameObject> allGameObjects = new List<GameObject>();
+    Rigidbody []allGameObjects;
     /// <summary>
     /// Objelerin hýzý kontrol edilsin mi?
     /// </summary>
@@ -19,6 +16,12 @@ public class InLevelManager : MonoBehaviour
     /// Tüm objeler durdu mu?
     /// </summary>
     private bool _isAllObjectsStopped;
+    private const string muteKey = "isMute";
+
+    private void Start()
+    {
+        CheckAudioVolume();
+    }
 
     private void Update()
     {
@@ -31,8 +34,6 @@ public class InLevelManager : MonoBehaviour
         ControllerManager.controller.InLevel.Attack.started += CheckFirstClick;
 
         EventBus.Subscribe(EventType.AllEnemiesDead, LevelSuccesful);
-        if (_isTutorialScene)
-            ThrowInputController.Started += SetTutorial;
 
         EventBus.Subscribe(EventType.OutOfAmmo, InvokeAssignObjects);
         EventBus.Subscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
@@ -44,6 +45,12 @@ public class InLevelManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelSuccesful);
         EventBus.Unsubscribe(EventType.OutOfAmmo, InvokeAssignObjects);
         EventBus.Unsubscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
+    }
+
+    private void CheckAudioVolume()
+    {
+        bool isMuted = PlayerPrefs.GetInt(muteKey) == 1;
+        AudioListener.volume = isMuted ? 0f : 1f;
     }
 
     /// <summary>
@@ -60,7 +67,7 @@ public class InLevelManager : MonoBehaviour
             {
                 if (obj != null)
                 {
-                    float speed = obj.GetComponent<Rigidbody>().velocity.magnitude;
+                    float speed = obj.velocity.magnitude;
                     if (speed > 2.5f)
                     {
                         isAllObjectsStopped = false;
@@ -87,23 +94,7 @@ public class InLevelManager : MonoBehaviour
     /// </summary>
     private void AssignObjects()
     {
-        Ammo[] ammoList = FindObjectsOfType<Ammo>();
-        Enemy[] enemyList = FindObjectsOfType<Enemy>();
-        Building[] buildingList = FindObjectsOfType<Building>();
-
-        foreach (var ammo in ammoList)
-        {
-            allGameObjects.Add(ammo.gameObject);
-        }
-        foreach (var enemy in enemyList)
-        {
-            allGameObjects.Add(enemy.gameObject);
-        }
-        foreach (var building in buildingList)
-        {
-            allGameObjects.Add(building.gameObject);
-        }
-        
+        allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
     }
 
     void InvokeSetCheckSpeedOfObjects()
@@ -133,12 +124,7 @@ public class InLevelManager : MonoBehaviour
         }
     }
 
-    private void SetTutorial()
-    {
-        _tutorial.SetActive(false);
-        ThrowInputController.Started -= SetTutorial;
-    }
-
+    
     void LevelSuccesful()
     {
         ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)));

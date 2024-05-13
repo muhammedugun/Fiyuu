@@ -27,7 +27,6 @@ public class SwipeController : MonoBehaviour
     {
         if(currentPage<pageCount)
         {
-            Debug.Log("Next");
             currentPage++;
             titleText.text = "Chapter " + currentPage;
             targetPos += pageStep;
@@ -39,7 +38,6 @@ public class SwipeController : MonoBehaviour
     {
         if(currentPage>1)
         {
-            Debug.Log("Previous");
             currentPage--;
             titleText.text = "Chapter " + currentPage;
             targetPos -= pageStep;

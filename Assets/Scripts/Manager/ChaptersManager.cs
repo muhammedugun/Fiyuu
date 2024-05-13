@@ -29,7 +29,7 @@ public class ChaptersManager : MonoBehaviour
             popUpTitleText.text = "Level " + levelNumber;
             levelName = "Level" + levelNumber;
             scoreText.text = PlayerPrefs.GetInt("LevelScore" + levelNumber).ToString();
-            if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 0.75f)
+            if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 3)
             {
                 foreach (var star in stars)
                 {
@@ -38,7 +38,7 @@ public class ChaptersManager : MonoBehaviour
                     child.color = new Color(child.color.r, child.color.g, child.color.b, 1f);
                 }
             }
-            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 0.5f)
+            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 2)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -48,7 +48,7 @@ public class ChaptersManager : MonoBehaviour
                 }
 
             }
-            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 0.25f)
+            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 1)
             {
                 stars[2].color = new Color(stars[2].color.r, stars[2].color.g, stars[2].color.b, 1f);
                 var child = stars[2].transform.GetChild(0).GetComponent<Image>();

@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &24835319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -174,10 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d063099ce768964abbb68a08cc863d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundButtonOn: {fileID: 0}
-  _soundButtonOff: {fileID: 0}
-  _fullScreenButtonOn: {fileID: 0}
-  _fullScreenButtonOff: {fileID: 0}
+  _soundButtonOn: {fileID: 578378247}
+  _soundButtonOff: {fileID: 1256138095}
+  _fullScreenButtonOn: {fileID: 903377969}
+  _fullScreenButtonOff: {fileID: 160070106}
+  _backgroundFade: {fileID: 596089947}
+  _window: {fileID: 785698501}
 --- !u!1 &33275475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,7 +2077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &596089947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2255,9 +2257,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1553228992}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: OpenSettingsPopUp
+      - m_Target: {fileID: 24835320}
+        m_TargetAssemblyTypeName: SettingsPopUp, Assembly-CSharp
+        m_MethodName: OpenPopUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2724,9 +2726,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1553228992}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: CloseSettingsPopUp
+      - m_Target: {fileID: 24835320}
+        m_TargetAssemblyTypeName: SettingsPopUp, Assembly-CSharp
+        m_MethodName: ClosePopUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3077,7 +3079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &785698501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5577,8 +5579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0b599681a7a664eaa3bf2c04e856d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsPopUp: {fileID: 24835318}
-  settingsPopUpWindow: {fileID: 785698501}
 --- !u!4 &1553228993
 Transform:
   m_ObjectHideFlags: 0

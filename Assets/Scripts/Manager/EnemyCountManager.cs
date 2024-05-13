@@ -1,21 +1,19 @@
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class EnemyCountManager : MonoBehaviour
 {
-    [SerializeField] private Text enemyCountText;
+    
     [HideInInspector] public int _enemyCount;
 
     private void Start()
     {
         CalculateEnemyCount();
-        UpdateEnemyCountText();
     }
 
     private void OnEnable()
     {
         EventBus.Subscribe(EventType.EnemyDied, UpdateEnemyCount);
-        
     }
 
     private void OnDisable()
@@ -27,18 +25,16 @@ public class EnemyCountManager : MonoBehaviour
     private void CalculateEnemyCount()
     {
         _enemyCount = FindObjectsOfType<Enemy>().Length;
+        EventBus.Publish(EventType.EnemyCountUpdated);
     }
 
     private void UpdateEnemyCount()
     {
         _enemyCount--;
-        UpdateEnemyCountText();
         if (_enemyCount <= 0)
             EventBus.Publish(EventType.AllEnemiesDead);
+        EventBus.Publish(EventType.EnemyCountUpdated);
     }
 
-    private void UpdateEnemyCountText()
-    {
-        enemyCountText.text = _enemyCount.ToString();
-    }
+    
 }

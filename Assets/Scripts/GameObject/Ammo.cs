@@ -138,7 +138,7 @@ public class Ammo : ExplosiveBase
             var building = other.GetComponent<Building>();
             if(building!=null && building.armor==BuildingMatter.Stone)
             {
-                gameObject.GetComponent<Rigidbody>().mass = 0.01f;
+                gameObject.GetComponent<Rigidbody>().mass = 0f;
             }
         }
     }

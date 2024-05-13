@@ -9,10 +9,16 @@ using UnityEngine.EventSystems;
 public class ThrowInputController : MonoBehaviour, IPointerDownHandler
 {
     public static event Action Started;
+    public bool isEnabled;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Started?.Invoke();
+        if(isEnabled)
+            Started?.Invoke();
     }
 
+    public void SetIsEnabled(bool condition)
+    {
+        isEnabled = condition;
+    }
 }

@@ -15,11 +15,12 @@ public class Building : SmashableObjectBase
     [SerializeField] private MMF_Player damageFeedbacks;
     [SerializeField] private MMF_Player destroyFeedbacks;
     [SerializeField] private MMF_Player skipBeginningFeedback;
+    [SerializeField] private int damageSensitivity;
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
-    public float[] armorDurabilitiy = new float[4] { 100f, 200f, 600f, 800f };
+    public float[] armorDurabilitiy = new float[2] { 300f, 400f};
     private bool _isDamageble;
 
     /// <summary>
@@ -91,7 +92,7 @@ public class Building : SmashableObjectBase
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
         var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-        if (durability > 0 && collisionForce / _rigidbody.mass > 200f)
+        if (durability > 0 && collisionForce > damageSensitivity)
         {
             if (collision.transform.CompareTag("Ammo"))
             {

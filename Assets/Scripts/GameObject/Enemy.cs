@@ -94,7 +94,7 @@ public class Enemy : DamagableObjectBase
     {
         _isDead = true;
         EventBus.Publish(EventType.EnemyDied);
-        dieFeedback?.PlayFeedbacks(this.transform.position, 200);
+        dieFeedback?.PlayFeedbacks(this.transform.position, ScoreManager.enemyScore);
     }
 
     /// <summary>

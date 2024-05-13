@@ -5,7 +5,7 @@ using UnityEngine;
 public class SettingsPopUp : MonoBehaviour
 {
     [SerializeField] private GameObject _soundButtonOn, _soundButtonOff, _fullScreenButtonOn, _fullScreenButtonOff;
-
+    [SerializeField] private RectTransform _backgroundFade, _window;
     private const string muteKey = "isMute";
     private const string fullScreenKey = "isNotFullScreen";
 
@@ -56,5 +56,22 @@ public class SettingsPopUp : MonoBehaviour
     public void FullScreenToggle()
     {
         SetFullScreenState(!Screen.fullScreen);
+    }
+
+    public void OpenPopUp()
+    {
+        _backgroundFade.gameObject.SetActive(true);
+        _window.gameObject.SetActive(true);
+
+        UIAnimation.OpenPopUp(_window, 0.2f, true);
+    }
+
+    public void ClosePopUp()
+    {
+        UIAnimation.ClosePopUp(_window, 0.2f, true, () =>
+        {
+            _backgroundFade.gameObject.SetActive(false);
+            _window.gameObject.SetActive(false);
+        });
     }
 }
