@@ -15,7 +15,7 @@ public class Building : SmashableObjectBase
     [SerializeField] private MMF_Player damageFeedbacks;
     [SerializeField] private MMF_Player destroyFeedbacks;
     [SerializeField] private MMF_Player skipBeginningFeedback;
-    [SerializeField] private int damageSensitivity;
+    
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>

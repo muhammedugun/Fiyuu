@@ -39,17 +39,21 @@ public class ScoreBar : MonoBehaviour
 
     private void UpdateSlider()
     {
-        scoreSlider.value = ((float)_scoreManager.CurrentScore / _scoreManager.starScore[2]);
+        scoreSlider.value = ((float)_scoreManager.CurrentScore / _scoreManager.threeStarScore);
     }
 
     private void UpdateStars()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (scoreSlider.value >= (0.25f * (i + 1)))
             {
                 stars[i].color = Color.yellow;
             }
+        }
+        if (scoreSlider.value >= 1f)
+        {
+            stars[2].color = Color.yellow;
         }
     }
 

@@ -35,7 +35,7 @@ public class InLevelManager : MonoBehaviour
 
         EventBus.Subscribe(EventType.AllEnemiesDead, LevelSuccesful);
 
-        EventBus.Subscribe(EventType.OutOfAmmo, InvokeAssignObjects);
+        EventBus.Subscribe(EventType.OutOfAmmo, AssignObjects);
         EventBus.Subscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
         
     }
@@ -43,7 +43,7 @@ public class InLevelManager : MonoBehaviour
     private void OnDisable()
     {
         EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelSuccesful);
-        EventBus.Unsubscribe(EventType.OutOfAmmo, InvokeAssignObjects);
+        EventBus.Unsubscribe(EventType.OutOfAmmo, AssignObjects);
         EventBus.Unsubscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
     }
 
@@ -68,9 +68,8 @@ public class InLevelManager : MonoBehaviour
                 if (obj != null)
                 {
                     float speed = obj.velocity.magnitude;
-                    if (speed > 2.5f)
+                    if (speed > 1f)
                     {
-                        isAllObjectsStopped = false;
                         return false;
                     }
                 }
@@ -82,11 +81,6 @@ public class InLevelManager : MonoBehaviour
         }
         else
             return false;
-    }
-
-    private void InvokeAssignObjects()
-    {
-        Invoke(nameof(AssignObjects), 1f);
     }
 
     /// <summary>

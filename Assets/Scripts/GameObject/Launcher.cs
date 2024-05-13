@@ -24,21 +24,18 @@ public class Launcher : MonoBehaviour
     private GameObject _lastAmmo;
     
     private Rigidbody _ammoRigidBody;
-    /// <summary>
-    /// Mühimmatın başlangıçtaki y pozisyonu
-    /// </summary>
-    private float _ammoStartY;
 
+    private float _height;
+    private float _ammoStartY;
 
     private void Start()
     {
-
+        _ammoStartY = ammoSpawnPosition.position.y;
         _ammoManager = FindObjectOfType<AmmoManager>();
         _throwInputController = FindObjectOfType<ThrowInputController>();
 
         ThrowInputController.Started += Throw;
         _collisionIconText = GameObject.Find("/UI/Canvas/CollisionIcon").GetComponent<TextMeshProUGUI>();
-        _ammoStartY = ammoSpawnPosition.position.y;
         CreateAmmo();
     }
 
@@ -128,9 +125,11 @@ public class Launcher : MonoBehaviour
             _ammoRigidBody.useGravity = true;
             _ammoRigidBody.GetComponent<Collider>().enabled = true;
 
+            _height = _ammoRigidBody.transform.position.y - _ammoStartY;
+
             _ammo.transform.parent = null;
 
-            _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * throwPower, ForceMode.VelocityChange);
+            _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * throwPower * _height, ForceMode.VelocityChange);
             OnThrowedInvoke();
 
         }

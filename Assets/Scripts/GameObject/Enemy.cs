@@ -47,7 +47,7 @@ public class Enemy : DamagableObjectBase
         if(_isDamageble)
         {
             var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-            if (durability > 0 && collisionForce / _rigidbody.mass > 50f)
+            if (durability > 0 && collisionForce > damageSensitivity)
             {
                 damageFeedback.PlayFeedbacks();
             }

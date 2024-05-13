@@ -6,13 +6,22 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    private static ThrowInputController _throwInputController;
+
+    private void Start()
+    {
+        _throwInputController = FindObjectOfType<ThrowInputController>();
+    }
+
     public static void PauseLevel()
     {
+        _throwInputController.isEnabled = false;
         Time.timeScale = 0f;
     }
 
     public static void ResumeLevel()
     {
+        _throwInputController.isEnabled = true;
         Time.timeScale = 1f;
     }
 

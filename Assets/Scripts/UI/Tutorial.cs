@@ -12,6 +12,7 @@ public class Tutorial : MonoBehaviour
 
     private ThrowInputController _throwInputController;
     private bool isInputControl;
+    private bool isDeactive;
 
     private void Start()
     {
@@ -20,7 +21,6 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_launcherArm.eulerAngles.z);
         if (_isFirstTutorial && _launcherArm.eulerAngles.z>70 && _launcherArm.eulerAngles.z < 80)
         {
             _isFirstTutorial = false;
@@ -40,7 +40,7 @@ public class Tutorial : MonoBehaviour
         if(_isTutorialScene)
         {
             ThrowInputController.Started += Deactive;
-            for (int i = 0; i < _tutorial.transform.childCount; i++)
+            for (int i = 0; i < 2; i++)
             {
                 _tutorial.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -50,14 +50,22 @@ public class Tutorial : MonoBehaviour
 
     private void Deactive()
     {
+        isDeactive = true;
         ThrowInputController.Started -= Deactive;
         GameManager.ResumeLevel();
-        _pauseButton.SetActive(true);
-        for (int i = 0; i < _tutorial.transform.childCount; i++)
+        if(_pauseButton!=null)
+            _pauseButton.SetActive(true);
+        for (int i = 0; i < 2; i++)
         {
             _tutorial.transform.GetChild(i).gameObject.SetActive(false);
         }
         stopFeedbacks.PlayFeedbacks();
+    }
+
+    public void PlayFeedbacks()
+    {
+        if(!isDeactive)
+            playFeedbacks.PlayFeedbacks();
     }
 
 }

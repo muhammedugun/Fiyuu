@@ -1254,11 +1254,9 @@ MonoBehaviour:
   - {fileID: 2530586586199853392, guid: adc6c8b4f11624146a1aeca40dc34517, type: 3}
   ammoSpawnPosition: {fileID: 5518473780971767405}
   animator: {fileID: 1307464940851176877}
-  throwPower: 20
+  throwPower: 3
   loadFeedback: {fileID: 7107647153649465858}
   throwFeedback: {fileID: 5854591264245220584}
-  ammoSelectionUI: {fileID: 0}
-  _throwInputController: {fileID: 0}
 --- !u!95 &1307464940851176877
 Animator:
   serializedVersion: 5

@@ -6,6 +6,8 @@ public abstract class DamagableObjectBase : RigidObjectBase
 {
     public float durability { get; set; }
 
+    [SerializeField] protected int damageSensitivity;
+
     protected float _durabilityMultiplier=1f;
 
     protected override void Start()
@@ -30,7 +32,7 @@ public abstract class DamagableObjectBase : RigidObjectBase
     {
         var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
 
-        if (durability > 0 && collisionForce / _rigidbody.mass > 50f)
+        if (durability > 0 && collisionForce > damageSensitivity)
         {
             durability -= collisionForce * damageMultiplier;
             if (durability < 0)

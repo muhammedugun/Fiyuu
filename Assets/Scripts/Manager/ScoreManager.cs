@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int[] starScore;
+    public int threeStarScore;
 
     public static int enemyScore = 500;
 
     private int currentScore;
+    [SerializeField] private bool isFirstLevel;
     public int CurrentScore
     {
         get { return currentScore; }
@@ -33,14 +34,18 @@ public class ScoreManager : MonoBehaviour
     {
         EventBus<float, BuildingMatter>.Subscribe(EventType.BuildSmashed, CalculateBuildingScore);
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
-        EventBus.Subscribe(EventType.EnOfLevelPopUpOpened, CalculateGameEndScore);
+        if(!isFirstLevel)
+            EventBus.Subscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
+        EventBus.Subscribe(EventType.EnOfLevelPopUpOpened, SaveScore);
     }
 
     private void OnDisable()
     {
         EventBus<float, BuildingMatter>.Unsubscribe(EventType.BuildSmashed, CalculateBuildingScore);
         EventBus.Unsubscribe(EventType.EnemyDied, CalculateEnemyScore);
-        EventBus.Unsubscribe(EventType.EnOfLevelPopUpOpened, CalculateGameEndScore);
+        if (!isFirstLevel)
+            EventBus.Unsubscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
+        EventBus.Unsubscribe(EventType.EnOfLevelPopUpOpened, SaveScore);
     }
 
     public static int CalculateScore(float volumeSize, BuildingMatter buildingArmor)
@@ -67,6 +72,10 @@ public class ScoreManager : MonoBehaviour
         {
             CurrentScore += (int)Math.Round(multiplierScore / 1.0) * 200;
         }
+    }
+
+    private void SaveScore()
+    {
         int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
         if (CurrentScore > (PlayerPrefs.GetInt("LevelScore" + levelIndex)))
         {
@@ -78,13 +87,19 @@ public class ScoreManager : MonoBehaviour
     public int GetRewardedStarCount()
     {
         int rewardedStarCount = 0;
-        for (int i = 0; i < 3; i++)
+        float scoreBarSlider = ((float)CurrentScore / threeStarScore);
+        for (int i = 0; i < 2; i++)
         {
-            if (CurrentScore > starScore[i])
+            if (scoreBarSlider >= (0.25f * (i + 1)))
             {
                 rewardedStarCount++;
             }
         }
+        if (scoreBarSlider >= 1f)
+        {
+            rewardedStarCount++;
+        }
+
         return rewardedStarCount;
     }
 

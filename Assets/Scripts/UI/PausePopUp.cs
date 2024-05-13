@@ -10,7 +10,9 @@ public class PausePopUp : MonoBehaviour
     [SerializeField] private RectTransform _pausePopUpTransform;
     [SerializeField] private GameObject _popUps;
 
+    
     private const string volumeKey = "isMute";
+
 
     private void OnEnable()
     {
@@ -62,7 +64,6 @@ public class PausePopUp : MonoBehaviour
             UIAnimation.ClosePopUp(_pausePopUpTransform, 0.2f, true, () =>
             {
                 _pausePopUpTransform.gameObject.SetActive(false);
-                _popUps.SetActive(false);
             });
         }
     }
