@@ -1,6 +1,7 @@
 //Refactor 11.05.24
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PausePopUp : MonoBehaviour
@@ -9,10 +10,15 @@ public class PausePopUp : MonoBehaviour
     [SerializeField] private Sprite _soundOnSprite, _soundOffSprite;
     [SerializeField] private RectTransform _pausePopUpTransform;
     [SerializeField] private GameObject _popUps;
-
+    [SerializeField] private Text title;
     
     private const string volumeKey = "isMute";
 
+    private void Start()
+    {
+        int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
+        title.text = "Level " + levelIndex;
+    }
 
     private void OnEnable()
     {
@@ -46,8 +52,11 @@ public class PausePopUp : MonoBehaviour
 
     public void OnClickPauseButton()
     {
-        GameManager.PauseLevel();
-        OpenPausePopUp();
+        if(!_pausePopUpTransform.gameObject.activeSelf)
+        {
+            GameManager.PauseLevel();
+            OpenPausePopUp();
+        }
     }
 
     public void OnClickMainMenu()

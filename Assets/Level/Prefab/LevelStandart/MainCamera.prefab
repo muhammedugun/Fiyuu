@@ -1112,7 +1112,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 3725079145872377945}
         DebugActive: 0
-        PauseDuration: 4
+        PauseDuration: 2.5
         RandomizePauseDuration: 0
         MinPauseDuration: 1
         MaxPauseDuration: 3
