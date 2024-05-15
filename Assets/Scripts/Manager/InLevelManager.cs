@@ -15,19 +15,27 @@ public class InLevelManager : MonoBehaviour
     /// <summary>
     /// Tüm objeler durdu mu?
     /// </summary>
-    private bool _isAllObjectsStopped;
+    public static bool isAllObjectsStopped;
+    private bool isAssignObjects, isSetCheckSpeedOfObjects;
     private const string muteKey = "isMute";
 
     private void Start()
     {
+        isAllObjectsStopped = false;
         CheckAudioVolume();
     }
 
     private void Update()
     {
         if(CheckSpeedOfObjects())
+        {
+            Debug.Log("Tüm objeler durdu");
             EventBus.Publish(EventType.AllObjectsStopped);
+        }
+            
     }
+
+   
 
     private void OnEnable()
     {
@@ -37,7 +45,10 @@ public class InLevelManager : MonoBehaviour
 
         EventBus.Subscribe(EventType.OutOfAmmo, AssignObjects);
         EventBus.Subscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
-        
+
+        EventBus.Subscribe(EventType.AllEnemiesDead, AssignObjects);
+        EventBus.Subscribe(EventType.AllEnemiesDead, InvokeSetCheckSpeedOfObjects);
+
     }
 
     private void OnDisable()
@@ -45,6 +56,9 @@ public class InLevelManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.AllEnemiesDead, LevelSuccesful);
         EventBus.Unsubscribe(EventType.OutOfAmmo, AssignObjects);
         EventBus.Unsubscribe(EventType.OutOfAmmo, InvokeSetCheckSpeedOfObjects);
+
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, AssignObjects);
+        EventBus.Unsubscribe(EventType.AllEnemiesDead, InvokeSetCheckSpeedOfObjects);
     }
 
     private void CheckAudioVolume()
@@ -59,7 +73,7 @@ public class InLevelManager : MonoBehaviour
     /// <returns>Tüm objeler durduysa true döndürür</returns>
     private bool CheckSpeedOfObjects()
     {
-        if (_isCheckSpeedOfObjects && !_isAllObjectsStopped)
+        if (_isCheckSpeedOfObjects && !isAllObjectsStopped)
         {
             bool isAllObjectsStopped = true;
 
@@ -68,6 +82,7 @@ public class InLevelManager : MonoBehaviour
                 if (obj != null)
                 {
                     float speed = obj.velocity.magnitude;
+
                     if (speed > 1f)
                     {
                         return false;
@@ -75,7 +90,7 @@ public class InLevelManager : MonoBehaviour
                 }
             }
 
-            _isAllObjectsStopped = isAllObjectsStopped;
+            InLevelManager.isAllObjectsStopped = isAllObjectsStopped;
             return true;
 
         }
@@ -88,12 +103,22 @@ public class InLevelManager : MonoBehaviour
     /// </summary>
     private void AssignObjects()
     {
-        allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+        if(!isAssignObjects)
+        {
+            isAssignObjects = true;
+            allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+        }
+        
     }
 
     void InvokeSetCheckSpeedOfObjects()
     {
-        Invoke(nameof(SetCheckSpeedOfObjects), 1f);
+        if(!isSetCheckSpeedOfObjects)
+        {
+            isSetCheckSpeedOfObjects = true;
+            Invoke(nameof(SetCheckSpeedOfObjects), 1f);
+        }
+        
     }
 
     void SetCheckSpeedOfObjects()

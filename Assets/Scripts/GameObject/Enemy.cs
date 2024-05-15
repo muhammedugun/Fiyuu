@@ -18,7 +18,6 @@ public class Enemy : DamagableObjectBase
 
     private bool _isDead;
     private Animator _animator;
-    private bool _isDamageble;
     private void Awake()
     {
         _massMultiplier = massMultiplier;
@@ -44,23 +43,30 @@ public class Enemy : DamagableObjectBase
     private void OnCollisionEnter(Collision collision)
     {
 
-        if(_isDamageble)
+        
+        var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+        if (durability > 0 && collisionForce > damageSensitivity)
         {
-            var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-            if (durability > 0 && collisionForce > damageSensitivity)
-            {
-                damageFeedback.PlayFeedbacks();
-            }
-
-            DoDamage(collision);
-
-            if (CheckDie())
-                Die();
+            damageFeedback.PlayFeedbacks();
         }
+
+        DoDamage(collision);
+
+        if (CheckDie())
+            Die();
+      
 
     }
 
-    public void PlayVoiceClip(int index)
+    public override void DoDamage(Collision collision, float damageMultiplier = 1f)
+    {
+        Debug.Log("mainName: " + name + " colname: " + collision.gameObject.name);
+        Debug.Log("mainName: " + name + " collisionForce: " + (collision.impulse.magnitude / Time.fixedDeltaTime));
+        base.DoDamage(collision, damageMultiplier);
+    }
+
+
+        public void PlayVoiceClip(int index)
     {
         _audioSource.PlayOneShot(voiceClips[index]);
     }
@@ -71,16 +77,6 @@ public class Enemy : DamagableObjectBase
         EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
-    public void SetIsDamageble()
-    {
-        _isDamageble = true;
-    }
-
-
-    public void SetIsDamagebleInvoke()
-    {
-        Invoke(nameof(SetIsDamageble), 0.5f);
-    }
 
     public void SetEnableAnimator()
     {

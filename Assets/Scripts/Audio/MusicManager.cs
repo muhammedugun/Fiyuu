@@ -41,7 +41,7 @@ public class MusicManager : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         string name = SceneManager.GetSceneByBuildIndex(level).name;
-        if (name == "Chapters" || name == "Loading" || name == "MainMenu")
+        if (name == "Chapters" || name == "Loading" || name == "MainMenu" || name == "DemoEnd")
         {
             if (isStop)
             {

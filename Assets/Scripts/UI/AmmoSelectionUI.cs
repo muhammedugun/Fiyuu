@@ -33,6 +33,7 @@ public class AmmoSelectionUI : MonoBehaviour
     {
         UpdateAmmunitionDisplay();
         UpdateAmmoIcons();
+        UpdatePlusIcon();
     }
 
     private void UpdateAmmunitionDisplay()
@@ -76,5 +77,14 @@ public class AmmoSelectionUI : MonoBehaviour
 
         iconImage.sprite = image;
         iconText.text = text;
+    }
+
+    private void UpdatePlusIcon()
+    {
+        if(plusIcon.activeSelf)
+        {
+            int ammoCount = _ammoManager.ammunition.Count;
+            plusIcon.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "+" + (ammoCount - MaxDisplayedAmmo).ToString();
+        }
     }
 }

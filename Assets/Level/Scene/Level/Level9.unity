@@ -255,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7404022
+      value: -1.79
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
@@ -1352,12 +1352,12 @@ PrefabInstance:
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.75
+      value: 16.873
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2595978
+      value: 2.21
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
@@ -4369,12 +4369,12 @@ PrefabInstance:
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.25
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7404022
+      value: -4.29
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
@@ -6502,7 +6502,7 @@ PrefabInstance:
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7404022
+      value: -1.79
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
@@ -6984,7 +6984,7 @@ PrefabInstance:
     - target: {fileID: 4929624581686577424, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
       propertyPath: threeStarScore
-      value: 19000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 6306014348557241654, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}

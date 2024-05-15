@@ -9,11 +9,21 @@ public class ButtonAnimator : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     float defaultHeight;
     [SerializeField] float duration = 0.2f;
 
-    private void OnEnable()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         defaultWidth = rectTransform.sizeDelta.x;
         defaultHeight = rectTransform.sizeDelta.y;
+    }
+
+    private void OnEnable()
+    {
+        if (rectTransform != null)
+        {
+            rectTransform?.DOSizeDelta(new Vector2(defaultWidth, defaultHeight), duration)
+                    .SetEase(Ease.InOutQuad).SetUpdate(true);
+        }
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData)

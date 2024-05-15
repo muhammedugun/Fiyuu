@@ -1,5 +1,6 @@
 ﻿// Refactor 12.03.24
 using MoreMountains.Feedbacks;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -89,13 +90,6 @@ public class Ammo : ExplosiveBase
                 hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .2f;
                 hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .2f;
             }
-            /*
-            if(collision.transform.CompareTag("Moveble"))
-            {
-                moveble = collision.gameObject;
-                _moveableMass = moveble.GetComponent<Rigidbody>().mass;
-                Invoke(nameof(Moveble), 0.1f);
-            }*/
 
             hitFeedback.PlayFeedbacks();
         }
@@ -107,6 +101,10 @@ public class Ammo : ExplosiveBase
         if (CheckSmash())
         {
             Smash(collision);
+            
+            if (CheckWoodVersusStone(collision.gameObject, matter))
+              AssignFragmentsMass();
+
             Explode(collision);
             isExplode = true;
             destroyFeedback.PlayFeedbacks();
@@ -114,16 +112,41 @@ public class Ammo : ExplosiveBase
 
     }
 
+
+    void AssignFragmentsMass()
+    {
+        var fragmentsParent = transform.parent.GetChild(2).gameObject;
+
+        for (int i = 0; i < fragmentsParent.transform.childCount; i++)
+        {
+            fragmentsParent.transform.GetChild(i).GetComponent<Rigidbody>().mass = _mass / fragmentsParent.transform.childCount;
+        }
+
+    }
+
+    /// <summary>
+    /// Odun mühimmata karşı taş yapı kontrolü
+    /// </summary>
+    /// <returns>Bu mühimmat odunsa ve collision'da taş yapıysa true döndürür</returns>
+    public static bool CheckWoodVersusStone(GameObject triggerObject, AmmoMatter matter)
+    {
+        if (triggerObject.CompareTag("Building") && matter == AmmoMatter.Wood)
+        {
+            var building = triggerObject.GetComponent<Building>();
+            if (building != null && building.armor == BuildingMatter.Stone)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        if (collision.gameObject.CompareTag("Building") && matter == AmmoMatter.Wood)
+        if (CheckWoodVersusStone(collision.gameObject, matter))
         {
-            var building = collision.gameObject.GetComponent<Building>();
-            if (building!=null && building.armor == BuildingMatter.Stone)
-            {
-                gameObject.GetComponent<Rigidbody>().mass = _mass;
-                durability = 0f;
-            }
+            gameObject.GetComponent<Rigidbody>().mass = _mass;
+            durability = 0f;
         }
         else
         {
@@ -133,32 +156,14 @@ public class Ammo : ExplosiveBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Building") && matter == AmmoMatter.Wood)
-        {
-            var building = other.GetComponent<Building>();
-            if(building!=null && building.armor==BuildingMatter.Stone)
-            {
-                gameObject.GetComponent<Rigidbody>().mass = 0f;
-            }
-        }
+        if (CheckWoodVersusStone(other.gameObject, matter))
+            gameObject.GetComponent<Rigidbody>().mass = 0f;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Building") && matter == AmmoMatter.Wood)
-        {
-            var building = other.GetComponent<Building>();
-            if (building!=null && building.armor == BuildingMatter.Stone)
-            {
-                gameObject.GetComponent<Rigidbody>().mass = _mass;
-            }
-        }
-    }
-
-
-    private void Moveble()
-    {
-        moveble.GetComponent<Rigidbody>().mass = 5f;
+        if (CheckWoodVersusStone(other.gameObject, matter))
+            gameObject.GetComponent<Rigidbody>().mass = _mass;
     }
 
     /// <summary>

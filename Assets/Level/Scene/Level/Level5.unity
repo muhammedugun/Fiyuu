@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.413436
+      value: -2.52
       objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
@@ -860,11 +860,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 565279176056134245, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1152534441}
+      addedObject: {fileID: 29767604}
     - targetCorrespondingSourceObject: {fileID: 565279176056134245, guid: 455ea73fb8a0e274797025014961f5e1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 29767604}
+      addedObject: {fileID: 1152534441}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 455ea73fb8a0e274797025014961f5e1, type: 3}
 --- !u!4 &293439986 stripped
@@ -1692,7 +1692,7 @@ PrefabInstance:
     - target: {fileID: 4929624581686577424, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
       propertyPath: threeStarScore
-      value: 3500
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 6306014348557241654, guid: 9bed05b059dafa141b119ac8e820eb7d,
         type: 3}
@@ -2295,11 +2295,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBarbarian
       objectReference: {fileID: 0}
-    - target: {fileID: 4703034721456137885, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6312140664764342248, guid: 9d39828139e55ef48bed4e8ad4ce88e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2831,6 +2826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090325768073089230, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4325160786466639868, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}

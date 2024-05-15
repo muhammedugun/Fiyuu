@@ -96,9 +96,12 @@ public class Launcher : MonoBehaviour
     {
         if (CheckAnimStateEmpty())
         {
-            _lastClickTime = Time.time;
-            TriggerLoadAnim();
-            loadFeedback.PlayFeedbacks();
+            if(_ammoManager.ammunition.Count > 0)
+            {
+                _lastClickTime = Time.time;
+                TriggerLoadAnim();
+                loadFeedback.PlayFeedbacks();
+            }
         }
         else if (_ammoRigidBody.isKinematic && !animator.GetBool("leave") && Time.time > _lastClickTime + 0.4f)
         {

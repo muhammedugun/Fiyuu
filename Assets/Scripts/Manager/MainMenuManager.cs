@@ -14,5 +14,8 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    
+    public void OpenURL()
+    {
+        Application.OpenURL("https://spritestudio.itch.io/fiyuu");
+    }
 }

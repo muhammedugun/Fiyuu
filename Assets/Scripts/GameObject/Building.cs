@@ -1,8 +1,7 @@
 // Refactor 12.03.24
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+
 
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
@@ -21,11 +20,11 @@ public class Building : SmashableObjectBase
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
     public float[] armorDurabilitiy = new float[2] { 300f, 400f};
-    private bool _isDamageble;
 
     /// <summary>
     /// Zýrhýn güçlü yönleri. Zýrhýn neye dayanýklý olup neye dayanýklý olmadýðý. 
     /// <para> Satýrlar: Bina zýrhý, Sütunlar: mühimmat zýrhý </para>
+    /// <para> Sonucun 1 olmasý binanýn bu mühimmata karþý dayanýklý olduðunu gösterir</para>
     /// </summary>
     public static int[,] armorStrengths = new int[2, 4]
     {
@@ -60,27 +59,16 @@ public class Building : SmashableObjectBase
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (_isDamageble)
+       
+        DoDamage(collision);
+        if (CheckSmash())
         {
-            DoDamage(collision);
-            if (CheckSmash())
-            {
-                Smash(collision);
-            }
+            Smash(collision);
         }
+        
            
     }
 
-    public void SetIsDamageble()
-    {
-        _isDamageble = true;
-    }
-
-
-    public void SetIsDamagebleInvoke()
-    {
-        Invoke(nameof(SetIsDamageble), 0.5f);
-    }
 
     public void SkipBeginning()
     {

@@ -40,7 +40,29 @@ public class EndOfLevelPopUp : MonoBehaviour
         GameManager.ResumeLevel();
         string thisSceneName = SceneManager.GetActiveScene().name;
         int levelNumber = int.Parse(thisSceneName.Substring(5, thisSceneName.Length - 5));
-        Infrastructure.LoadScene("Level" + (levelNumber + 1));
+        if(IsSceneInBuildSettings("Level" + (levelNumber + 1)))
+        {
+            Infrastructure.LoadScene("Level" + (levelNumber + 1));
+        }
+        else
+        {
+            Infrastructure.LoadScene("DemoEnd");
+        }
+        
+    }
+
+    private bool IsSceneInBuildSettings(string name)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            if (sceneName == name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void OnClickMainMenu()
@@ -71,19 +93,7 @@ public class EndOfLevelPopUp : MonoBehaviour
 
     private void OpenPopUpInvoke()
     {
-        Invoke(nameof(OpenPopUpControl), 3f);
-    }
-
-    private void OpenPopUpControl()
-    {
-        if (_enemyCountManager._enemyCount > 0)
-        {
-            OpenPopUp();
-        }
-        else
-        {
-            OpenForwardButton();
-        }
+        Invoke(nameof(OpenPopUp), 3f);
     }
 
     public void OpenPopUp()
@@ -110,7 +120,11 @@ public class EndOfLevelPopUp : MonoBehaviour
 
     private void OpenForwardButton()
     {
-        _ForwardButton.SetActive(true);
+        if(!InLevelManager.isAllObjectsStopped)
+        {
+            _ForwardButton.SetActive(true);
+        }
+        
     }
 
 

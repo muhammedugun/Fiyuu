@@ -32,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 2238989890849500188, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}
       propertyPath: m_Mass
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3175606940536158909, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}
@@ -52,7 +52,7 @@ PrefabInstance:
     - target: {fileID: 3175606940536158909, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}
       propertyPath: durabilityMultiplier
-      value: 300
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 3295886525263225491, guid: 3d2f94c14d0fe884cb252fc16f6cbd71,
         type: 3}

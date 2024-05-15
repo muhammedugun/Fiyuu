@@ -19,6 +19,11 @@ public class Tutorial : MonoBehaviour
         _throwInputController = FindObjectOfType<ThrowInputController>();
     }
 
+    private void OnDisable()
+    {
+        ThrowInputController.Started -= Deactive;
+    }
+
     private void Update()
     {
         if (_isFirstTutorial && _launcherArm.eulerAngles.z>70 && _launcherArm.eulerAngles.z < 80)

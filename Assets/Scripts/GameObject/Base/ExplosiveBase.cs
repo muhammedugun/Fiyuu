@@ -36,9 +36,10 @@ public abstract class ExplosiveBase : SmashableObjectBase
             var rb = obj.GetComponent<Rigidbody>();
             if (rb == null) { continue; }
 
-            if (rb.TryGetComponent<SmashableObjectBase>(out SmashableObjectBase smashableObject))
+            if (rb.TryGetComponent(out SmashableObjectBase smashableObject))
             {
-                if(this.gameObject.CompareTag("Ammo") && obj.gameObject.transform.CompareTag("Building"))
+                // Ben mühimmatsam ve obj bir yapıysa
+                if (this.gameObject.CompareTag("Ammo") && obj.gameObject.CompareTag("Building"))
                 {
                     var building = obj.gameObject.GetComponent<Building>();
                     var ammo = gameObject.GetComponent<Ammo>();
@@ -51,15 +52,31 @@ public abstract class ExplosiveBase : SmashableObjectBase
                     {
                         explosionForce = 0f;
                     }
-                    
                 }
                 else
                 {
                     var differentPosition = rb.transform.position - transform.position;
                     smashableObject.durability -= (explosionForce * collision.relativeVelocity.magnitude * 300) / differentPosition.magnitude;
                 }
-                
+
             }
+
+            // Ben wood mühimmatıysam ve Stone olan yapıya çarptıysam ve şuanda obj'de bir mühimmat parçası ise
+            else if (this.gameObject.CompareTag("Ammo") && collision.gameObject.CompareTag("Building") && obj.CompareTag("Ammo"))
+            {
+                var ammo = gameObject.GetComponent<Ammo>();
+
+                if (Ammo.CheckWoodVersusStone(collision.gameObject, ammo.matter))
+                {
+                    var objAmmo = obj.GetComponent<Ammo>();
+                    if (objAmmo == null)
+                    {
+                        obj.GetComponent<Rigidbody>().mass = 0.01f;
+                        explosionForce = 0.01f;
+                    }
+                }
+            }
+
             rb.AddExplosionForce(explosionForce * collision.relativeVelocity.magnitude, transform.position, _explosionRadius, 0.0f, ForceMode.Impulse);
         }
         
