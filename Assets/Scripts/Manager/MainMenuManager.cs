@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
         Infrastructure.LoadScene(sceneName);
     }
 
-
     public void ExitButton()
     {
         Application.Quit();
