@@ -44,6 +44,8 @@ public class Infrastructure : MonoBehaviour
 
     void Start()
     {
+        QualitySettings.vSyncCount = 0;  // VSync'i kapatýr
+        Application.targetFrameRate = 60; // Ýsteðe baðlý: FPS’i sýnýrlamak için
 
         loadingSlider = FindObjectOfType<Slider>();
         if (currentSceneName==null)
