@@ -1249,14 +1249,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ae4facaa34dd34f99a4f9aed0d8b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoTypePrefabs:
+  _ammoTypePrefabs:
   - {fileID: 8323522048705883766, guid: 04777b5b973edc14b97b70d4b1c53f15, type: 3}
   - {fileID: 2530586586199853392, guid: adc6c8b4f11624146a1aeca40dc34517, type: 3}
-  ammoSpawnPosition: {fileID: 5518473780971767405}
-  animator: {fileID: 1307464940851176877}
-  throwPower: 3
-  loadFeedback: {fileID: 7107647153649465858}
-  throwFeedback: {fileID: 5854591264245220584}
+  _ammoSpawnPosition: {fileID: 5518473780971767405}
+  _animator: {fileID: 1307464940851176877}
+  _throwPower: 3.1
+  _loadFeedback: {fileID: 7107647153649465858}
+  _throwFeedback: {fileID: 5854591264245220584}
 --- !u!95 &1307464940851176877
 Animator:
   serializedVersion: 5

@@ -760,20 +760,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableAssignMass: 1
   _volumeSize: 1
-  damageSensitivity: 0
-  _fracture: {fileID: 7717536153865751847}
+  damageSensitivity: 1
   _isParticleEffect: 0
   _explosionParticle: {fileID: 0}
-  _explosionRadius: 1
+  _explosionRadius: 2
   _explosionForce: 1
   matter: 1
-  scareRadius: 5
-  visibleMaterial: {fileID: 2100000, guid: 695873166113ab64997efed81c2426c7, type: 2}
   durabilityMultiplier: 100
   massMultiplier: 9
-  hitFeedback: {fileID: 1609441511912315678}
-  destroyFeedback: {fileID: 1444521781671833460}
-  maxHitVolume: 0.3
+  _scareRadius: 1
+  _visibleMaterial: {fileID: 2100000, guid: ee0c3c95830c9af42be7419eb9447ca9, type: 2}
+  _hitFeedback: {fileID: 1609441511912315678}
+  _destroyFeedback: {fileID: 1444521781671833460}
+  _maxHitVolume: 0.5
 --- !u!96 &5682819097927835413
 TrailRenderer:
   serializedVersion: 3

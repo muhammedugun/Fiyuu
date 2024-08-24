@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 0.75
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13133854, g: 0.44435146, b: 0.6956557, a: 0.75}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1395,11 +1394,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorial: {fileID: 804475461}
-  playFeedbacks: {fileID: 815097658}
-  stopFeedbacks: {fileID: 2087482039}
+  _playFeedbacks: {fileID: 815097658}
+  _stopFeedbacks: {fileID: 2087482039}
   _isTutorialScene: 1
   _isFirstTutorial: 0
-  _launcherArm: {fileID: 0}
+  _launcherArm: {fileID: 1745528123}
   _pauseButton: {fileID: 774122189}
 --- !u!114 &804475464
 MonoBehaviour:
@@ -3566,6 +3565,12 @@ Transform:
 --- !u!4 &1745528122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3647213665381432846, guid: 455ea73fb8a0e274797025014961f5e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1745528119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1745528123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4303454225216119110, guid: 455ea73fb8a0e274797025014961f5e1,
     type: 3}
   m_PrefabInstance: {fileID: 1745528119}
   m_PrefabAsset: {fileID: 0}

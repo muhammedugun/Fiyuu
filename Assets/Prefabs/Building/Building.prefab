@@ -192,14 +192,13 @@ MonoBehaviour:
   disableAssignMass: 1
   _volumeSize: 1
   damageSensitivity: 10
-  _fracture: {fileID: 5093296501143758248}
   armor: 0
-  damageFeedbacks: {fileID: 3859949310406596290}
-  destroyFeedbacks: {fileID: 6335255932944754190}
-  skipBeginningFeedback: {fileID: 1410672776483323578}
   armorDurabilitiy:
   - 600
   - 800
+  _damageFeedbacks: {fileID: 3859949310406596290}
+  _destroyFeedbacks: {fileID: 6335255932944754190}
+  _skipBeginningFeedback: {fileID: 1410672776483323578}
 --- !u!114 &4320506391577644817
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -261,16 +261,13 @@ MonoBehaviour:
   disableAssignMass: 0
   _volumeSize: 1
   damageSensitivity: 28
-  visual: {fileID: 5467909943051193666}
-  dieFeedback: {fileID: 3667324147907310007}
-  damageFeedback: {fileID: 2026154078631842477}
-  skipBeginningFeedback: {fileID: 2358002949291937848}
   durabilityMultiplier: 10
   massMultiplier: 1
-  voiceClips:
-  - {fileID: 8300000, guid: 5b0238c915268954c9f279f6f9b7f030, type: 3}
-  - {fileID: 8300000, guid: bc3dd91a9ad8b4b48a3070fd2e5972bb, type: 3}
-  - {fileID: 8300000, guid: 10cb768124c5b3441bc1ba0da8d89b99, type: 3}
+  _visual: {fileID: 5467909943051193666}
+  _dieFeedback: {fileID: 3667324147907310007}
+  _damageFeedback: {fileID: 2026154078631842477}
+  _skipBeginningFeedback: {fileID: 2358002949291937848}
+  _voiceClips: []
 --- !u!54 &7384214464759222294
 Rigidbody:
   m_ObjectHideFlags: 0

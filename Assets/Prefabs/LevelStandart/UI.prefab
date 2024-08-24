@@ -772,7 +772,7 @@ MonoBehaviour:
   _soundOffSprite: {fileID: 21300000, guid: 454a44711857a4fba85b5ef63a492276, type: 3}
   _pausePopUpTransform: {fileID: 1834494559862764800}
   _popUps: {fileID: 762944435576824111}
-  title: {fileID: 2175345650795888701}
+  _title: {fileID: 2175345650795888701}
 --- !u!1 &762944435576824111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &854290210628424319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1168342058767927340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1293387997037003496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,10 +1694,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 0
-  pauseButton: {fileID: 5142110479152543887}
-  resumeButton: {fileID: 6920563003976060789}
+  _pauseButton: {fileID: 5142110479152543887}
+  _resumeButton: {fileID: 6920563003976060789}
   _pausePopUpTransform: {fileID: 1834494559862764800}
-  levelTitle: {fileID: 8580443233407151204}
+  _levelTitle: {fileID: 8580443233407151204}
 --- !u!114 &1900397317997194525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,12 +1844,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe86a879a4e18f448bba86b59fea5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stars:
+  _stars:
   - {fileID: 6197421792229422500}
   - {fileID: 4923355146799401295}
   - {fileID: 5114353563662189383}
-  scoreText: {fileID: 129884504766606053}
-  scoreSlider: {fileID: 3694914410144015845}
+  _scoreText: {fileID: 129884504766606053}
+  _scoreSlider: {fileID: 3694914410144015845}
 --- !u!1 &1999175144341336052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2245074009802639015
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,7 +2779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2816110349591859781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,7 +3014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2867234489679589895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,7 +3284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &3217131677053237680
 GameObject:
   m_ObjectHideFlags: 0
@@ -4949,7 +4949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &3619365208999137762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6834,7 +6834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &4661431017935595662
 GameObject:
   m_ObjectHideFlags: 0
@@ -7560,7 +7560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &4986613024277868217
 GameObject:
   m_ObjectHideFlags: 0
@@ -7779,10 +7779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df605a9520de2224e86f235279824e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoGrid: {fileID: 2137108863677259610}
-  plusIcon: {fileID: 1999175144341336052}
-  woodImage: {fileID: 21300000, guid: e3ad252a6b5dd254598e6c6a4b2b9b81, type: 3}
-  stoneImage: {fileID: 21300000, guid: 832acf00d1b486545a3e2ee3d0aabb6e, type: 3}
+  _ammoGrid: {fileID: 2137108863677259610}
+  _plusIcon: {fileID: 1999175144341336052}
+  _woodImage: {fileID: 21300000, guid: e3ad252a6b5dd254598e6c6a4b2b9b81, type: 3}
+  _stoneImage: {fileID: 21300000, guid: 832acf00d1b486545a3e2ee3d0aabb6e, type: 3}
 --- !u!1 &5171291337819156247
 GameObject:
   m_ObjectHideFlags: 0
@@ -8365,7 +8365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5e89e5501274a4aa043bffb15ca296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCountText: {fileID: 4863267044180159340}
+  _enemyCountText: {fileID: 4863267044180159340}
 --- !u!1 &5683408626400298013
 GameObject:
   m_ObjectHideFlags: 0
@@ -9709,6 +9709,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Feedbacks
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6245514888382521168}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Feedbacks
         m_MethodName: PlayFeedbacks
@@ -9733,7 +9745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &6815347764892311621
 GameObject:
   m_ObjectHideFlags: 0
@@ -10539,6 +10551,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 6245514888382521168}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Feedbacks
         m_MethodName: PlayFeedbacks
@@ -10549,7 +10573,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &7935883208802520402
 MonoBehaviour:
@@ -10563,7 +10587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &8063429393452783324
 GameObject:
   m_ObjectHideFlags: 0
@@ -12400,7 +12424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &9008546179163990392
 GameObject:
   m_ObjectHideFlags: 0
@@ -12709,7 +12733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1001 &1418145161258160237
 PrefabInstance:
   m_ObjectHideFlags: 0

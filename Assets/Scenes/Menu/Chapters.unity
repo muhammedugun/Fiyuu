@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1014,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &424517094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &531836379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &634520717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &799744175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,12 +2373,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262fd4b398d77734e810b0f7131ae0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 634520722}
-  pageCount: 2
   pageStep: {x: -1765, y: 0, z: 0}
   chapters: {fileID: 1958615264}
-  tweenTime: 0.3
   tweenType: 9
+  tweenTime: 0.3
+  _titleText: {fileID: 0}
+  _pageCount: 0
 --- !u!1 &874398478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,7 +2537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &906741105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,7 +2905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &985393582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,7 +3063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1011865631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,18 +3751,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961bb8f9bb77f6c408f3e52adf3d4b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPopUp: {fileID: 314609106}
-  chapter1: {fileID: 158174924}
-  lockImagePrefab: {fileID: 6550041780783676981, guid: 54980423fd90a54408a99d2916a1c913,
+  _playPopUp: {fileID: 314609106}
+  _chapter1: {fileID: 158174924}
+  _lockImagePrefab: {fileID: 6550041780783676981, guid: 54980423fd90a54408a99d2916a1c913,
     type: 3}
-  stars:
+  _stars:
   - {fileID: 411064443}
   - {fileID: 121620127}
   - {fileID: 2119560413}
-  popUpTitleText: {fileID: 1208748497}
-  scoreText: {fileID: 386156222}
-  lockIcon: {fileID: 21300000, guid: 7fb1749bc4bed4422a977bfdf3212dd3, type: 3}
-  playPopUpWindow: {fileID: 554316926}
+  _popUpTitleText: {fileID: 1208748497}
+  _scoreText: {fileID: 386156222}
+  _lockIcon: {fileID: 21300000, guid: 7fb1749bc4bed4422a977bfdf3212dd3, type: 3}
+  _playPopUpWindow: {fileID: 554316926}
 --- !u!4 &1157273644
 Transform:
   m_ObjectHideFlags: 0
@@ -3937,7 +3936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1208748492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,7 +4274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!114 &1267013337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4541,7 +4540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1289686722
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,7 +4699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1399337477
 GameObject:
   m_ObjectHideFlags: 0
@@ -5295,7 +5294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1569133135
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,7 +5529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &1645868080
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,12 +6237,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &2010337168
 GameObject:
   m_ObjectHideFlags: 0
@@ -6553,7 +6552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2092387409
 GameObject:
   m_ObjectHideFlags: 0
@@ -6803,7 +6802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2119560411
 GameObject:
   m_ObjectHideFlags: 0
