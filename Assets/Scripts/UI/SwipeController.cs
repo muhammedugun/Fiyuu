@@ -1,51 +1,63 @@
+// Refactor 24.08.24
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 
+/// <summary>
+/// Chapters sahnesindeki bölümler arasýndaki geçiþi saðlayan swipe'leri yönetmekten sorumludur
+/// </summary>
 public class SwipeController : MonoBehaviour
 {
-    [SerializeField] private Text titleText;
-    [SerializeField] private int pageCount;
-    
-
-    int currentPage;
-    Vector3 targetPos;
     public Vector3 pageStep;
     public RectTransform chapters;
-
-    public float tweenTime;
     public Ease tweenType;
+    public float tweenTime;
+
+    [SerializeField] private Text _titleText;
+    [SerializeField] private int _pageCount;
+
+    private int _currentPage;
+    private Vector3 _targetPos;
 
     private void Awake()
     {
-        currentPage = 1;
-        targetPos = chapters.localPosition;
-        
+        _currentPage = 1;
+        _targetPos = chapters.localPosition;
     }
 
+    /// <summary>
+    /// Sonraki bölüme geçer
+    /// </summary>
     public void Next()
     {
-        if(currentPage<pageCount)
+        if(_currentPage<_pageCount)
         {
-            currentPage++;
-            titleText.text = "Chapter " + currentPage;
-            targetPos += pageStep;
+            _currentPage++;
+            _titleText.text = "Chapter " + _currentPage;
+            _targetPos += pageStep;
             MovePage();
-
         }
     }
+
+    /// <summary>
+    /// Önceki bölüme geçer
+    /// </summary>
     public void Previous()
     {
-        if(currentPage>1)
+        if(_currentPage>1)
         {
-            currentPage--;
-            titleText.text = "Chapter " + currentPage;
-            targetPos -= pageStep;
+            _currentPage--;
+            _titleText.text = "Chapter " + _currentPage;
+            _targetPos -= pageStep;
             MovePage();
         }
     }
+
+    /// <summary>
+    /// Sayfayý hareket ettirir
+    /// </summary>
     void MovePage()
     {
-        chapters.DOLocalMove(targetPos, tweenTime).SetEase(tweenType);
+        chapters.DOLocalMove(_targetPos, tweenTime).SetEase(tweenType);
     }
 }

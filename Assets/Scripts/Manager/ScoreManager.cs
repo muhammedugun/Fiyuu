@@ -1,29 +1,31 @@
-// Refactor 12.05.24
+// Refactor 23.08.24
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Skor bilgisini yönetmekten sorumludur
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    public int threeStarScore;
-
     public static int enemyScore = 500;
 
-    private int currentScore;
-    [SerializeField] private bool isFirstLevel;
-    public int CurrentScore
-    {
-        get { return currentScore; }
-        set
-        {
-            currentScore = value;
-            EventBus.Publish(EventType.ScoreUpdated);
-        }
-    }
+    public int threeStarScore;
 
+    [SerializeField] private bool _isFirstLevel;
 
     private AmmoManager _ammoManager;
-
+    private int _currentScore;
+    
+    public int CurrentScore
+    {
+        get { return _currentScore; }
+        set
+        {
+            _currentScore = value;
+            EventBus.Publish(EventType.ScoreUpdated);
+        }
+    } 
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class ScoreManager : MonoBehaviour
     {
         EventBus<float, BuildingMatter>.Subscribe(EventType.BuildSmashed, CalculateBuildingScore);
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
-        if(!isFirstLevel)
+        if(!_isFirstLevel)
             EventBus.Subscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
         EventBus.Subscribe(EventType.EnOfLevelPopUpOpened, SaveScore);
     }
@@ -43,27 +45,44 @@ public class ScoreManager : MonoBehaviour
     {
         EventBus<float, BuildingMatter>.Unsubscribe(EventType.BuildSmashed, CalculateBuildingScore);
         EventBus.Unsubscribe(EventType.EnemyDied, CalculateEnemyScore);
-        if (!isFirstLevel)
+        if (!_isFirstLevel)
             EventBus.Unsubscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
         EventBus.Unsubscribe(EventType.EnOfLevelPopUpOpened, SaveScore);
     }
 
+    /// <summary>
+    /// Kýrýlan herhangi bir objenin verilen parametrelerine bakarak kazanýlacak skoru hesaplar
+    /// </summary>
+    /// <param name="volumeSize"></param>
+    /// <param name="buildingArmor"></param>
+    /// <returns></returns>
     public static int CalculateScore(float volumeSize, BuildingMatter buildingArmor)
     {
         int score = (int)(volumeSize * 200) * (int)buildingArmor;
         return score;
     }
 
+    /// <summary>
+    /// Kýrýlan binanýn verilen parametrelerine bakarak kazanýlacak skoru hesaplar 
+    /// </summary>
+    /// <param name="volumeSize"></param>
+    /// <param name="buildingArmor"></param>
     private void CalculateBuildingScore(float volumeSize, BuildingMatter buildingArmor)
     {
         CurrentScore += CalculateScore(volumeSize, buildingArmor);
     }
 
+    /// <summary>
+    /// Yokedilen düþmanýn skorunu hesaplar
+    /// </summary>
     private void CalculateEnemyScore()
     {
         CurrentScore += enemyScore;
     }
 
+    /// <summary>
+    /// Level sonu için skoru hesaplayýp günceller
+    /// </summary>
     private void CalculateGameEndScore()
     {
         int firedCount = _ammoManager.levelAmmoCount - _ammoManager.ammunition.Count;
@@ -74,6 +93,9 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Mevcut skor rekor skordan yüksekse mevcut skoru levelin üzerine kalýcý olarak kaydeder
+    /// </summary>
     private void SaveScore()
     {
         int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
@@ -84,6 +106,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <returns>Kazanýlan yýldýz sayýsý</returns>
     public int GetRewardedStarCount()
     {
         int rewardedStarCount = 0;
@@ -102,6 +125,5 @@ public class ScoreManager : MonoBehaviour
 
         return rewardedStarCount;
     }
-
-   
+ 
 }

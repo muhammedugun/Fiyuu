@@ -1,13 +1,23 @@
-// Refactor 12.03.24
-
+// Refactor 23.08.24
 using UnityEngine;
 
+/// <summary>
+/// Hasar alabilen objelerin ana sýnýfýdýr
+/// </summary>
 public abstract class DamagableObjectBase : RigidObjectBase
 {
+    /// <summary>
+    /// Objenin dayanýklýlýk deðerini tutar. Obje hasar aldýðýnda bu deðer azalýr
+    /// </summary>
     public float durability { get; set; }
-
+    /// <summary>
+    /// Hasar hassaslýðý, objenin ne kadarlýk bir fiziksel etkiye uðradýktan sonra hasar alabileceðini belirler
+    /// </summary>
     [SerializeField] protected int damageSensitivity;
-
+    /// <summary>
+    /// Dayanýklýlýk çarpaný, objenin dayanýklýlýðý bu deðerle çarpýldýktan sonra atanýr. 
+    /// Bu deðer ne kadar yüksek olursa o kadar dayanýklý olur
+    /// </summary>
     protected float _durabilityMultiplier=1f;
 
     protected override void Start()
@@ -17,7 +27,7 @@ public abstract class DamagableObjectBase : RigidObjectBase
     }
 
     /// <summary>
-    /// Objenin dayanýklýlýðýný atar
+    /// Objenin aðýrlýðýný ve parametredeki deðeri baz alarak dayanýklýlýðýný atar
     /// </summary>
     protected virtual void AssignDurability(float durabilityMultiplier = 1f)
     {

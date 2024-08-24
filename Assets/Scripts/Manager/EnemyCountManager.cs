@@ -1,9 +1,11 @@
+// Refactor 23.08.24
 using UnityEngine;
 
-
+/// <summary>
+/// Seviyedeki düþman sayýsýyla ilgili iþlemleri yönetmekten sorumlu
+/// </summary>
 public class EnemyCountManager : MonoBehaviour
 {
-    
     [HideInInspector] public int _enemyCount;
 
     private void Start()
@@ -22,12 +24,18 @@ public class EnemyCountManager : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Seviyedeki düþman sayýsýný hesapla
+    /// </summary>
     private void CalculateEnemyCount()
     {
         _enemyCount = FindObjectsOfType<Enemy>().Length;
         EventBus.Publish(EventType.EnemyCountUpdated);
     }
 
+    /// <summary>
+    /// Seviyedeki mevcut düþman sayýsýný güncelle
+    /// </summary>
     private void UpdateEnemyCount()
     {
         _enemyCount--;
@@ -35,6 +43,4 @@ public class EnemyCountManager : MonoBehaviour
             EventBus.Publish(EventType.AllEnemiesDead);
         EventBus.Publish(EventType.EnemyCountUpdated);
     }
-
-    
 }

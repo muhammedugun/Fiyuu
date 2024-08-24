@@ -1,23 +1,18 @@
 //Refactor: 11.02.24
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 /// <summary>
 /// Arayüzdeki mühimmat seçim objesiyle ilgili
 /// </summary>
 public class AmmoManager : MonoBehaviour
 {
-
     public List<AmmoMatter> ammunition;
 
     /// <summary>
     /// Seviyedeki mühimmat sayýsý
     /// </summary>
     [HideInInspector] public int levelAmmoCount;
-
 
     private void Start()
     {

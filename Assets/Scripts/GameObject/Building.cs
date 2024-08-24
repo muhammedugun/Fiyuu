@@ -1,7 +1,6 @@
-// Refactor 12.03.24
+// Refactor 23.08.24
 using MoreMountains.Feedbacks;
 using UnityEngine;
-
 
 /// <summary>
 /// Yapý(Bina) objelerini temsil eder
@@ -11,15 +10,11 @@ public class Building : SmashableObjectBase
     [Tooltip("Yapýnýn zýrhý")]
     public BuildingMatter armor;
 
-    [SerializeField] private MMF_Player damageFeedbacks;
-    [SerializeField] private MMF_Player destroyFeedbacks;
-    [SerializeField] private MMF_Player skipBeginningFeedback;
-    
     /// <summary>
     /// Yapý zýrhýna göre dayanýklýlýk deðerlerini saklayan dizi. 
     /// <para>  Örnek: 0. index 1. yapý maddesi olan ahþapa denk gelir. </para>
     /// </summary>
-    public float[] armorDurabilitiy = new float[2] { 300f, 400f};
+    public float[] armorDurabilitiy = new float[2] { 300f, 400f };
 
     /// <summary>
     /// Zýrhýn güçlü yönleri. Zýrhýn neye dayanýklý olup neye dayanýklý olmadýðý. 
@@ -35,19 +30,18 @@ public class Building : SmashableObjectBase
         { 1,0,1,0}, // Taþ
     };
 
-    private static int frameCount;
+    [SerializeField] private MMF_Player _damageFeedbacks;
+    [SerializeField] private MMF_Player _destroyFeedbacks;
+    [SerializeField] private MMF_Player _skipBeginningFeedback;
 
     private void Awake()
     {
         _massMultiplier = (int)armor;
         _durabilityMultiplier = armorDurabilitiy[(int)armor - 1];
     }
-    private Rigidbody rb;
 
     protected override void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-       
+    {     
         MMFloatingTextSpawner floatingTextSpawner = FindObjectOfType<MMFloatingTextSpawner>();
         base.Start();
     }
@@ -59,23 +53,20 @@ public class Building : SmashableObjectBase
 
     private void OnCollisionEnter(Collision collision)
     {
-       
         DoDamage(collision);
         if (CheckSmash())
         {
             Smash(collision);
-        }
-        
-           
+        }    
     }
-
-
+    /// <summary>
+    /// Baþlangýç feedback'lerini atlar
+    /// </summary>
     public void SkipBeginning()
     {
-        skipBeginningFeedback.PlayFeedbacks();
+        _skipBeginningFeedback.PlayFeedbacks();
         EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
-
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
@@ -87,7 +78,7 @@ public class Building : SmashableObjectBase
                 var ammo = collision.gameObject.GetComponent<Ammo>();
                 if(ammo!=null)
                 {
-                    damageFeedbacks?.PlayFeedbacks();
+                    _damageFeedbacks?.PlayFeedbacks();
                     var ammoArmor = ammo.matter;
                     if (armorStrengths[(int)armor - 1, (int)ammoArmor - 1] == 0)
                     {
@@ -103,21 +94,16 @@ public class Building : SmashableObjectBase
         }
     }
 
-    
     public override void Smash(Collision collision)
     {
         base.Smash(collision);
         EventBus<float, BuildingMatter>.Publish(EventType.BuildSmashed, _volumeSize, armor);
         EventBus.Publish(EventType.BuildSmashed);
         
-        destroyFeedbacks.PlayFeedbacks(transform.position, ScoreManager.CalculateScore(_volumeSize, armor));
+        _destroyFeedbacks.PlayFeedbacks(transform.position, ScoreManager.CalculateScore(_volumeSize, armor));
 
-    }
-
-   
+    }  
 }
-
-
 
 /// <summary>
 /// Yapýnýn maddesi(zýrhý) 

@@ -1,4 +1,4 @@
-﻿// Refactor 12.03.24
+﻿// Refactor 23.08.24
 using MoreMountains.Feedbacks;
 using System.Collections;
 using TMPro;
@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Mühimmat ile ilgili
+/// Mühimmatların ana sınıfıdır
 /// </summary>
 public class Ammo : ExplosiveBase
 {
@@ -14,35 +14,32 @@ public class Ammo : ExplosiveBase
     [Tooltip("Mühimmatın maddesi")]
     public AmmoMatter matter;
 
-    [Tooltip("Mühimmat düştükten sonra ne kadar yakınındaki düşmanları korkutsun?")]
-    [SerializeField] private float scareRadius;
-    [Tooltip("Trail Renderer'in görülmesini sağlayacak materyal")]
-    [SerializeField] private Material visibleMaterial;
-    [SerializeField] private float durabilityMultiplier = 100f;
-    [SerializeField] private float massMultiplier = 10f;
-    [SerializeField] private MMF_Player hitFeedback;
-    [SerializeField] private MMF_Player destroyFeedback;
-    [SerializeField] private float maxHitVolume;
+    public float durabilityMultiplier = 100f;
+    public float massMultiplier = 10f;
 
     internal Vector3 throwPos;
 
-
-    private bool isHit;
-    private float _mass;
+    [Tooltip("Mühimmat düştükten sonra ne kadar yakınındaki düşmanları korkutsun?")]
+    [SerializeField] private float _scareRadius;
+    [Tooltip("Trail Renderer'in görülmesini sağlayacak materyal")]
+    [SerializeField] private Material _visibleMaterial;
+    [SerializeField] private MMF_Player _hitFeedback;
+    [SerializeField] private MMF_Player _destroyFeedback;
+    [SerializeField] private float _maxHitVolume;
 
     /// <summary>
     /// Mühimmatın ilk çaprıştığı noktayı gösterecek olan X şeklindeki UI elemanı
     /// </summary>
     private TextMeshProUGUI _collisionIconText;
     private TrailRenderer _trailRenderer;
-    private bool isCollisionShowed;
+    private bool _isHit;
+    private float _mass;
+    private bool _isCollisionShowed;
 
-    public static int frameCount;
-    
     private void Awake()
     {
-        _massMultiplier = massMultiplier;
-        _durabilityMultiplier = durabilityMultiplier;
+        base._massMultiplier = massMultiplier;
+        base._durabilityMultiplier = durabilityMultiplier;
     }
     protected override void Start()
     {
@@ -52,15 +49,14 @@ public class Ammo : ExplosiveBase
         _mass = gameObject.GetComponent<Rigidbody>().mass;
     }
 
-    GameObject moveble;
-    float _moveableMass;
+    
     private void OnCollisionEnter(Collision collision)
     {
         // İlk kez çarpışıldığı için ses efekti çalmakla ilgili işlemler yapılıyor
-        if (!isHit )
+        if (!_isHit )
         {
-            isHit = true;
-            _trailRenderer.material = visibleMaterial;
+            _isHit = true;
+            _trailRenderer.material = _visibleMaterial;
 
             bool isHitBuilding = collision.gameObject.TryGetComponent<Building>(out Building building);
             bool isHitEnemy = collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy);
@@ -71,32 +67,32 @@ public class Ammo : ExplosiveBase
                 var colForce = collision.impulse.magnitude / Time.fixedDeltaTime;
                 if(colForce>600)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = _maxHitVolume;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = _maxHitVolume;
                 }
                 else if (colForce > 300)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume*0.8f;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume * 0.8f;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = _maxHitVolume*0.8f;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = _maxHitVolume * 0.8f;
                 }
                 else if (colForce > 0)
                 {
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = maxHitVolume * 0.6f;
-                    hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = maxHitVolume * 0.6f;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = _maxHitVolume * 0.6f;
+                    _hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = _maxHitVolume * 0.6f;
                 }
             }
             else
             {
-                hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .2f;
-                hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .2f;
+                _hitFeedback.GetFeedbackOfType<MMF_Sound>().MaxVolume = .2f;
+                _hitFeedback.GetFeedbackOfType<MMF_Sound>().MinVolume = .2f;
             }
 
-            hitFeedback.PlayFeedbacks();
+            _hitFeedback.PlayFeedbacks();
         }
 
 
         ShowCollisionIcon();
-        RunResponseAnim(scareRadius);
+        RunResponseAnim(_scareRadius);
         DoDamage(collision);
         if (CheckSmash())
         {
@@ -107,12 +103,14 @@ public class Ammo : ExplosiveBase
 
             Explode(collision);
             isExplode = true;
-            destroyFeedback.PlayFeedbacks();
+            _destroyFeedback.PlayFeedbacks();
         }
 
     }
 
-
+    /// <summary>
+    /// Mühimmatın parçalandıktan sonraki parçalarına ağırlık ataması yapar
+    /// </summary>
     void AssignFragmentsMass()
     {
         var fragmentsParent = transform.parent.GetChild(2).gameObject;
@@ -171,9 +169,9 @@ public class Ammo : ExplosiveBase
     /// </summary>
     private void ShowCollisionIcon()
     {
-        if(!isCollisionShowed)
+        if(!_isCollisionShowed)
         {
-            isCollisionShowed = true;
+            _isCollisionShowed = true;
             _collisionIconText.enabled = true;
             MoveUIToWorldPos(_collisionIconText.rectTransform, transform.position);
         }

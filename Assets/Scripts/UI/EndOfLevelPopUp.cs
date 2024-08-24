@@ -1,9 +1,12 @@
-// Refactor 12.05.24
+// Refactor 23.08.24
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Level sonu popupýný yönetmekten sorumludur
+/// </summary>
 public class EndOfLevelPopUp : MonoBehaviour
 {
     [SerializeField] private Image[] _stars;
@@ -32,9 +35,11 @@ public class EndOfLevelPopUp : MonoBehaviour
     {
         EventBus.Unsubscribe(EventType.AllEnemiesDead, OpenForwardButton);
         EventBus.Unsubscribe(EventType.AllObjectsStopped, OpenPopUpInvoke);
-
     }
 
+    /// <summary>
+    /// Next Level butonunu çalýþtýrýr. Sonraki levele geçiþ yapar.
+    /// </summary>
     public void OnClickNextLevel()
     {
         GameManager.ResumeLevel();
@@ -51,6 +56,11 @@ public class EndOfLevelPopUp : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Sahnenin editörun build settings bölümünde ayarlý olup olmadýðýný kontrol eder
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     private bool IsSceneInBuildSettings(string name)
     {
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
@@ -76,6 +86,9 @@ public class EndOfLevelPopUp : MonoBehaviour
         GameManager.RestartLevel();
     }
 
+    /// <summary>
+    /// Popup üzerindeki aktif ve deaktif olacak yýldýzlarý ayarlar
+    /// </summary>
     private void SetStars()
     {
         if (_stars.Length > 0)
@@ -91,6 +104,9 @@ public class EndOfLevelPopUp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Popupý gecikmeli bir þekilde açar
+    /// </summary>
     private void OpenPopUpInvoke()
     {
         Invoke(nameof(OpenPopUp), 3f);
@@ -104,6 +120,9 @@ public class EndOfLevelPopUp : MonoBehaviour
         GameManager.PauseLevel();
     }
 
+    /// <summary>
+    /// Kazanma ve kaybetme durumuna göre uygun olan popupý açar
+    /// </summary>
     private void SetWinOrFailPanel()
     {
         if (_enemyCountManager._enemyCount <= 0)
@@ -118,14 +137,15 @@ public class EndOfLevelPopUp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Forward, yani hýzlýca geçip level sonu popupýnýn açýlmasýný saðlayan butonu çalýþtýrýr.
+    /// </summary>
     private void OpenForwardButton()
     {
         if(!InLevelManager.isAllObjectsStopped)
         {
             _ForwardButton.SetActive(true);
         }
-        
     }
-
 
 }

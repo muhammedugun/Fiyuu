@@ -2,11 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Level içindeki skor çubuðu ile ilgili güncellemelerden sorumlu
+/// </summary>
 public class ScoreBar : MonoBehaviour
 {
-    [SerializeField] private Image []stars;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Slider scoreSlider;
+    [SerializeField] private Image[] _stars;
+    [SerializeField] private Text _scoreText;
+    [SerializeField] private Slider _scoreSlider;
 
     private ScoreManager _scoreManager;
 
@@ -34,26 +37,26 @@ public class ScoreBar : MonoBehaviour
 
     private void UpdateScore()
     {
-        scoreText.text = _scoreManager.CurrentScore.ToString();
+        _scoreText.text = _scoreManager.CurrentScore.ToString();
     }
 
     private void UpdateSlider()
     {
-        scoreSlider.value = ((float)_scoreManager.CurrentScore / _scoreManager.threeStarScore);
+        _scoreSlider.value = ((float)_scoreManager.CurrentScore / _scoreManager.threeStarScore);
     }
 
     private void UpdateStars()
     {
         for (int i = 0; i < 2; i++)
         {
-            if (scoreSlider.value >= (0.25f * (i + 1)))
+            if (_scoreSlider.value >= (0.25f * (i + 1)))
             {
-                stars[i].color = Color.yellow;
+                _stars[i].color = Color.yellow;
             }
         }
-        if (scoreSlider.value >= 1f)
+        if (_scoreSlider.value >= 1f)
         {
-            stars[2].color = Color.yellow;
+            _stars[2].color = Color.yellow;
         }
     }
 

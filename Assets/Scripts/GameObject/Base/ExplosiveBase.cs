@@ -1,8 +1,8 @@
-// Refactor 12.03.24
+// Refactor 23.08.24
 using UnityEngine;
 
 /// <summary>
-/// Patlayıcı nesne ile ilgili görevlerden sorumlu
+/// Patlayıcı nesne ile ilgili görevlerden sorumlu ana sınıf
 /// </summary>
 public abstract class ExplosiveBase : SmashableObjectBase
 {

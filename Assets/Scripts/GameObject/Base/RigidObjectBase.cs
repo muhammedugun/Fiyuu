@@ -1,4 +1,4 @@
-// Refactor 12.03.24
+// Refactor 23.08.24
 using UnityEngine;
 
 /// <summary>
@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public abstract class RigidObjectBase : MonoBehaviour
 {
+    /// <summary>
+    /// Aðýrlýk atamasý devre dýþý býrakýlsýn mý?
+    /// Devre dýþý býrakýlýrsa inspectordaki deðer neyse onu kullanmaya devam eder.
+    /// </summary>
     [SerializeField] private bool disableAssignMass;
     /// <summary>
     /// Objenin hacmi. Yani objenin uzayda kapladýðý alanýn boyutu.
@@ -18,9 +22,6 @@ public abstract class RigidObjectBase : MonoBehaviour
     /// Aðýrlýk atamasý yapýlýrken eklenecek çarpan.
     /// </summary>
     protected float _massMultiplier=1f;
-    
-
-
 
     protected virtual void Start()
     {
@@ -29,10 +30,8 @@ public abstract class RigidObjectBase : MonoBehaviour
             AssignMass(_rigidbody, _volumeSize, _massMultiplier);
     }
 
-
-
     /// <summary>
-    /// Objenin aðýrlýðýný atar
+    /// Objenin aðýrlýðýný hacmine ve _massMultiplier deðerine göre atar
     /// </summary>
     /// <param name="rb"></param>
     /// <param name="volumeSize"></param>

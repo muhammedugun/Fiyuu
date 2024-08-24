@@ -1,23 +1,26 @@
-//Refactor 11.05.24
+//Refactor 23.08.24
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Level içindeki pause menüüsünü yönetmekten sorumludur
+/// </summary>
 public class PausePopUp : MonoBehaviour
 {
     [SerializeField] private Image _soundButtonImage;
     [SerializeField] private Sprite _soundOnSprite, _soundOffSprite;
     [SerializeField] private RectTransform _pausePopUpTransform;
     [SerializeField] private GameObject _popUps;
-    [SerializeField] private Text title;
+    [SerializeField] private Text _title;
     
-    private const string volumeKey = "isMute";
+    private const string _volumeKey = "isMute";
 
     private void Start()
     {
         int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
-        title.text = "Level " + levelIndex;
+        _title.text = "Level " + levelIndex;
     }
 
     private void OnEnable()
@@ -25,17 +28,24 @@ public class PausePopUp : MonoBehaviour
         UpdateSoundButtonSprite();
     }
 
+    /// <summary>
+    /// Ses butonunun sprite'ýný günceller
+    /// </summary>
     private void UpdateSoundButtonSprite()
     {
         bool isSoundOn = AudioListener.volume != 0f;
         _soundButtonImage.sprite = isSoundOn ? _soundOnSprite : _soundOffSprite;
     }
 
+    /// <summary>
+    /// Ses butonuna basýlýnca yapýlmasý gereken iþlemleri yapar. 
+    /// Sesi azaltýr ya da artýrýr, sprite'ý günceller, ses bilgisini günceller
+    /// </summary>
     public void OnClickSoundButton()
     {
         bool isMuted = AudioListener.volume == 0f;
         AudioListener.volume = isMuted ? 1f : 0f;
-        PlayerPrefs.SetInt(volumeKey, isMuted ? 0 : 1);
+        PlayerPrefs.SetInt(_volumeKey, isMuted ? 0 : 1);
         UpdateSoundButtonSprite();
     }
 
@@ -65,18 +75,16 @@ public class PausePopUp : MonoBehaviour
         Infrastructure.LoadScene("MainMenu");
     }
 
-
     private void ClosePausePopUp()
     {
         if (_pausePopUpTransform != null)
         {
-            UIAnimation.ClosePopUp(_pausePopUpTransform, 0.2f, true, () =>
+            UIAnimationService.ClosePopUp(_pausePopUpTransform, 0.2f, true, () =>
             {
                 _pausePopUpTransform.gameObject.SetActive(false);
             });
         }
     }
-
 
     private void OpenPausePopUp()
     {
@@ -84,7 +92,7 @@ public class PausePopUp : MonoBehaviour
         {
             _popUps.SetActive(true);
             _pausePopUpTransform.gameObject.SetActive(true);
-            UIAnimation.OpenPopUp(_pausePopUpTransform, 0.2f, true);
+            UIAnimationService.OpenPopUp(_pausePopUpTransform, 0.2f, true);
         }
     }
 

@@ -1,14 +1,18 @@
-// Refactor 12.03.24
+// Refactor 23.08.24
 using UnityEngine;
 
+/// <summary>
+/// Parçalanabilir objeler için ana sýnýftýr
+/// </summary>
 [RequireComponent(typeof(Fracture))]
 public abstract class SmashableObjectBase : DamagableObjectBase
 {
-    public Fracture _fracture;
     /// <summary>
     /// Parçalanma gerçekleþti mi?
     /// </summary>
     protected bool _isSmash;
+
+    private Fracture _fracture;
 
     protected override void Start()
     {
@@ -37,7 +41,6 @@ public abstract class SmashableObjectBase : DamagableObjectBase
     /// <summary>
     /// Parçalamanýn gerçekleþebilirliðini kontrol eder
     /// </summary>
-    /// <param name="collision"></param>
     public bool CheckSmash()
     {
         if (!_isSmash && durability <= 0)

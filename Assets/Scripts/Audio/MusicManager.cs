@@ -1,12 +1,17 @@
+//Refactor 23.08.24
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Oyun boyunca (sahnelerden sahnelere geçiþte bile) oyun müziðinin oynatýlma durumundan sorumludur
+/// </summary>
 public class MusicManager : MonoBehaviour
 {
     public AudioSource audioSource;
-    private bool isStop;
 
     private static MusicManager instance;
+    private bool isStop;
+
     public static MusicManager Instance
     {
         get
@@ -27,6 +32,7 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton saðlanýyor
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -38,6 +44,10 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Bir sahne yüklendiði zaman, yüklenen sahneye göre müziði oynatýr ya da duraklatýr
+    /// </summary>
+    /// <param name="level"></param>
     private void OnLevelWasLoaded(int level)
     {
         string name = SceneManager.GetSceneByBuildIndex(level).name;

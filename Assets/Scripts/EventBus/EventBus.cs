@@ -1,3 +1,4 @@
+// Refactor 23.08.24
 using System.Collections.Generic;
 using UnityEngine.Events;
 
@@ -12,7 +13,9 @@ public enum EventType
     BuildSmashed, LauncherThrowed, FirstClickInLevel, AllObjectsStopped, EnOfLevelPopUpOpened, ScoreUpdated
 }
 
-
+/// <summary>
+/// Event'leri daha kolay yönetmeyi saðlar
+/// </summary>
 public class EventBus
 {
     private static readonly IDictionary<EventType, UnityEvent> Events = new Dictionary<EventType, UnityEvent>();
@@ -60,6 +63,10 @@ public class EventBus
 
 }
 
+/// <summary>
+/// Tek parametre alabilen EventBus
+/// </summary>
+/// <typeparam name="T0"></typeparam>
 public class EventBus<T0>
 {
     private static readonly IDictionary<EventType, UnityEvent<T0>> Events = new Dictionary<EventType, UnityEvent<T0>>();
@@ -97,7 +104,11 @@ public class EventBus<T0>
 
 }
 
-
+/// <summary>
+/// Ýki parametre alabilen EventBus
+/// </summary>
+/// <typeparam name="T0"></typeparam>
+/// <typeparam name="T1"></typeparam>
 public class EventBus<T0, T1>
 {
     private static readonly IDictionary<EventType, UnityEvent<T0, T1>> Events = new Dictionary<EventType, UnityEvent<T0, T1>>();

@@ -1,6 +1,10 @@
+// Refactor 23.08.24
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
+/// <summary>
+/// Kýrýlamaz binalarla ilgili fonksiyonlardan sorumlu
+/// </summary>
 public class UnbreakableBuilding : MonoBehaviour
 {
     [SerializeField] private MMF_Player skipBeginningFeedback;
@@ -10,6 +14,9 @@ public class UnbreakableBuilding : MonoBehaviour
         EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
 
+    /// <summary>
+    /// Baþlangýç feedback'lerini atlar
+    /// </summary>
     public void SkipBeginning()
     {
         skipBeginningFeedback.PlayFeedbacks();

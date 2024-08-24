@@ -1,27 +1,30 @@
-// Refactor 12.03.24
-
+// Refactor 23.08.24
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using System.Collections.Generic;
+
+/// <summary>
+/// Düþmanlar için ana sýnýf
+/// </summary>
 public class Enemy : DamagableObjectBase
 {
-    [SerializeField] private GameObject visual;
-    [SerializeField] private MMF_Player dieFeedback;
-    [SerializeField] private MMF_Player damageFeedback;
-    [SerializeField] private MMF_Player skipBeginningFeedback;
-    [SerializeField] private float durabilityMultiplier=50f;
-    [SerializeField] private float massMultiplier = 1f;
-    [SerializeField] private List<AudioClip> voiceClips;
+    public float durabilityMultiplier = 50f;
+    public float massMultiplier = 1f;
 
+    [SerializeField] private GameObject _visual;
+    [SerializeField] private MMF_Player _dieFeedback;
+    [SerializeField] private MMF_Player _damageFeedback;
+    [SerializeField] private MMF_Player _skipBeginningFeedback;
+    [SerializeField] private List<AudioClip> _voiceClips;
 
     private AudioSource _audioSource;
-
     private bool _isDead;
     private Animator _animator;
+
     private void Awake()
     {
-        _massMultiplier = massMultiplier;
-        _durabilityMultiplier = durabilityMultiplier;
+        base._massMultiplier = massMultiplier;
+        base._durabilityMultiplier = durabilityMultiplier;
     }
 
     protected override void Start()
@@ -31,8 +34,6 @@ public class Enemy : DamagableObjectBase
         _animator = GetComponent<Animator>();
         base.Start();
         gameObject.tag = "Enemy";
-
-
     }
 
     private void OnEnable()
@@ -42,20 +43,16 @@ public class Enemy : DamagableObjectBase
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        
         var collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
         if (durability > 0 && collisionForce > damageSensitivity)
         {
-            damageFeedback.PlayFeedbacks();
+            _damageFeedback.PlayFeedbacks();
         }
 
         DoDamage(collision);
 
         if (CheckDie())
             Die();
-      
-
     }
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
@@ -65,23 +62,29 @@ public class Enemy : DamagableObjectBase
         base.DoDamage(collision, damageMultiplier);
     }
 
-
-        public void PlayVoiceClip(int index)
+    /// <summary>
+    /// Konuþma klibini oynat
+    /// </summary>
+    /// <param name="index"></param>
+    public void PlayVoiceClip(int index)
     {
-        _audioSource.PlayOneShot(voiceClips[index]);
+        _audioSource.PlayOneShot(_voiceClips[index]);
     }
 
+    /// <summary>
+    /// Baþlangýç feedback'lerini atla
+    /// </summary>
     public void SkipBeginning()
     {
-        skipBeginningFeedback.PlayFeedbacks();
+        _skipBeginningFeedback.PlayFeedbacks();
         EventBus.Unsubscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
-
 
     public void SetEnableAnimator()
     {
         _animator.enabled = true;
     }
+
     /// <summary>
     /// Ölmeyi gerçekleþtir
     /// </summary>
@@ -90,7 +93,7 @@ public class Enemy : DamagableObjectBase
     {
         _isDead = true;
         EventBus.Publish(EventType.EnemyDied);
-        dieFeedback?.PlayFeedbacks(this.transform.position, ScoreManager.enemyScore);
+        _dieFeedback?.PlayFeedbacks(this.transform.position, ScoreManager.enemyScore);
     }
 
     /// <summary>

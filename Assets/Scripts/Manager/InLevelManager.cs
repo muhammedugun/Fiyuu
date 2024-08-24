@@ -1,23 +1,28 @@
+// Refactor 23.08.24
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Seviyeler içinde genel durumlarý yönetmekten sorumludur
+/// </summary>
 public class InLevelManager : MonoBehaviour
 {
-    [SerializeField] private List<ParticleSystem> _winFireworks;
-
-    Rigidbody []allGameObjects;
-    /// <summary>
-    /// Objelerin hýzý kontrol edilsin mi?
-    /// </summary>
-    private bool _isCheckSpeedOfObjects;
     /// <summary>
     /// Tüm objeler durdu mu?
     /// </summary>
     public static bool isAllObjectsStopped;
-    private bool isAssignObjects, isSetCheckSpeedOfObjects;
-    private const string muteKey = "isMute";
+
+    [SerializeField] private List<ParticleSystem> _winFireworks;
+
+    private Rigidbody[] _allGameObjects;
+    /// <summary>
+    /// Objelerin hýzý kontrol edilsin mi?
+    /// </summary>
+    private bool _isCheckSpeedOfObjects;
+    private bool _isAssignObjects, _isSetCheckSpeedOfObjects;
+    private const string _muteKey = "isMute";
 
     private void Start()
     {
@@ -35,8 +40,6 @@ public class InLevelManager : MonoBehaviour
             
     }
 
-   
-
     private void OnEnable()
     {
         ControllerManager.controller.InLevel.Attack.started += CheckFirstClick;
@@ -48,7 +51,6 @@ public class InLevelManager : MonoBehaviour
 
         EventBus.Subscribe(EventType.AllEnemiesDead, AssignObjects);
         EventBus.Subscribe(EventType.AllEnemiesDead, InvokeSetCheckSpeedOfObjects);
-
     }
 
     private void OnDisable()
@@ -61,9 +63,12 @@ public class InLevelManager : MonoBehaviour
         EventBus.Unsubscribe(EventType.AllEnemiesDead, InvokeSetCheckSpeedOfObjects);
     }
 
+    /// <summary>
+    /// Oyun sesini kontrol eder
+    /// </summary>
     private void CheckAudioVolume()
     {
-        bool isMuted = PlayerPrefs.GetInt(muteKey) == 1;
+        bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
         AudioListener.volume = isMuted ? 0f : 1f;
     }
 
@@ -77,7 +82,7 @@ public class InLevelManager : MonoBehaviour
         {
             bool isAllObjectsStopped = true;
 
-            foreach (var obj in allGameObjects)
+            foreach (var obj in _allGameObjects)
             {
                 if (obj != null)
                 {
@@ -103,22 +108,21 @@ public class InLevelManager : MonoBehaviour
     /// </summary>
     private void AssignObjects()
     {
-        if(!isAssignObjects)
+        if(!_isAssignObjects)
         {
-            isAssignObjects = true;
-            allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+            _isAssignObjects = true;
+            _allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
         }
         
     }
 
     void InvokeSetCheckSpeedOfObjects()
     {
-        if(!isSetCheckSpeedOfObjects)
+        if(!_isSetCheckSpeedOfObjects)
         {
-            isSetCheckSpeedOfObjects = true;
+            _isSetCheckSpeedOfObjects = true;
             Invoke(nameof(SetCheckSpeedOfObjects), 1f);
         }
-        
     }
 
     void SetCheckSpeedOfObjects()
@@ -143,7 +147,9 @@ public class InLevelManager : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Seviyenin baþarýyla geçildiði bilgisini kaydeder ve seviye tamamlanýnca olacak olaylarý gerçekleþtirir.
+    /// </summary>
     void LevelSuccesful()
     {
         ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)));
@@ -152,8 +158,6 @@ public class InLevelManager : MonoBehaviour
         {
             item.Play();
         }
-
     }
-
 
 }

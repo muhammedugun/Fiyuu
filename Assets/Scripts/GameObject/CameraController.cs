@@ -1,11 +1,12 @@
+// Refactor 23.08.24
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Kamera davranýþlarýndan sorumlu
+/// </summary>
 public class CameraController : MonoBehaviour
 {
-
     [SerializeField] private MMF_Player beginningFeedback;
     [SerializeField] private MMF_Player skipBeginningFeedback;
 
@@ -15,6 +16,9 @@ public class CameraController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Baþlangýç feedback'lerini atlar
+    /// </summary>
     public void SkipBeginning()
     {
         if (beginningFeedback.IsPlaying)

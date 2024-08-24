@@ -1,34 +1,36 @@
+// Refactor 23.08.24
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Mancınığın ana sınıfı
+/// </summary>
 public class Launcher : MonoBehaviour
 {
     [Header("Ammo")]
-    [SerializeField] private GameObject[] ammoTypePrefabs;
-    [SerializeField] private Transform ammoSpawnPosition;
+    [SerializeField] private GameObject[] _ammoTypePrefabs;
+    [SerializeField] private Transform _ammoSpawnPosition;
 
     [Header("Launcher")]
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator _animator;
     [Tooltip("Fırlatma gücü")]
-    [SerializeField] private float throwPower;
-    [SerializeField] private MMF_Player loadFeedback;
-    [SerializeField] private MMF_Player throwFeedback;
+    [SerializeField] private float _throwPower;
+    [SerializeField] private MMF_Player _loadFeedback;
+    [SerializeField] private MMF_Player _throwFeedback;
 
     private AmmoManager _ammoManager;
     private TextMeshProUGUI _collisionIconText;
     private Vector3 _throwVelocity;
     private GameObject _ammo;
     private GameObject _lastAmmo;
-    
     private Rigidbody _ammoRigidBody;
-
     private float _height;
     private float _ammoStartY;
 
     private void Start()
     {
-        _ammoStartY = ammoSpawnPosition.position.y;
+        _ammoStartY = _ammoSpawnPosition.position.y;
         _ammoManager = FindObjectOfType<AmmoManager>();
 
         ThrowInputController.Started += Throw;
@@ -51,14 +53,14 @@ public class Launcher : MonoBehaviour
         if(_ammoManager.ammunition.Count>0)
         {
             // mevcut bir mühimmat varsa ve fırlatılmamışsa onu yok et
-            if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == ammoSpawnPosition.transform.position)
+            if (CheckAnimStateEmpty() && _ammo != null && _ammo.transform.position == _ammoSpawnPosition.transform.position)
                 Destroy(_ammo.gameObject);
 
-            _ammo = Instantiate(ammoTypePrefabs[(int)_ammoManager.ammunition[0] - 1], ammoSpawnPosition);
+            _ammo = Instantiate(_ammoTypePrefabs[(int)_ammoManager.ammunition[0] - 1], _ammoSpawnPosition);
             if (_lastAmmo == null)
                 _lastAmmo = _ammo;
-            _ammo.transform.position = ammoSpawnPosition.position;
-            _ammo.transform.rotation = ammoSpawnPosition.rotation;
+            _ammo.transform.position = _ammoSpawnPosition.position;
+            _ammo.transform.rotation = _ammoSpawnPosition.rotation;
             _ammoRigidBody = _ammo.transform.GetChild(0).GetComponent<Rigidbody>();
         }
         
@@ -70,7 +72,7 @@ public class Launcher : MonoBehaviour
     /// <returns>Empty animasyonundaysa true, değilse false döndürür</returns>
     private bool CheckAnimStateEmpty()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Empty"))
             return true;
         else return false;
     }
@@ -80,8 +82,8 @@ public class Launcher : MonoBehaviour
     /// </summary>
     private void TriggerLoadAnim()
     {
-        animator.SetBool("leave", false);
-        animator.SetTrigger("load");
+        _animator.SetBool("leave", false);
+        _animator.SetTrigger("load");
     }
 
     float _lastClickTime;
@@ -101,46 +103,59 @@ public class Launcher : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Mancınığın fırlatmaya hazırlık aşaması olan load aşamasının animasyonunu çalıştırır
+    /// </summary>
     private void HandleLoadAnimation()
     {
         if (_ammoManager.ammunition.Count > 0)
         {
             _lastClickTime = Time.time;
             TriggerLoadAnim();
-            loadFeedback.PlayFeedbacks();
+            _loadFeedback.PlayFeedbacks();
         }
     }
 
+    /// <returns>Fırlatma durumuna uygun mu?</returns>
     private bool CanThrow()
     {
-        return _ammoRigidBody.isKinematic && !animator.GetBool("leave") && Time.time > _lastClickTime + 0.4f;
+        return _ammoRigidBody.isKinematic && !_animator.GetBool("leave") && Time.time > _lastClickTime + 0.4f;
     }
 
+    /// <summary>
+    /// Fırlatmayı başlat
+    /// </summary>
     private void ExecuteThrow()
     {
-        loadFeedback.StopFeedbacks();
-        throwFeedback.PlayFeedbacks();
+        _loadFeedback.StopFeedbacks();
+        _throwFeedback.PlayFeedbacks();
 
         _collisionIconText.enabled = false;
 
         EnableTrailRenderer();
 
-        HandlePreviousAmmo();
+        DetermineLastAmmo();
 
         SetAmmoProperties();
 
         ApplyThrowForce();
 
-        OnThrowedInvoke();
+        PublishOnThrowed();
     }
 
+    /// <summary>
+    /// Fırlatma sonrası için mühimmat arkasında çıkan izi etkinleştir
+    /// </summary>
     private void EnableTrailRenderer()
     {
         _ammo.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         _ammo.transform.GetChild(0).GetComponent<Ammo>().throwPos = _ammo.transform.position;
     }
 
-    private void HandlePreviousAmmo()
+    /// <summary>
+    /// Şuan fırlatılacak olan mühimmatı son mühimmat olarak belirler
+    /// </summary>
+    private void DetermineLastAmmo()
     {
         if (_lastAmmo != null && _lastAmmo != _ammo)
         {
@@ -152,9 +167,12 @@ public class Launcher : MonoBehaviour
         _lastAmmo = _ammo;
     }
 
+    /// <summary>
+    /// Mühimmatın özelliklerini ayarlar
+    /// </summary>
     private void SetAmmoProperties()
     {
-        animator.SetBool("leave", true);
+        _animator.SetBool("leave", true);
         _ammoRigidBody.isKinematic = false;
         _ammoRigidBody.useGravity = true;
         _ammoRigidBody.GetComponent<Collider>().enabled = true;
@@ -164,12 +182,18 @@ public class Launcher : MonoBehaviour
         _ammo.transform.parent = null;
     }
 
+    /// <summary>
+    /// Fırlatma gücünü uygular
+    /// </summary>
     private void ApplyThrowForce()
     {
-        _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * throwPower * _height, ForceMode.VelocityChange);
+        _ammoRigidBody.AddForce(_ammoRigidBody.transform.right * _throwPower * _height, ForceMode.VelocityChange);
     }
 
-    private void OnThrowedInvoke()
+    /// <summary>
+    /// Fırlatıldı bilgisini event olarak yayar
+    /// </summary>
+    private void PublishOnThrowed()
     {
         EventBus.Publish(EventType.LauncherThrowed);
     }

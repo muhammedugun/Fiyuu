@@ -1,18 +1,21 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
+/// <summary>
+/// Oyun içindeki eðitimleri yönetmekten sorumludur
+/// </summary>
 public class Tutorial : MonoBehaviour
 {
     [SerializeField] private GameObject _tutorial;
-    [SerializeField] private MMF_Player playFeedbacks, stopFeedbacks;
+    [SerializeField] private MMF_Player _playFeedbacks, _stopFeedbacks;
     [SerializeField] private bool _isTutorialScene;
     [SerializeField] private bool _isFirstTutorial;
     [SerializeField] private Transform _launcherArm;
     [SerializeField] private GameObject _pauseButton;
 
     private ThrowInputController _throwInputController;
-    private bool isInputControl;
-    private bool isDeactive;
+    private bool _isInputControl;
+    private bool _isDeactive;
 
     private void Start()
     {
@@ -34,12 +37,16 @@ public class Tutorial : MonoBehaviour
             _throwInputController.isEnabled = true;
             Active();
         }
-        else if(_isFirstTutorial && _launcherArm.eulerAngles.z<320 && !isInputControl)
+        else if(_isFirstTutorial && _launcherArm.eulerAngles.z<320 && !_isInputControl)
         {
-            isInputControl = true;
+            _isInputControl = true;
             _throwInputController.isEnabled = false;
         }
     }
+
+    /// <summary>
+    /// Eðitimi aktifleþtirir
+    /// </summary>
     public void Active()
     {
         if(_isTutorialScene)
@@ -49,13 +56,16 @@ public class Tutorial : MonoBehaviour
             {
                 _tutorial.transform.GetChild(i).gameObject.SetActive(true);
             }
-            playFeedbacks.PlayFeedbacks();
+            _playFeedbacks.PlayFeedbacks();
         }
     }
 
+    /// <summary>
+    /// Eðitimi devre dýþý býrakýr
+    /// </summary>
     private void Deactive()
     {
-        isDeactive = true;
+        _isDeactive = true;
         ThrowInputController.Started -= Deactive;
         GameManager.ResumeLevel();
         if(_pauseButton!=null)
@@ -64,13 +74,12 @@ public class Tutorial : MonoBehaviour
         {
             _tutorial.transform.GetChild(i).gameObject.SetActive(false);
         }
-        stopFeedbacks.PlayFeedbacks();
+        _stopFeedbacks.PlayFeedbacks();
     }
 
     public void PlayFeedbacks()
     {
-        if(!isDeactive)
-            playFeedbacks.PlayFeedbacks();
+        if(!_isDeactive)
+            _playFeedbacks.PlayFeedbacks();
     }
-
 }
