@@ -8,12 +8,11 @@ Bu oyunu üniversitemin son yılında bitirme projesi olarak yaptım ve bir demo
 
 ## 📝 **İçindekiler**
 
-1. [Hakkında](#hakkında)
-2. [Özellikler](#özellikler)
-3. [Kurulum](#kurulum)
-4. [Oynanış](#oynanış)
-5. [Geliştirme](#geliştirme)
-6. [Katkıda Bulunanlar](#katkıda-bulunanlar)
+1. [Özellikler](#özellikler)
+2. [Kurulum](#kurulum)
+3. [Oynanış](#oynanış)
+4. [Geliştirme](#geliştirme)
+5. [Katkıda Bulunanlar](#katkıda-bulunanlar)
 
 ---
 
