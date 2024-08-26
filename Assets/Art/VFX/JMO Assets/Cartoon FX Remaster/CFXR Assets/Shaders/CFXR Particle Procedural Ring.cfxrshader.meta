@@ -7,7 +7,7 @@ ScriptedImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {instanceID: 0}
+  script: {fileID: 11500000, guid: fe56ec25963759b49955809beeb4324b, type: 3}
   detectedRenderPipeline: Universal Render Pipeline
   strippedLinesCount: 77
   shaderSourceCode: "//--------------------------------------------------------------------------------------------------------------------------------\r\n//
@@ -77,7 +77,6 @@ ScriptedImporter:
     \"CFXR_PASSES.cginc\"\r\n\r\n\t\t\t\tENDCG\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t}\r\n\t\r\n\tCustomEditor
     \"CartoonFX.MaterialInspector\"\r\n}\r\n\r\n"
   shaderName: Cartoon FX/Remaster/Particle Procedural Ring
-  shaderErrors:
-  - Couldn't open include file 'CFXR.cginc'. (line 980)
-  variantCount: 0
-  variantCountUsed: 0
+  shaderErrors: []
+  variantCount: 6080
+  variantCountUsed: 4

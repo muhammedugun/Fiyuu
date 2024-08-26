@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: SpriteStudio
+  companyName: MuhammedUgun
   productName: Fiyuu
   defaultCursor: {fileID: 2800000, guid: 2057b96da03e9db4991ab6e7bf5d940d, type: 3}
   cursorHotspot: {x: 0, y: 0}
@@ -83,7 +83,7 @@ PlayerSettings:
   androidAutoRotationBehavior: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -806,7 +806,7 @@ PlayerSettings:
   webGLTemplate: APPLICATION:Default
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 0
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
@@ -832,7 +832,7 @@ PlayerSettings:
     Stadia: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     Standalone: UNITY_POST_PROCESSING_STACK_V2;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;MAPMAGIC2;MM_NATIVE;DOTWEEN;URP_OUTLINE
     VisionOS: DOTWEEN;URP_OUTLINE
-    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
+    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
     Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     XboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     iPhone: DOTWEEN;URP_OUTLINE
