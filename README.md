@@ -1,65 +1,66 @@
 # 🎮 **Fiyuu**
 
-Fiyuu oyunu ana karakter olarak bir mancınığı yönettiğimiz ve Angry Birds oyunundaki gibi yapıların içinde bulunan düşmanları etkisiz hale getirmeye çalıştığımız bir oyundur.
-Oyun, 3 boyutlu grafiklere sahiptir, fizik tabanlı bulmaca türündedir ve içinde 10 seviye barındırmaktadır. 
-Bu oyunu üniversitemin son yılında bitirme projesi olarak yaptım ve bir demo oyun olarak tamamladım.
+Fiyuu is a game in which we manage a catapult as the main character and try to neutralize enemies inside structures like in Angry Birds.
+The game has 3D graphics, physics-based puzzle genre and contains 10 levels. 
+I made this game as a final project in the last year of my university and completed it as a demo game.
+![Açıklama](https://github.com/kullaniciadi/proje-adi/blob/main/gorseller/oyun-demo.gif)
 
 ---
 
-## 📝 **İçindekiler**
+## 📝 **Contents**
 
-1. [Özellikler](#-özellikler)
-2. [Kurulum](#-kurulum)
-3. [Oynanış](#-oynanış)
-4. [Geliştirme](#-geliştirme)
-5. [Katkıda Bulunanlar](#-katkıda-bulunanlar)
-
----
-
-## 🚀 **Özellikler**
-
-- **Grafikler:** Basit ama etkili görsel öğelerle desteklenmiş, kullanıcı dostu arayüz.
-- **Oynanış:** Fizik tabanlı bulmaca mekanikleriyle zenginleştirilmiş bir oyun deneyimi.
-- **Platformlar:** Windows ve WebGL platformlarında oynanabilir.
+1. [Properties](#-features)
+2. [Setup](#-installation)
+3. [Gameplay](#-gameplay)
+4. [Development](#-development)
+5. [Contributors](#-contributors)
 
 ---
 
-## 💾 **Kurulum**
+## 🚀 **Features**
 
-### Gereksinimler
-
-- Unity 2022.3 veya üzeri sürüm
-- En az 2 GB RAM
-- 100 MB boş disk alanı
-
-### Adımlar
-
-1. Depoyu klonla: `git clone https://github.com/kullaniciadi/fiyuu.git`
-2. Unity ile projeyi aç.
-3. `Scenes` altındaki `Menu` klasöründen `Loading` sahnesini açarak oyunu çalıştır.
+- Graphics:** User-friendly interface supported by simple but effective visual elements.
+- Gameplay:** An enriched gameplay experience with physics-based puzzle mechanics.
+- Platforms:** Playable on Windows and WebGL platforms.
 
 ---
 
-## 🎮 **Oynanış**
+## 💾 **Installation**
 
-- **Kontroller:**
-  - **Fare:** Mancınık ile atış yapmak için kullanılır.
+#### Requirements
 
-- **Kurallar:**
-  - Yapılar içinde saklanan tüm düşmanları etkisiz hale getir.
-  - Belirli sayıda atış hakkın bulunmakta, bu hakları dikkatli kullan.
+- Unity 2022.3 or later
+- At least 2 GB RAM
+- 100 MB free disk space
 
-- **Öneriler:**
-  - Yapıların zayıf noktalarını hedef alarak daha az atışla daha fazla düşmanı etkisiz hale getirebilirsin.
+### Steps
 
----
-
-## 🔧 **Geliştirme**
-
-- **Kullanılan Araçlar:** Unity 2022.3, C#, Blender (varlıklarla ufak tefek değişiklikler yapmak için).
+1. Clone the repository: `git clone https://github.com/muhammedugun/fiyuu.git`
+2. Open the project with Unity.
+3. Run the game by opening the `Loading` scene from the `Menu` folder under `Scenes`.
 
 ---
 
-## 👥 **Katkıda Bulunanlar**
+## 🎮 **Gameplay**
 
-- **Muhammed Uğun** - Proje Sahibi ve Geliştirici
+- Controls:**
+  - Mouse:** Used to shoot with the catapult.
+
+- Rules:** **
+  - Neutralize all enemies hiding inside the buildings.
+  - You have a certain number of shots, use them carefully.
+
+- Tips:**
+  - By targeting the weak points of the buildings, you can neutralize more enemies with fewer shots.
+
+---
+
+## 🔧 **Development**
+
+- Tools used:** Unity 2022.3, C#, Blender (to make minor modifications with assets).
+
+---
+
+## 👥 **Contributors**
+
+- **Muhammed Uğun** - Project Owner and Developer
