@@ -3,9 +3,10 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 /// <summary>
-/// Chapters menüsünü yönetmekten sorumlu
+/// Chapters menï¿½sï¿½nï¿½ yï¿½netmekten sorumlu
 /// </summary>
 public class ChaptersManager : MonoBehaviour
 {
@@ -26,18 +27,20 @@ public class ChaptersManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Harita üzerinde bir seviyeye basýldýðýnda açýlmasý gereken menüyü açar
+    /// Harita ï¿½zerinde bir seviyeye basï¿½ldï¿½ï¿½ï¿½nda aï¿½ï¿½lmasï¿½ gereken menï¿½yï¿½ aï¿½ar
     /// </summary>
     /// <param name="levelNumber"></param>
     public void OpenPlayPopUp(int levelNumber)
     {
-        if(IsLevelCompleted(levelNumber))
+        if (IsLevelCompleted(levelNumber))
         {
             _playPopUp.SetActive(true);
             _popUpTitleText.text = "Level " + levelNumber;
             _levelName = "Level" + levelNumber;
-            _scoreText.text = PlayerPrefs.GetInt("LevelScore" + levelNumber).ToString();
-            if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 3)
+            //_scoreText.text = PlayerPrefs.GetInt("LevelScore" + levelNumber).ToString();
+            _scoreText.text = YandexGame.savesData.LevelScore[levelNumber].ToString();
+            // if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 3)
+            if (YandexGame.savesData.LevelStars[levelNumber] >= 3)
             {
                 foreach (var star in _stars)
                 {
@@ -46,7 +49,8 @@ public class ChaptersManager : MonoBehaviour
                     child.color = new Color(child.color.r, child.color.g, child.color.b, 1f);
                 }
             }
-            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 2)
+            //else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 2)
+            else if (YandexGame.savesData.LevelStars[levelNumber] >= 2)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -56,7 +60,8 @@ public class ChaptersManager : MonoBehaviour
                 }
 
             }
-            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 1)
+            //else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 1)
+            else if (YandexGame.savesData.LevelStars[levelNumber] >= 1)
             {
                 _stars[2].color = new Color(_stars[2].color.r, _stars[2].color.g, _stars[2].color.b, 1f);
                 var child = _stars[2].transform.GetChild(0).GetComponent<Image>();
@@ -74,7 +79,7 @@ public class ChaptersManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play popupý kapatýr
+    /// Play popupï¿½ kapatï¿½r
     /// </summary>
     public void ClosePlayPopUp()
     {
@@ -97,40 +102,42 @@ public class ChaptersManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Oynanmak istenen seviyeyi yükler
+    /// Oynanmak istenen seviyeyi yï¿½kler
     /// </summary>
     public void LoadLevel()
     {
-        if(_levelName!=null)
+        if (_levelName != null)
             Infrastructure.LoadScene(_levelName);
     }
 
-    // Bir bölümü tamamladýðýnda çaðrýlacak fonksiyon
+    // Bir bï¿½lï¿½mï¿½ tamamladï¿½ï¿½ï¿½nda ï¿½aï¿½rï¿½lacak fonksiyon
     public static void CompleteLevel(int levelIndex)
     {
-        // Bölümü tamamlandýðýný kaydedin
-        PlayerPrefs.SetInt("CompletedLevel" + levelIndex, 1);
-
-        // Deðiþiklikleri kaydedin
-        PlayerPrefs.Save();
+        // Bï¿½lï¿½mï¿½ tamamlandï¿½ï¿½ï¿½nï¿½ kaydedin
+        //PlayerPrefs.SetInt("CompletedLevel" + levelIndex, 1);
+        YandexGame.savesData.CompletedLevel[levelIndex] = 1;
+        // Deï¿½iï¿½iklikleri kaydedin
+        //PlayerPrefs.Save();
+        YandexGame.SaveProgress();
     }
 
 
-    // Belirli bir bölümü tamamlayýp tamamlamadýðýný kontrol eden fonksiyon
+    // Belirli bir bï¿½lï¿½mï¿½ tamamlayï¿½p tamamlamadï¿½ï¿½ï¿½nï¿½ kontrol eden fonksiyon
     public bool IsLevelCompleted(int levelIndex)
     {
-        return PlayerPrefs.GetInt("CompletedLevel" + levelIndex, 0) == 1;
+        // return PlayerPrefs.GetInt("CompletedLevel" + levelIndex, 0) == 1;
+        return YandexGame.savesData.CompletedLevel[levelIndex] == 1;
     }
 
-    // Belirli bir bölüme girebilir mi?
+    // Belirli bir bï¿½lï¿½me girebilir mi?
     public void CanEnterLevel()
     {
-        // Önceki tüm bölümlerin tamamlanýp tamamlanmadýðýný kontrol eder
+        // ï¿½nceki tï¿½m bï¿½lï¿½mlerin tamamlanï¿½p tamamlanmadï¿½ï¿½ï¿½nï¿½ kontrol eder
         for (int i = 2; i <= 10; i++)
         {
             if (!IsLevelCompleted(i))
             {
-                if(i>=10)
+                if (i >= 10)
                 {
                     _chapter1.transform.GetChild(i - 1).GetChild(0).gameObject.SetActive(false);
                     _chapter1.transform.GetChild(i - 1).GetChild(1).gameObject.SetActive(false);
@@ -140,7 +147,7 @@ public class ChaptersManager : MonoBehaviour
                     _chapter1.transform.GetChild(i - 1).GetChild(0).GetComponent<Image>().sprite = _lockIcon;
             }
         }
-        
+
     }
 
     public void LoadScene(string sceneName)

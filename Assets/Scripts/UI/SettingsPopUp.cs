@@ -1,5 +1,6 @@
 // Refactor 24.08.24
 using UnityEngine;
+using YG;
 
 public class SettingsPopUp : MonoBehaviour
 {
@@ -16,41 +17,50 @@ public class SettingsPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Popup açýlýþý için ses toggle'ýný ayarlar
+    /// Popup aï¿½ï¿½lï¿½ï¿½ï¿½ iï¿½in ses toggle'ï¿½nï¿½ ayarlar
     /// </summary>
     private void InitializeSoundToggle()
     {
-        bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
+        //bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
+        bool isMuted = YandexGame.savesData.isMute == 1;
         SetSoundState(!isMuted);
     }
 
     /// <summary>
-    /// Popup açýlýþý için tam ekran toggle'ýný ayarlar
+    /// Popup aï¿½ï¿½lï¿½ï¿½ï¿½ iï¿½in tam ekran toggle'ï¿½nï¿½ ayarlar
     /// </summary>
     private void InitializeFullScreenToggle()
     {
-        bool isFullScreen = PlayerPrefs.GetInt(_fullScreenKey) != 1;
+        //bool isFullScreen = PlayerPrefs.GetInt(_fullScreenKey) != 1;
+        bool isFullScreen = YandexGame.savesData.isNotFullScreen != 1;
         SetFullScreenState(isFullScreen);
     }
 
     /// <summary>
-    /// Sesin açýklýk kapalýlýk durumunu ayarlar
+    /// Sesin aï¿½ï¿½klï¿½k kapalï¿½lï¿½k durumunu ayarlar
     /// </summary>
     private void SetSoundState(bool isSoundOn)
     {
         AudioListener.volume = isSoundOn ? 1f : 0f;
         Toggle(_soundButtonOn, _soundButtonOff, isSoundOn);
-        PlayerPrefs.SetInt(_muteKey, isSoundOn ? 0 : 1);
+        //PlayerPrefs.SetInt(_muteKey, isSoundOn ? 0 : 1);
+        //PlayerPrefs.Save();
+        YandexGame.savesData.isMute = isSoundOn ? 0 : 1;
+        YandexGame.SaveProgress();
+
     }
 
     /// <summary>
-    /// Tam ekran açýklýk kapalýlýk durumunu ayarlar
+    /// Tam ekran aï¿½ï¿½klï¿½k kapalï¿½lï¿½k durumunu ayarlar
     /// </summary>
     private void SetFullScreenState(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
         Toggle(_fullScreenButtonOn, _fullScreenButtonOff, isFullScreen);
-        PlayerPrefs.SetInt(_fullScreenKey, isFullScreen ? 0 : 1);
+        //PlayerPrefs.SetInt(_fullScreenKey, isFullScreen ? 0 : 1);
+        //PlayerPrefs.Save();
+        YandexGame.savesData.isNotFullScreen = isFullScreen ? 0 : 1;
+        YandexGame.SaveProgress();
     }
 
     private void Toggle(GameObject onObject, GameObject offObject, bool isOn)

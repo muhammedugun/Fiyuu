@@ -1625,6 +1625,7 @@ GameObject:
   - component: {fileID: 634520721}
   - component: {fileID: 634520720}
   - component: {fileID: 634520719}
+  - component: {fileID: 634520724}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -1738,6 +1739,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634520717}
   m_CullTransparentMesh: 1
+--- !u!114 &634520724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634520717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "B\xF6l\xFCm 1"
+  _en: Chapter 1
+  _ru: "\u0413\u043B\u0430\u0432\u0430 1"
 --- !u!1 &638492804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1769,7 @@ GameObject:
   - component: {fileID: 638492808}
   - component: {fileID: 638492807}
   - component: {fileID: 638492806}
+  - component: {fileID: 638492811}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -1864,6 +1882,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638492804}
   m_CullTransparentMesh: 1
+--- !u!114 &638492811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638492804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "\xC7ok Yak\u0131nda"
+  _en: Coming Soon
+  _ru: "\u0412\u0441\u043A\u043E\u0440\u0435"
 --- !u!1 &657795350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,6 +3451,7 @@ GameObject:
   - component: {fileID: 1115352227}
   - component: {fileID: 1115352224}
   - component: {fileID: 1115352228}
+  - component: {fileID: 1115352229}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3556,6 +3591,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1115352229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115352222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 1
+  _tr: Oyna
+  _en: Play
+  _ru: "\u0418\u0433\u0440\u0430\u0442\u044C"
 --- !u!1 &1132615126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,6 +4002,7 @@ GameObject:
   - component: {fileID: 1208748496}
   - component: {fileID: 1208748495}
   - component: {fileID: 1208748494}
+  - component: {fileID: 1208748499}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -4063,6 +4115,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208748492}
   m_CullTransparentMesh: 1
+--- !u!114 &1208748499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208748492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 1
+  _tr: Seviye 1
+  _en: Level 1
+  _ru: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
 --- !u!1 &1239570090
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,6 +5763,7 @@ GameObject:
   - component: {fileID: 1705595450}
   - component: {fileID: 1705595449}
   - component: {fileID: 1705595448}
+  - component: {fileID: 1705595453}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -5807,6 +5876,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705595446}
   m_CullTransparentMesh: 1
+--- !u!114 &1705595453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705595446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "\xC7ok Yak\u0131nda"
+  _en: Coming Soon
+  _ru: "\u0412\u0441\u043A\u043E\u0440\u0435"
 --- !u!1 &1736115615
 GameObject:
   m_ObjectHideFlags: 0

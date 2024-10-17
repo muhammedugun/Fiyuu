@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 0.75
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13133854, g: 0.44435146, b: 0.6956557, a: 0.75}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -192,6 +191,7 @@ GameObject:
   - component: {fileID: 33275479}
   - component: {fileID: 33275478}
   - component: {fileID: 33275477}
+  - component: {fileID: 33275480}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -275,6 +275,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33275475}
   m_CullTransparentMesh: 1
+--- !u!114 &33275480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33275475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "Kapal\u0131"
+  _en: Off
+  _ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u043E"
 --- !u!1001 &64480372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -766,6 +782,7 @@ GameObject:
   - component: {fileID: 181461457}
   - component: {fileID: 181461456}
   - component: {fileID: 181461455}
+  - component: {fileID: 181461460}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -879,6 +896,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181461453}
   m_CullTransparentMesh: 1
+--- !u!114 &181461460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181461453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: Ayarlar
+  _en: Settings
+  _ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
 --- !u!1001 &199364723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1172,6 +1205,7 @@ GameObject:
   - component: {fileID: 261648167}
   - component: {fileID: 261648166}
   - component: {fileID: 261648165}
+  - component: {fileID: 261648168}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1255,6 +1289,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261648163}
   m_CullTransparentMesh: 1
+--- !u!114 &261648168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261648163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "A\xE7\u0131k"
+  _en: On
+  _ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
 --- !u!1 &408628677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1317,7 @@ GameObject:
   - component: {fileID: 408628681}
   - component: {fileID: 408628680}
   - component: {fileID: 408628679}
+  - component: {fileID: 408628682}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1350,6 +1401,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408628677}
   m_CullTransparentMesh: 1
+--- !u!114 &408628682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408628677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "Kapal\u0131"
+  _en: Off
+  _ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u043E"
 --- !u!1001 &409117633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2305,7 +2372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &612424703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &694599363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,7 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &719091841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,6 +3052,7 @@ GameObject:
   - component: {fileID: 784439033}
   - component: {fileID: 784439036}
   - component: {fileID: 784439037}
+  - component: {fileID: 784439038}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3109,6 +3177,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &784439038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784439032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 1
+  _tr: "\xC7\u0131k"
+  _en: Exit
+  _ru: "\u0412\u044B\u0445\u043E\u0434"
 --- !u!1 &785698500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3214,6 +3298,7 @@ GameObject:
   - component: {fileID: 865316270}
   - component: {fileID: 865316272}
   - component: {fileID: 865316271}
+  - component: {fileID: 865316273}
   m_Layer: 5
   m_Name: Text_Music
   m_TagString: Untagged
@@ -3273,7 +3358,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fullscren
+  m_Text: Full Screen
 --- !u!222 &865316272
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3282,6 +3367,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865316269}
   m_CullTransparentMesh: 1
+--- !u!114 &865316273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865316269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: Tam Ekran
+  _en: Full Screen
+  _ru: "\u041F\u043E\u043B\u043D\u043E\u044D\u043A\u0440\u0430\u043D\u043D\u044B\u0439"
 --- !u!1001 &887387721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4683,6 +4784,7 @@ GameObject:
   - component: {fileID: 1347079132}
   - component: {fileID: 1347079134}
   - component: {fileID: 1347079133}
+  - component: {fileID: 1347079135}
   m_Layer: 5
   m_Name: Text_Effects
   m_TagString: Untagged
@@ -4751,6 +4853,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347079131}
   m_CullTransparentMesh: 1
+--- !u!114 &1347079135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347079131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: Ses
+  _en: Sound
+  _ru: "\u0417\u0432\u0443\u043A"
 --- !u!1001 &1402939600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5474,6 +5592,7 @@ GameObject:
   - component: {fileID: 1538296703}
   - component: {fileID: 1538296706}
   - component: {fileID: 1538296707}
+  - component: {fileID: 1538296708}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5598,6 +5717,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1538296708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538296702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 1
+  _tr: Ayarlar
+  _en: Settings
+  _ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
 --- !u!1 &1553228991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5995,7 +6130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1001 &1688280712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6387,7 +6522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!114 &1762483717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6638,6 +6773,7 @@ GameObject:
   - component: {fileID: 2034837929}
   - component: {fileID: 2034837932}
   - component: {fileID: 2034837933}
+  - component: {fileID: 2034837934}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6762,6 +6898,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2034837934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034837928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 1
+  _tr: Oyna
+  _en: Play
+  _ru: "\u0418\u0433\u0440\u0430\u0442\u044C"
 --- !u!1 &2035563387
 GameObject:
   m_ObjectHideFlags: 0
@@ -6996,7 +7148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e995cdb2b96fd4a9e8c69a003ceadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
+  _duration: 0.2
 --- !u!1 &2047371315
 GameObject:
   m_ObjectHideFlags: 0
@@ -7009,6 +7161,7 @@ GameObject:
   - component: {fileID: 2047371319}
   - component: {fileID: 2047371318}
   - component: {fileID: 2047371317}
+  - component: {fileID: 2047371320}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -7092,6 +7245,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047371315}
   m_CullTransparentMesh: 1
+--- !u!114 &2047371320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047371315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "A\xE7\u0131k"
+  _en: On
+  _ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
 --- !u!1001 &2067446719
 PrefabInstance:
   m_ObjectHideFlags: 0

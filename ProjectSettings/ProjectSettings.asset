@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: MuhammedUgun
+  companyName: Sprite Games
   productName: Fiyuu
   defaultCursor: {fileID: 2800000, guid: 2057b96da03e9db4991ab6e7bf5d940d, type: 3}
   cursorHotspot: {x: 0, y: 0}
@@ -42,14 +42,12 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: 751729bea4475d8458aca0c2cf486be9, type: 3}
-    duration: 3
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidthWeb: 1920
+  defaultScreenHeightWeb: 1080
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   unsupportedMSAAFallback: 0
@@ -83,7 +81,7 @@ PlayerSettings:
   androidAutoRotationBehavior: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 1
+  runInBackground: 0
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -143,7 +141,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: Demo_1.0.0
+  bundleVersion: 1.0.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -803,7 +801,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: APPLICATION:Default
+  webGLTemplate: PROJECT:PluginYG
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 2
@@ -832,7 +830,7 @@ PlayerSettings:
     Stadia: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     Standalone: UNITY_POST_PROCESSING_STACK_V2;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;MAPMAGIC2;MM_NATIVE;DOTWEEN;URP_OUTLINE
     VisionOS: DOTWEEN;URP_OUTLINE
-    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;YG_PLUGIN_YANDEX_GAME;YG_TEXT_MESH_PRO
     Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     XboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN;URP_OUTLINE
     iPhone: DOTWEEN;URP_OUTLINE

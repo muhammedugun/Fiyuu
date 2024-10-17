@@ -4,7 +4,7 @@ using MoreMountains.Feedbacks;
 using System.Collections.Generic;
 
 /// <summary>
-/// Düþmanlar için ana sýnýf
+/// Dï¿½ï¿½manlar iï¿½in ana sï¿½nï¿½f
 /// </summary>
 public class Enemy : DamagableObjectBase
 {
@@ -15,9 +15,7 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private MMF_Player _dieFeedback;
     [SerializeField] private MMF_Player _damageFeedback;
     [SerializeField] private MMF_Player _skipBeginningFeedback;
-    [SerializeField] private List<AudioClip> _voiceClips;
 
-    private AudioSource _audioSource;
     private bool _isDead;
     private Animator _animator;
 
@@ -29,8 +27,6 @@ public class Enemy : DamagableObjectBase
 
     protected override void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-        
         _animator = GetComponent<Animator>();
         base.Start();
         gameObject.tag = "Enemy";
@@ -63,16 +59,7 @@ public class Enemy : DamagableObjectBase
     }
 
     /// <summary>
-    /// Konuþma klibini oynat
-    /// </summary>
-    /// <param name="index"></param>
-    public void PlayVoiceClip(int index)
-    {
-        _audioSource.PlayOneShot(_voiceClips[index]);
-    }
-
-    /// <summary>
-    /// Baþlangýç feedback'lerini atla
+    /// Baï¿½langï¿½ï¿½ feedback'lerini atla
     /// </summary>
     public void SkipBeginning()
     {
@@ -86,9 +73,9 @@ public class Enemy : DamagableObjectBase
     }
 
     /// <summary>
-    /// Ölmeyi gerçekleþtir
+    /// ï¿½lmeyi gerï¿½ekleï¿½tir
     /// </summary>
-    /// <param name="smashableObject">Objenin parçalanabilir halinin örneði</param>
+    /// <param name="smashableObject">Objenin parï¿½alanabilir halinin ï¿½rneï¿½i</param>
     private void Die()
     {
         _isDead = true;
@@ -97,7 +84,7 @@ public class Enemy : DamagableObjectBase
     }
 
     /// <summary>
-    /// Ölünebilir mi? diye kontrol et
+    /// ï¿½lï¿½nebilir mi? diye kontrol et
     /// </summary>
     /// <param name="collision"></param>
     private bool CheckDie()

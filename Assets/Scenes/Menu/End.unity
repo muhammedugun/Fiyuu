@@ -4400,7 +4400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Made by Muhammed U\u011Fun"
+  m_Text: Sprite Games
 --- !u!222 &1428432130
 CanvasRenderer:
   m_ObjectHideFlags: 0

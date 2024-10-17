@@ -2,9 +2,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 /// <summary>
-/// Skor bilgisini yönetmekten sorumludur
+/// Skor bilgisini yï¿½netmekten sorumludur
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ScoreManager : MonoBehaviour
 
     private AmmoManager _ammoManager;
     private int _currentScore;
-    
+
     public int CurrentScore
     {
         get { return _currentScore; }
@@ -25,7 +26,7 @@ public class ScoreManager : MonoBehaviour
             _currentScore = value;
             EventBus.Publish(EventType.ScoreUpdated);
         }
-    } 
+    }
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class ScoreManager : MonoBehaviour
     {
         EventBus<float, BuildingMatter>.Subscribe(EventType.BuildSmashed, CalculateBuildingScore);
         EventBus.Subscribe(EventType.EnemyDied, CalculateEnemyScore);
-        if(!_isFirstLevel)
+        if (!_isFirstLevel)
             EventBus.Subscribe(EventType.AllEnemiesDead, CalculateGameEndScore);
         EventBus.Subscribe(EventType.EnOfLevelPopUpOpened, SaveScore);
     }
@@ -51,7 +52,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Kýrýlan herhangi bir objenin verilen parametrelerine bakarak kazanýlacak skoru hesaplar
+    /// Kï¿½rï¿½lan herhangi bir objenin verilen parametrelerine bakarak kazanï¿½lacak skoru hesaplar
     /// </summary>
     /// <param name="volumeSize"></param>
     /// <param name="buildingArmor"></param>
@@ -63,7 +64,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Kýrýlan binanýn verilen parametrelerine bakarak kazanýlacak skoru hesaplar 
+    /// Kï¿½rï¿½lan binanï¿½n verilen parametrelerine bakarak kazanï¿½lacak skoru hesaplar 
     /// </summary>
     /// <param name="volumeSize"></param>
     /// <param name="buildingArmor"></param>
@@ -73,7 +74,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Yokedilen düþmanýn skorunu hesaplar
+    /// Yokedilen dï¿½ï¿½manï¿½n skorunu hesaplar
     /// </summary>
     private void CalculateEnemyScore()
     {
@@ -81,7 +82,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Level sonu için skoru hesaplayýp günceller
+    /// Level sonu iï¿½in skoru hesaplayï¿½p gï¿½nceller
     /// </summary>
     private void CalculateGameEndScore()
     {
@@ -94,19 +95,25 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Mevcut skor rekor skordan yüksekse mevcut skoru levelin üzerine kalýcý olarak kaydeder
+    /// Mevcut skor rekor skordan yï¿½ksekse mevcut skoru levelin ï¿½zerine kalï¿½cï¿½ olarak kaydeder
     /// </summary>
     private void SaveScore()
     {
         int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
-        if (CurrentScore > (PlayerPrefs.GetInt("LevelScore" + levelIndex)))
+        //if (CurrentScore > PlayerPrefs.GetInt("LevelScore" + levelIndex))
+        if (CurrentScore > YandexGame.savesData.LevelScore[levelIndex])
         {
-            PlayerPrefs.SetInt("LevelScore" + levelIndex, CurrentScore);
-            PlayerPrefs.SetInt("LevelStars" + levelIndex, GetRewardedStarCount());
+            //PlayerPrefs.SetInt("LevelScore" + levelIndex, CurrentScore);
+            //PlayerPrefs.SetInt("LevelStars" + levelIndex, GetRewardedStarCount());
+            //PlayerPrefs.Save();
+
+            YandexGame.savesData.LevelScore[levelIndex] = CurrentScore;
+            YandexGame.savesData.LevelStars[levelIndex] = GetRewardedStarCount();
+            YandexGame.SaveProgress();
         }
     }
 
-    /// <returns>Kazanýlan yýldýz sayýsý</returns>
+    /// <returns>Kazanï¿½lan yï¿½ldï¿½z sayï¿½sï¿½</returns>
     public int GetRewardedStarCount()
     {
         int rewardedStarCount = 0;
@@ -125,5 +132,5 @@ public class ScoreManager : MonoBehaviour
 
         return rewardedStarCount;
     }
- 
+
 }

@@ -3,9 +3,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 /// <summary>
-/// Level içindeki pause menüüsünü yönetmekten sorumludur
+/// Level iï¿½indeki pause menï¿½ï¿½sï¿½nï¿½ yï¿½netmekten sorumludur
 /// </summary>
 public class PausePopUp : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PausePopUp : MonoBehaviour
     [SerializeField] private RectTransform _pausePopUpTransform;
     [SerializeField] private GameObject _popUps;
     [SerializeField] private Text _title;
-    
+
     private const string _volumeKey = "isMute";
 
     private void Start()
@@ -29,7 +30,7 @@ public class PausePopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Ses butonunun sprite'ýný günceller
+    /// Ses butonunun sprite'ï¿½nï¿½ gï¿½nceller
     /// </summary>
     private void UpdateSoundButtonSprite()
     {
@@ -38,14 +39,17 @@ public class PausePopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Ses butonuna basýlýnca yapýlmasý gereken iþlemleri yapar. 
-    /// Sesi azaltýr ya da artýrýr, sprite'ý günceller, ses bilgisini günceller
+    /// Ses butonuna basï¿½lï¿½nca yapï¿½lmasï¿½ gereken iï¿½lemleri yapar. 
+    /// Sesi azaltï¿½r ya da artï¿½rï¿½r, sprite'ï¿½ gï¿½nceller, ses bilgisini gï¿½nceller
     /// </summary>
     public void OnClickSoundButton()
     {
         bool isMuted = AudioListener.volume == 0f;
         AudioListener.volume = isMuted ? 1f : 0f;
-        PlayerPrefs.SetInt(_volumeKey, isMuted ? 0 : 1);
+        //PlayerPrefs.SetInt(_volumeKey, isMuted ? 0 : 1);
+        //PlayerPrefs.Save();
+        YandexGame.savesData.isMute = isMuted ? 0 : 1;
+        YandexGame.SaveProgress();
         UpdateSoundButtonSprite();
     }
 
@@ -62,7 +66,7 @@ public class PausePopUp : MonoBehaviour
 
     public void OnClickPauseButton()
     {
-        if(!_pausePopUpTransform.gameObject.activeSelf)
+        if (!_pausePopUpTransform.gameObject.activeSelf)
         {
             GameManager.PauseLevel();
             OpenPausePopUp();

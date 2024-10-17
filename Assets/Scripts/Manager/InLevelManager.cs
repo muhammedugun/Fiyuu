@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using YG;
 
 /// <summary>
-/// Seviyeler içinde genel durumlarý yönetmekten sorumludur
+/// Seviyeler iï¿½inde genel durumlarï¿½ yï¿½netmekten sorumludur
 /// </summary>
 public class InLevelManager : MonoBehaviour
 {
     /// <summary>
-    /// Tüm objeler durdu mu?
+    /// Tï¿½m objeler durdu mu?
     /// </summary>
     public static bool isAllObjectsStopped;
 
@@ -18,7 +19,7 @@ public class InLevelManager : MonoBehaviour
 
     private Rigidbody[] _allGameObjects;
     /// <summary>
-    /// Objelerin hýzý kontrol edilsin mi?
+    /// Objelerin hï¿½zï¿½ kontrol edilsin mi?
     /// </summary>
     private bool _isCheckSpeedOfObjects;
     private bool _isAssignObjects, _isSetCheckSpeedOfObjects;
@@ -32,12 +33,12 @@ public class InLevelManager : MonoBehaviour
 
     private void Update()
     {
-        if(CheckSpeedOfObjects())
+        if (CheckSpeedOfObjects())
         {
-            Debug.Log("Tüm objeler durdu");
+            Debug.Log("Tï¿½m objeler durdu");
             EventBus.Publish(EventType.AllObjectsStopped);
         }
-            
+
     }
 
     private void OnEnable()
@@ -68,14 +69,15 @@ public class InLevelManager : MonoBehaviour
     /// </summary>
     private void CheckAudioVolume()
     {
-        bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
+        //bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
+        bool isMuted = YandexGame.savesData.isMute == 1;
         AudioListener.volume = isMuted ? 0f : 1f;
     }
 
     /// <summary>
-    /// Objelerin hýzýný kontrol et
+    /// Objelerin hï¿½zï¿½nï¿½ kontrol et
     /// </summary>
-    /// <returns>Tüm objeler durduysa true döndürür</returns>
+    /// <returns>Tï¿½m objeler durduysa true dï¿½ndï¿½rï¿½r</returns>
     private bool CheckSpeedOfObjects()
     {
         if (_isCheckSpeedOfObjects && !isAllObjectsStopped)
@@ -104,21 +106,21 @@ public class InLevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Leveldeki tüm ammo, enemy ve building objelerini allGameObjects listesine kaydeder.
+    /// Leveldeki tï¿½m ammo, enemy ve building objelerini allGameObjects listesine kaydeder.
     /// </summary>
     private void AssignObjects()
     {
-        if(!_isAssignObjects)
+        if (!_isAssignObjects)
         {
             _isAssignObjects = true;
             _allGameObjects = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
         }
-        
+
     }
 
     void InvokeSetCheckSpeedOfObjects()
     {
-        if(!_isSetCheckSpeedOfObjects)
+        if (!_isSetCheckSpeedOfObjects)
         {
             _isSetCheckSpeedOfObjects = true;
             Invoke(nameof(SetCheckSpeedOfObjects), 1f);
@@ -131,14 +133,18 @@ public class InLevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Level baþlangýcýndaki ilk týklama gerçekleþtiyse bunu ilgili evente abone olanlara bildirir.
+    /// Level baï¿½langï¿½cï¿½ndaki ilk tï¿½klama gerï¿½ekleï¿½tiyse bunu ilgili evente abone olanlara bildirir.
     /// </summary>
     /// <param name="context"></param>
     void CheckFirstClick(InputAction.CallbackContext context)
     {
-        if (SceneManager.GetActiveScene().name == "Level1" && PlayerPrefs.GetInt("Level1Played") == 0)
+        //if (SceneManager.GetActiveScene().name == "Level1" && PlayerPrefs.GetInt("Level1Played") == 0)
+        if (SceneManager.GetActiveScene().name == "Level1" && YandexGame.savesData.Level1Played == 0)
         {
-            PlayerPrefs.SetInt("Level1Played", 1);
+            //PlayerPrefs.SetInt("Level1Played", 1);
+            //PlayerPrefs.Save();
+            YandexGame.savesData.Level1Played = 1;
+            YandexGame.SaveProgress();
         }
         else
         {
@@ -148,12 +154,12 @@ public class InLevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Seviyenin baþarýyla geçildiði bilgisini kaydeder ve seviye tamamlanýnca olacak olaylarý gerçekleþtirir.
+    /// Seviyenin baï¿½arï¿½yla geï¿½ildiï¿½i bilgisini kaydeder ve seviye tamamlanï¿½nca olacak olaylarï¿½ gerï¿½ekleï¿½tirir.
     /// </summary>
     void LevelSuccesful()
     {
         ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)));
-        ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5))+1);
+        ChaptersManager.CompleteLevel(int.Parse(SceneManager.GetActiveScene().name.Substring(5)) + 1);
         foreach (var item in _winFireworks)
         {
             item.Play();
