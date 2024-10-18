@@ -46,10 +46,10 @@ public class PausePopUp : MonoBehaviour
     {
         bool isMuted = AudioListener.volume == 0f;
         AudioListener.volume = isMuted ? 1f : 0f;
-        //PlayerPrefs.SetInt(_volumeKey, isMuted ? 0 : 1);
-        //PlayerPrefs.Save();
-        YandexGame.savesData.isMute = isMuted ? 0 : 1;
-        YandexGame.SaveProgress();
+        PlayerPrefs.SetInt(_volumeKey, isMuted ? 0 : 1);
+        PlayerPrefs.Save();
+        //YandexGame.savesData.isMute = isMuted ? 0 : 1;
+        //YandexGame.SaveProgress();
         UpdateSoundButtonSprite();
     }
 

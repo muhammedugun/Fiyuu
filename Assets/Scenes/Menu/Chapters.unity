@@ -4127,10 +4127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTextMeshPro: 1
-  _tr: Seviye 1
-  _en: Level 1
-  _ru: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
+  _isTextMeshPro: 0
+  _tr: 'Seviye '
+  _en: 'Level '
+  _ru: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C "
 --- !u!1 &1239570090
 GameObject:
   m_ObjectHideFlags: 0

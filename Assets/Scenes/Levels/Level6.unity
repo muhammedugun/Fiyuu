@@ -191,6 +191,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5675308647493120913, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _en
+      value: Level 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675308647493120913, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _ru
+      value: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5675308647493120913, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _tr
+      value: Seviye 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5894526551975756208, guid: 52389e7482e2c5e4f8140e4267a8e4df,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -290,6 +305,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257644196286711490, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _en
+      value: Level 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257644196286711490, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _ru
+      value: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257644196286711490, guid: 52389e7482e2c5e4f8140e4267a8e4df,
+        type: 3}
+      propertyPath: _tr
+      value: Seviye 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

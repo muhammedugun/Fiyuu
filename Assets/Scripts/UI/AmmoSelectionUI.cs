@@ -2,9 +2,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 /// <summary>
-/// Level içindeki mühimmat seçim ekranýný yönetmekten sorumludur
+/// Level iï¿½indeki mï¿½himmat seï¿½im ekranï¿½nï¿½ yï¿½netmekten sorumludur
 /// </summary>
 public class AmmoSelectionUI : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class AmmoSelectionUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Mühimmat seçim ekranýný günceller
+    /// Mï¿½himmat seï¿½im ekranï¿½nï¿½ gï¿½nceller
     /// </summary>
     private void UpdateUI()
     {
@@ -44,7 +45,7 @@ public class AmmoSelectionUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Kalan mühimmat sayýsýný günceller
+    /// Kalan mï¿½himmat sayï¿½sï¿½nï¿½ gï¿½nceller
     /// </summary>
     private void UpdateAmmunitionDisplay()
     {
@@ -60,7 +61,7 @@ public class AmmoSelectionUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Mühimmatlarýn ikonlarýný günceller
+    /// Mï¿½himmatlarï¿½n ikonlarï¿½nï¿½ gï¿½nceller
     /// </summary>
     private void UpdateAmmoIcons()
     {
@@ -84,7 +85,7 @@ public class AmmoSelectionUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Parametre olarak gönderilen mühimmatýn ikonunu günceller
+    /// Parametre olarak gï¿½nderilen mï¿½himmatï¿½n ikonunu gï¿½nceller
     /// </summary>
     /// <param name="ammoIcon"></param>
     /// <param name="image"></param>
@@ -95,15 +96,22 @@ public class AmmoSelectionUI : MonoBehaviour
         Text iconText = ammoIcon.GetChild(0).GetChild(0).GetComponent<Text>();
 
         iconImage.sprite = image;
-        iconText.text = text;
+        if (YandexGame.savesData.language == "tr")
+        {
+            if (text == "Wood") iconText.text = "Odun";
+            else if (text == "Stone") iconText.text = "TaÅŸ";
+        }
+        else
+            iconText.text = text;
+
     }
 
     /// <summary>
-    /// Plus ikonunun üzerindeki sayýyý günceller
+    /// Plus ikonunun ï¿½zerindeki sayï¿½yï¿½ gï¿½nceller
     /// </summary>
     private void UpdatePlusIcon()
     {
-        if(_plusIcon.activeSelf)
+        if (_plusIcon.activeSelf)
         {
             int ammoCount = _ammoManager.ammunition.Count;
             _plusIcon.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "+" + (ammoCount - _MaxDisplayedAmmo).ToString();

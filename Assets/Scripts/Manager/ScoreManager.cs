@@ -100,16 +100,16 @@ public class ScoreManager : MonoBehaviour
     private void SaveScore()
     {
         int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
-        //if (CurrentScore > PlayerPrefs.GetInt("LevelScore" + levelIndex))
-        if (CurrentScore > YandexGame.savesData.LevelScore[levelIndex])
+        if (CurrentScore > PlayerPrefs.GetInt("LevelScore" + levelIndex))
+        //if (CurrentScore > YandexGame.savesData.LevelScore[levelIndex])
         {
-            //PlayerPrefs.SetInt("LevelScore" + levelIndex, CurrentScore);
-            //PlayerPrefs.SetInt("LevelStars" + levelIndex, GetRewardedStarCount());
-            //PlayerPrefs.Save();
+            PlayerPrefs.SetInt("LevelScore" + levelIndex, CurrentScore);
+            PlayerPrefs.SetInt("LevelStars" + levelIndex, GetRewardedStarCount());
+            PlayerPrefs.Save();
 
-            YandexGame.savesData.LevelScore[levelIndex] = CurrentScore;
-            YandexGame.savesData.LevelStars[levelIndex] = GetRewardedStarCount();
-            YandexGame.SaveProgress();
+            //YandexGame.savesData.LevelScore[levelIndex] = CurrentScore;
+            //YandexGame.savesData.LevelStars[levelIndex] = GetRewardedStarCount();
+            //YandexGame.SaveProgress();
         }
     }
 

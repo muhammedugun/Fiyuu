@@ -69,8 +69,8 @@ public class InLevelManager : MonoBehaviour
     /// </summary>
     private void CheckAudioVolume()
     {
-        //bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
-        bool isMuted = YandexGame.savesData.isMute == 1;
+        bool isMuted = PlayerPrefs.GetInt(_muteKey) == 1;
+        //bool isMuted = YandexGame.savesData.isMute == 1;
         AudioListener.volume = isMuted ? 0f : 1f;
     }
 
@@ -138,13 +138,13 @@ public class InLevelManager : MonoBehaviour
     /// <param name="context"></param>
     void CheckFirstClick(InputAction.CallbackContext context)
     {
-        //if (SceneManager.GetActiveScene().name == "Level1" && PlayerPrefs.GetInt("Level1Played") == 0)
-        if (SceneManager.GetActiveScene().name == "Level1" && YandexGame.savesData.Level1Played == 0)
+        if (SceneManager.GetActiveScene().name == "Level1" && PlayerPrefs.GetInt("Level1Played") == 0)
+        //if (SceneManager.GetActiveScene().name == "Level1" && YandexGame.savesData.Level1Played == 0)
         {
-            //PlayerPrefs.SetInt("Level1Played", 1);
-            //PlayerPrefs.Save();
-            YandexGame.savesData.Level1Played = 1;
-            YandexGame.SaveProgress();
+            PlayerPrefs.SetInt("Level1Played", 1);
+            PlayerPrefs.Save();
+            //YandexGame.savesData.Level1Played = 1;
+            //YandexGame.SaveProgress();
         }
         else
         {

@@ -35,12 +35,14 @@ public class ChaptersManager : MonoBehaviour
         if (IsLevelCompleted(levelNumber))
         {
             _playPopUp.SetActive(true);
-            _popUpTitleText.text = "Level " + levelNumber;
+            //_popUpTitleText.text = "Level " + levelNumber;
+            string levelText = _popUpTitleText.GetComponent<InternationalText>().GetText();
+            _popUpTitleText.text = levelText + levelNumber;
             _levelName = "Level" + levelNumber;
-            //_scoreText.text = PlayerPrefs.GetInt("LevelScore" + levelNumber).ToString();
-            _scoreText.text = YandexGame.savesData.LevelScore[levelNumber].ToString();
-            // if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 3)
-            if (YandexGame.savesData.LevelStars[levelNumber] >= 3)
+            _scoreText.text = PlayerPrefs.GetInt("LevelScore" + levelNumber).ToString();
+            //_scoreText.text = YandexGame.savesData.LevelScore[levelNumber].ToString();
+            if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 3)
+            //if (YandexGame.savesData.LevelStars[levelNumber] >= 3)
             {
                 foreach (var star in _stars)
                 {
@@ -49,8 +51,8 @@ public class ChaptersManager : MonoBehaviour
                     child.color = new Color(child.color.r, child.color.g, child.color.b, 1f);
                 }
             }
-            //else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 2)
-            else if (YandexGame.savesData.LevelStars[levelNumber] >= 2)
+            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 2)
+            //else if (YandexGame.savesData.LevelStars[levelNumber] >= 2)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -60,8 +62,8 @@ public class ChaptersManager : MonoBehaviour
                 }
 
             }
-            //else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 1)
-            else if (YandexGame.savesData.LevelStars[levelNumber] >= 1)
+            else if (PlayerPrefs.GetInt("LevelStars" + levelNumber) >= 1)
+            //else if (YandexGame.savesData.LevelStars[levelNumber] >= 1)
             {
                 _stars[2].color = new Color(_stars[2].color.r, _stars[2].color.g, _stars[2].color.b, 1f);
                 var child = _stars[2].transform.GetChild(0).GetComponent<Image>();
@@ -72,7 +74,9 @@ public class ChaptersManager : MonoBehaviour
         {
             Debug.LogWarning("Level1open");
             _playPopUp.SetActive(true);
-            _popUpTitleText.text = "Level " + levelNumber;
+            //_popUpTitleText.text = "Level " + levelNumber;
+            string levelText = _popUpTitleText.GetComponent<InternationalText>().GetText();
+            _popUpTitleText.text = levelText + levelNumber;
             _levelName = "Level" + levelNumber;
         }
 
@@ -114,19 +118,18 @@ public class ChaptersManager : MonoBehaviour
     public static void CompleteLevel(int levelIndex)
     {
         // B�l�m� tamamland���n� kaydedin
-        //PlayerPrefs.SetInt("CompletedLevel" + levelIndex, 1);
-        YandexGame.savesData.CompletedLevel[levelIndex] = 1;
-        // De�i�iklikleri kaydedin
-        //PlayerPrefs.Save();
-        YandexGame.SaveProgress();
+        PlayerPrefs.SetInt("CompletedLevel" + levelIndex, 1);
+        //YandexGame.savesData.CompletedLevel[levelIndex] = 1;
+        PlayerPrefs.Save();
+        //YandexGame.SaveProgress();
     }
 
 
     // Belirli bir b�l�m� tamamlay�p tamamlamad���n� kontrol eden fonksiyon
     public bool IsLevelCompleted(int levelIndex)
     {
-        // return PlayerPrefs.GetInt("CompletedLevel" + levelIndex, 0) == 1;
-        return YandexGame.savesData.CompletedLevel[levelIndex] == 1;
+        return PlayerPrefs.GetInt("CompletedLevel" + levelIndex, 0) == 1;
+        //return YandexGame.savesData.CompletedLevel[levelIndex] == 1;
     }
 
     // Belirli bir b�l�me girebilir mi?
