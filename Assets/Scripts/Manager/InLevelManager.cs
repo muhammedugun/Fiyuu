@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using YG;
 
 /// <summary>
 /// Seviyeler i�inde genel durumlar� y�netmekten sorumludur
@@ -17,6 +16,7 @@ public class InLevelManager : MonoBehaviour
 
     [SerializeField] private List<ParticleSystem> _winFireworks;
 
+
     private Rigidbody[] _allGameObjects;
     /// <summary>
     /// Objelerin h�z� kontrol edilsin mi?
@@ -24,6 +24,7 @@ public class InLevelManager : MonoBehaviour
     private bool _isCheckSpeedOfObjects;
     private bool _isAssignObjects, _isSetCheckSpeedOfObjects;
     private const string _muteKey = "isMute";
+
 
     private void Start()
     {
@@ -35,7 +36,6 @@ public class InLevelManager : MonoBehaviour
     {
         if (CheckSpeedOfObjects())
         {
-            Debug.Log("T�m objeler durdu");
             EventBus.Publish(EventType.AllObjectsStopped);
         }
 

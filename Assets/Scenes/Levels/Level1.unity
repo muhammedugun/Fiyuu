@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: fcdda5b973c46e64ba173e324b876639,
+  m_LightingDataAsset: {fileID: 112000000, guid: cf619143bf33c8f4090dd693239018fe,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 82b5346f237e3e549a0620c9d4f2b340,
     type: 2}
@@ -905,6 +905,7 @@ GameObject:
   - component: {fileID: 502764657}
   - component: {fileID: 502764656}
   - component: {fileID: 502764655}
+  - component: {fileID: 502764661}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
@@ -1017,6 +1018,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 86.27}
   m_SizeDelta: {x: 660, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &502764661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502764654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6516b426f7c51d54187303fbab7f61cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isTextMeshPro: 0
+  _tr: "Fareyle t\u0131klay\u0131n veya Bo\u015Fluk tu\u015Funa bas\u0131n"
+  _en: Click with mouse or press Space key
+  _ru: "\u0429\u0435\u043B\u043A\u043D\u0438\u0442\u0435 \u043C\u044B\u0448\u044C\u044E
+    \u0438\u043B\u0438 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043B\u0430\u0432\u0438\u0448\u0443
+    \u043F\u0440\u043E\u0431\u0435\u043B\u0430."
 --- !u!1001 &503797142
 PrefabInstance:
   m_ObjectHideFlags: 0

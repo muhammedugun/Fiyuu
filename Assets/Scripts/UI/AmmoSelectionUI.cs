@@ -75,10 +75,10 @@ public class AmmoSelectionUI : MonoBehaviour
             switch (_ammoManager.ammunition[i])
             {
                 case AmmoMatter.Wood:
-                    SetAmmoIcon(ammoIcon, _woodImage, "Wood");
+                    SetAmmoIcon(ammoIcon, _woodImage);
                     break;
                 case AmmoMatter.Stone:
-                    SetAmmoIcon(ammoIcon, _stoneImage, "Stone");
+                    SetAmmoIcon(ammoIcon, _stoneImage);
                     break;
             }
         }
@@ -90,20 +90,10 @@ public class AmmoSelectionUI : MonoBehaviour
     /// <param name="ammoIcon"></param>
     /// <param name="image"></param>
     /// <param name="text"></param>
-    private void SetAmmoIcon(Transform ammoIcon, Sprite image, string text)
+    private void SetAmmoIcon(Transform ammoIcon, Sprite image)
     {
-        Image iconImage = ammoIcon.GetChild(1).GetComponent<Image>();
-        Text iconText = ammoIcon.GetChild(0).GetChild(0).GetComponent<Text>();
-
+        Image iconImage = ammoIcon.GetChild(0).GetComponent<Image>();
         iconImage.sprite = image;
-        if (YandexGame.savesData.language == "tr")
-        {
-            if (text == "Wood") iconText.text = "Odun";
-            else if (text == "Stone") iconText.text = "Taş";
-        }
-        else
-            iconText.text = text;
-
     }
 
     /// <summary>

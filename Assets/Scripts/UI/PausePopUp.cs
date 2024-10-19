@@ -20,8 +20,10 @@ public class PausePopUp : MonoBehaviour
 
     private void Start()
     {
-        int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
-        _title.text = "Level " + levelIndex;
+        //int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
+        //_title.text = "Level " + levelIndex;
+
+        _title.text = _title.GetComponent<InternationalText>().GetText();
     }
 
     private void OnEnable()

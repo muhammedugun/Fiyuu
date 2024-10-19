@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// Fýrlatma inputu ile ilgili görevlerden sorumlu
+/// Fï¿½rlatma inputu ile ilgili gï¿½revlerden sorumlu
 /// </summary>
 public class ThrowInputController : MonoBehaviour, IPointerDownHandler
 {
@@ -15,17 +15,10 @@ public class ThrowInputController : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] private Button _pauseButton, _resumeButton;
     [SerializeField] private RectTransform _pausePopUpTransform;
-    [SerializeField] private Text _levelTitle;
-
-    private void Start()
-    {
-        int levelIndex = int.Parse(SceneManager.GetActiveScene().name.Substring(5));
-        _levelTitle.text = "Level " + levelIndex;
-    }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isEnabled)
+        if (Input.GetKeyDown(KeyCode.Space) && isEnabled)
             Started?.Invoke();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -33,21 +26,21 @@ public class ThrowInputController : MonoBehaviour, IPointerDownHandler
                 _pauseButton.onClick.Invoke();
             else
                 _resumeButton.onClick.Invoke();
-        }          
+        }
     }
 
     /// <summary>
-    /// Ekrana týklandýðýnda gerçekleþerek olaylarý çaðýrýr.
+    /// Ekrana tï¿½klandï¿½ï¿½ï¿½nda gerï¿½ekleï¿½erek olaylarï¿½ ï¿½aï¿½ï¿½rï¿½r.
     /// </summary>
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(isEnabled)
+        if (isEnabled)
             Started?.Invoke();
     }
 
     /// <summary>
-    /// Fýrlatma kontrolünün açýklýk kapalýlýk durumunu ayarlar
+    /// Fï¿½rlatma kontrolï¿½nï¿½n aï¿½ï¿½klï¿½k kapalï¿½lï¿½k durumunu ayarlar
     /// </summary>
     /// <param name="condition"></param>
     public void SetIsEnabled(bool condition)
