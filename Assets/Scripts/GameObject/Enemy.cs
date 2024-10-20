@@ -16,7 +16,7 @@ public class Enemy : DamagableObjectBase
     [SerializeField] private MMF_Player _damageFeedback;
     [SerializeField] private MMF_Player _skipBeginningFeedback;
 
-    private bool _isDead;
+    private bool _isDead = false;
     private Animator _animator;
 
     private void Awake()
@@ -36,6 +36,12 @@ public class Enemy : DamagableObjectBase
     {
         EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
     }
+    private void OnDisable()
+    {
+        EventBus.Subscribe(EventType.FirstClickInLevel, SkipBeginning);
+        CancelInvoke();
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -53,8 +59,6 @@ public class Enemy : DamagableObjectBase
 
     public override void DoDamage(Collision collision, float damageMultiplier = 1f)
     {
-        Debug.Log("mainName: " + name + " colname: " + collision.gameObject.name);
-        Debug.Log("mainName: " + name + " collisionForce: " + (collision.impulse.magnitude / Time.fixedDeltaTime));
         base.DoDamage(collision, damageMultiplier);
     }
 
@@ -81,6 +85,12 @@ public class Enemy : DamagableObjectBase
         _isDead = true;
         EventBus.Publish(EventType.EnemyDied);
         _dieFeedback?.PlayFeedbacks(this.transform.position, ScoreManager.enemyScore);
+        Invoke(nameof(DestroyCharacter), 0.7f);
+    }
+
+    private void DestroyCharacter()
+    {
+        Destroy(gameObject);
     }
 
     /// <summary>

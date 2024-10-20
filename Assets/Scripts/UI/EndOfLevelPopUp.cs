@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// Level sonu popupýný yönetmekten sorumludur
+/// Level sonu popupï¿½nï¿½ yï¿½netmekten sorumludur
 /// </summary>
 public class EndOfLevelPopUp : MonoBehaviour
 {
@@ -38,14 +38,14 @@ public class EndOfLevelPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Next Level butonunu çalýþtýrýr. Sonraki levele geçiþ yapar.
+    /// Next Level butonunu ï¿½alï¿½ï¿½tï¿½rï¿½r. Sonraki levele geï¿½iï¿½ yapar.
     /// </summary>
     public void OnClickNextLevel()
     {
         GameManager.ResumeLevel();
         string thisSceneName = SceneManager.GetActiveScene().name;
         int levelNumber = int.Parse(thisSceneName.Substring(5, thisSceneName.Length - 5));
-        if(IsSceneInBuildSettings("Level" + (levelNumber + 1)))
+        if (IsSceneInBuildSettings("Level" + (levelNumber + 1)))
         {
             Infrastructure.LoadScene("Level" + (levelNumber + 1));
         }
@@ -53,11 +53,11 @@ public class EndOfLevelPopUp : MonoBehaviour
         {
             Infrastructure.LoadScene("DemoEnd");
         }
-        
+
     }
 
     /// <summary>
-    /// Sahnenin editörun build settings bölümünde ayarlý olup olmadýðýný kontrol eder
+    /// Sahnenin editï¿½run build settings bï¿½lï¿½mï¿½nde ayarlï¿½ olup olmadï¿½ï¿½ï¿½nï¿½ kontrol eder
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
@@ -87,7 +87,7 @@ public class EndOfLevelPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Popup üzerindeki aktif ve deaktif olacak yýldýzlarý ayarlar
+    /// Popup ï¿½zerindeki aktif ve deaktif olacak yï¿½ldï¿½zlarï¿½ ayarlar
     /// </summary>
     private void SetStars()
     {
@@ -105,7 +105,7 @@ public class EndOfLevelPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Popupý gecikmeli bir þekilde açar
+    /// Popupï¿½ gecikmeli bir ï¿½ekilde aï¿½ar
     /// </summary>
     private void OpenPopUpInvoke()
     {
@@ -121,7 +121,7 @@ public class EndOfLevelPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Kazanma ve kaybetme durumuna göre uygun olan popupý açar
+    /// Kazanma ve kaybetme durumuna gï¿½re uygun olan popupï¿½ aï¿½ar
     /// </summary>
     private void SetWinOrFailPanel()
     {
@@ -138,11 +138,11 @@ public class EndOfLevelPopUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Forward, yani hýzlýca geçip level sonu popupýnýn açýlmasýný saðlayan butonu çalýþtýrýr.
+    /// Forward, yani hï¿½zlï¿½ca geï¿½ip level sonu popupï¿½nï¿½n aï¿½ï¿½lmasï¿½nï¿½ saï¿½layan butonu ï¿½alï¿½ï¿½tï¿½rï¿½r.
     /// </summary>
     private void OpenForwardButton()
     {
-        if(!InLevelManager.isAllObjectsStopped)
+        if (!InLevelManager.isAllObjectsStopped)
         {
             _ForwardButton.SetActive(true);
         }

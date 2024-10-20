@@ -2,7 +2,7 @@ using MoreMountains.Feedbacks;
 using UnityEngine;
 
 /// <summary>
-/// Oyun içindeki eðitimleri yönetmekten sorumludur
+/// Oyun iï¿½indeki eï¿½itimleri yï¿½netmekten sorumludur
 /// </summary>
 public class Tutorial : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        if (_isFirstTutorial && _launcherArm.eulerAngles.z>70 && _launcherArm.eulerAngles.z < 80)
+        if (_isFirstTutorial && _launcherArm.eulerAngles.z > 80 && _launcherArm.eulerAngles.z < 89)
         {
             _isFirstTutorial = false;
             _pauseButton.SetActive(false);
@@ -37,7 +37,7 @@ public class Tutorial : MonoBehaviour
             _throwInputController.isEnabled = true;
             Active();
         }
-        else if(_isFirstTutorial && _launcherArm.eulerAngles.z<320 && !_isInputControl)
+        else if (_isFirstTutorial && _launcherArm.eulerAngles.z < 320 && !_isInputControl)
         {
             _isInputControl = true;
             _throwInputController.isEnabled = false;
@@ -45,11 +45,11 @@ public class Tutorial : MonoBehaviour
     }
 
     /// <summary>
-    /// Eðitimi aktifleþtirir
+    /// Eï¿½itimi aktifleï¿½tirir
     /// </summary>
     public void Active()
     {
-        if(_isTutorialScene)
+        if (_isTutorialScene)
         {
             ThrowInputController.Started += Deactive;
             for (int i = 0; i < 2; i++)
@@ -61,14 +61,14 @@ public class Tutorial : MonoBehaviour
     }
 
     /// <summary>
-    /// Eðitimi devre dýþý býrakýr
+    /// Eï¿½itimi devre dï¿½ï¿½ï¿½ bï¿½rakï¿½r
     /// </summary>
     private void Deactive()
     {
         _isDeactive = true;
         ThrowInputController.Started -= Deactive;
         GameManager.ResumeLevel();
-        if(_pauseButton!=null)
+        if (_pauseButton != null)
             _pauseButton.SetActive(true);
         for (int i = 0; i < 2; i++)
         {
@@ -79,7 +79,7 @@ public class Tutorial : MonoBehaviour
 
     public void PlayFeedbacks()
     {
-        if(!_isDeactive)
+        if (!_isDeactive)
             _playFeedbacks.PlayFeedbacks();
     }
 }
