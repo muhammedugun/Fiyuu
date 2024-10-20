@@ -87,6 +87,8 @@ public class ScoreManager : MonoBehaviour
     private void CalculateGameEndScore()
     {
         int firedCount = _ammoManager.levelAmmoCount - _ammoManager.ammunition.Count;
+        if (firedCount <= 0)
+            firedCount = 1;
         int multiplierScore = _ammoManager.levelAmmoCount / firedCount;
         if (firedCount != 0 && multiplierScore > 1)
         {

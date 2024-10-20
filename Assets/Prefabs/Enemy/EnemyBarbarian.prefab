@@ -217,8 +217,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6312140664764342248}
   - component: {fileID: 3367366160087345236}
+  - component: {fileID: 5794141823367566989}
   - component: {fileID: 7384214464759222294}
-  - component: {fileID: 4703034721456137885}
   - component: {fileID: 8869740149221002303}
   - component: {fileID: 1818996152778198697}
   - component: {fileID: 5618001783969348872}
@@ -267,6 +267,27 @@ MonoBehaviour:
   _dieFeedback: {fileID: 3667324147907310007}
   _damageFeedback: {fileID: 2026154078631842477}
   _skipBeginningFeedback: {fileID: 2358002949291937848}
+--- !u!65 &5794141823367566989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395356559743528009}
+  m_Material: {fileID: 13400000, guid: 254debc40e9d1ca4e9f74216d634c0ba, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.7, z: 1}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!54 &7384214464759222294
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -294,29 +315,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!136 &4703034721456137885
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395356559743528009}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4378294
-  m_Height: 1.5879344
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.82232076, z: -1.1461338e-15}
 --- !u!95 &8869740149221002303
 Animator:
   serializedVersion: 5
