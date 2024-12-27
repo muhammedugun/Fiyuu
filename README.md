@@ -6,8 +6,10 @@ I made this game as a final project in the last year of my university and comple
 
 [Play in Browser Link](https://muhammedugun.itch.io/fiyuu)  
 
-![05141-ezgif com-optimize](https://github.com/user-attachments/assets/8b40a37f-efb3-4718-864f-a9d1356cb838)
-![051411-ezgif com-optimize (1)](https://github.com/user-attachments/assets/555406f3-4e0d-4d99-9d33-ce00c9e01160)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/b62bd146-0a76-4a00-b4c6-d083f339a6dd" width="400">&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/eccb8447-98b8-4635-a274-49b75b928ca6" width="400">
+</div>
 
 ---
 
@@ -16,7 +18,7 @@ I made this game as a final project in the last year of my university and comple
 1. [Features](#-features)
 2. [Installation](#-installation)
 3. [Gameplay](#-gameplay)
-4. [Development](#-development)
+4. [Technologies Used](#-technologies-used)
 5. [Contributors](#-contributors)
 
 ---
@@ -62,9 +64,12 @@ I made this game as a final project in the last year of my university and comple
 ![051411-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/34e20d5c-329f-4c50-93a4-d5b8a4215d4a)
 ---
 
-## 🔧 **Development**
+## 🔧 **Technologies Used**
 
-- Tools used: Unity 2022.3, C#, Blender (to make minor modifications with assets).
+- Unity: Used as the general production process of the game.
+- Open-Fracture: To be able to fracture 3D models at runtime.
+- Feel: For game polish.
+- Blender: For editing some 3D models.
 
 ---
 
